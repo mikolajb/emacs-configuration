@@ -8,7 +8,8 @@
 (setq icon-title-format "Emacs - %b")
 
 (when (>= emacs-major-version 23)
-  (set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1"))
+  (add-to-list 'default-frame-alist '(font . "Droid Sans Mono Slashed-10")))
+
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
@@ -39,6 +40,6 @@
       inhibit-startup-message           t)
 (scroll-bar-mode nil)
 (tool-bar-mode 0)
-;(menu-bar-mode 0)
+(menu-bar-mode 0)
 
 (provide 'global)
