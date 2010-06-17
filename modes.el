@@ -13,12 +13,15 @@
 (autoload 'ruby-mode "ruby-mode"
   "Mode for editing ruby source files")
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("rakefile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile.rb$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("rakefile.rb$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("capfile" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Capfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("capfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Capfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 (autoload 'run-ruby "inf-ruby"
   "Run an inferior Ruby process")
@@ -61,5 +64,15 @@
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+
+;;; HAML mode
+(require 'haml-mode)
+(add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
+
+;;; org-mode
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
 
 (provide 'modes)
