@@ -1,6 +1,3 @@
-;;; DVC
-(load-file "~/.emacs.d/plugins/dvc/dvc-load.el")
-
 ;;; GRAPHVIZ
 (load-file "~/.emacs.d/plugins/graphviz-dot-mode.el")
 
@@ -28,8 +25,24 @@
 (require 'textile-mode)
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
-;;; nav-emacs: http://code.google.com/p/emacs-nav
+;; gist
+(add-to-list 'load-path "~/.emacs.d/plugins/gist")
+(require 'gist)
+
+;; magit
+(add-to-list 'load-path "~/.emacs.d/plugins/magit")
+(require 'magit)
+
+;;; nav-emacs
 (add-to-list 'load-path "~/.emacs.d/plugins/emacs-nav")
 (require 'nav)
+
+;; cucumber
+(add-to-list 'load-path "~/.emacs.d/plugins/cucumber")
+(require 'feature-mode)
+
+;; org-mode
+;; (add-to-list 'load-path "~/.emacs.d/plugins/org-mode/lisp")
+;; (require 'org-install)
 
 (provide 'plugins)
