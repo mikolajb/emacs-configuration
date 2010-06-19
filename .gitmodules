@@ -1,0 +1,15 @@
+[submodule "plugins/egg"]
+	path = plugins/egg
+	url = git://github.com/bogolisk/egg.git
+[submodule "plugins/color-theme-irblack"]
+	path = plugins/color-theme-irblack
+	url = git://github.com/dz/ir_black_emacs.git
+[submodule "plugins/magit"]
+	path = plugins/magit
+	url = http://github.com/philjackson/magit.git
+[submodule "plugins/gist"]
+	path = plugins/gist
+	url = git://github.com/defunkt/gist.el.git
+[submodule "plugins/cucumber"]
+	path = plugins/cucumber
+	url = http://github.com/michaelklishin/cucumber.el.git
