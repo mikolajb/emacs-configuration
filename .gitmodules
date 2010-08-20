@@ -1,6 +1,3 @@
-[submodule "plugins/egg"]
-	path = plugins/egg
-	url = git://github.com/bogolisk/egg.git
 [submodule "plugins/color-theme-irblack"]
 	path = plugins/color-theme-irblack
 	url = git://github.com/dz/ir_black_emacs.git
@@ -13,3 +10,18 @@
 [submodule "plugins/cucumber"]
 	path = plugins/cucumber
 	url = http://github.com/michaelklishin/cucumber.el.git
+[submodule "plugins/twilight-emacs"]
+	path = plugins/twilight-emacs
+	url = http://github.com/crafterm/twilight-emacs.git
+[submodule "plugins/color-theme-tangotango"]
+	path = plugins/color-theme-tangotango
+	url = http://github.com/juba/color-theme-tangotango.git
+[submodule "plugins/undo-tree"]
+	path = plugins/undo-tree
+	url = http://www.dr-qubit.org/git/undo-tree.git
+[submodule "plugins/egg"]
+	path = plugins/egg
+	url = http://github.com/byplayer/egg.git
+[submodule "plugins/multi-term"]
+	path = plugins/multi-term
+	url = http://github.com/emacsmirror/multi-term.git
