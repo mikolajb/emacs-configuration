@@ -37,12 +37,37 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/emacs-nav")
 (require 'nav)
 
-;; cucumber
+;;; cucumber
 (add-to-list 'load-path "~/.emacs.d/plugins/cucumber")
 (require 'feature-mode)
 
-;; org-mode
+;;; org-mode
 ;; (add-to-list 'load-path "~/.emacs.d/plugins/org-mode/lisp")
 ;; (require 'org-install)
+
+;;; autopair
+(add-to-list 'load-path "~/.emacs.d/plugins/autopair")
+(require 'autopair)
+(autopair-global-mode)
+
+;;; undo-tree
+(add-to-list 'load-path "~/.emacs.d/plugins/undo-tree")
+(require 'undo-tree)
+(global-undo-tree-mode)
+
+;;; muti-term
+(add-to-list 'load-path "~/.emacs.d/plugins/multi-term")
+(require 'multi-term)
+
+(setq multi-term-program "/bin/bash")   ;; use bash
+;; (setq multi-term-program "/bin/zsh") ;; or use zsh...
+
+;; only needed if you use autopair
+(add-hook 'term-mode-hook
+  #'(lambda () (setq autopair-dont-activate t)))
+
+
+(global-set-key (kbd "C-c t") 'multi-term-next)
+(global-set-key (kbd "C-c T") 'multi-term) ;; create a new one
 
 (provide 'plugins)

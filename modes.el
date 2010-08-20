@@ -75,4 +75,11 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
+;;; Go lang mode
+(require 'go-mode-load)
+(add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
+
+;;; midnight - clean-buffer-list
+(require 'midnight)
+
 (provide 'modes)
