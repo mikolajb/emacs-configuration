@@ -25,3 +25,6 @@
 [submodule "plugins/multi-term"]
 	path = plugins/multi-term
 	url = http://github.com/emacsmirror/multi-term.git
+[submodule "plugins/scratch-el"]
+	path = plugins/scratch-el
+	url = http://github.com/ieure/scratch-el.git

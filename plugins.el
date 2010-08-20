@@ -70,4 +70,8 @@
 (global-set-key (kbd "C-c t") 'multi-term-next)
 (global-set-key (kbd "C-c T") 'multi-term) ;; create a new one
 
+;;; scratch-el
+(add-to-list 'load-path "~/.emacs.d/plugins/scratch-el")
+(require 'scratch)
+
 (provide 'plugins)
