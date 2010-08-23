@@ -74,4 +74,9 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/scratch-el")
 (require 'scratch)
 
+;;; iedit
+(load-file "~/.emacs.d/plugins/iedit.el")
+(require 'iedit)
+;; (define-key global-map (kdb "C-;") 'iedit-mode)
+
 (provide 'plugins)
