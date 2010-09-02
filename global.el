@@ -1,3 +1,4 @@
+
 ;; Set encoding to UTF-8
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -32,6 +33,14 @@
 (setq show-trailing-whitespace t)
 ; delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; make all "yes or no" prompts show "y or n" instead
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;;; Electric minibuffer!
+;;; When selecting a file to visit, // will mean / and
+;;; ~ will mean $HOME regardless of preceding text.
+(setq file-name-shadow-tty-properties '(invisible t))
+(file-name-shadow-mode 1)
 
 ;;; Z KREDITORA
 ;;; Annoying stuff
@@ -41,5 +50,6 @@
 (scroll-bar-mode nil)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
-
+;; Don't insert instructions in the *scratch* buffer
+(setq initial-scratch-message nil)
 (provide 'global)

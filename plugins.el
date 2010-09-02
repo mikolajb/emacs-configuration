@@ -79,4 +79,16 @@
 (require 'iedit)
 ;; (define-key global-map (kdb "C-;") 'iedit-mode)
 
+;;; edit-server
+(load-file "~/.emacs.d/plugins/emacs_chrome/servers/edit-server.el")
+(require 'edit-server)
+;; (setq edit-server-new-frame nil)
+;; (add-hook 'edit-server-done-hook 'on-edit-server-done-do-backup)
+(edit-server-start)
+
+;;; browse-kill-ring
+(load-file "~/.emacs.d/plugins/browse-kill-ring.el")
+(require 'browse-kill-ring)
+(browse-kill-ring-default-keybindings)
+
 (provide 'plugins)

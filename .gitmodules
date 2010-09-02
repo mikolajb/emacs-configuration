@@ -28,3 +28,6 @@
 [submodule "plugins/scratch-el"]
 	path = plugins/scratch-el
 	url = http://github.com/ieure/scratch-el.git
+[submodule "plugins/emacs_chrome"]
+	path = plugins/emacs_chrome
+	url = http://github.com/stsquad/emacs_chrome.git
