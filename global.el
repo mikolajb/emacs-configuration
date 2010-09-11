@@ -1,4 +1,3 @@
-
 ;; Set encoding to UTF-8
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -35,6 +34,8 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; make all "yes or no" prompts show "y or n" instead
 (fset 'yes-or-no-p 'y-or-n-p)
+(setq scroll-step 1)
+(setq backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
 
 ;;; Electric minibuffer!
 ;;; When selecting a file to visit, // will mean / and
@@ -52,4 +53,9 @@
 (menu-bar-mode 0)
 ;; Don't insert instructions in the *scratch* buffer
 (setq initial-scratch-message nil)
+
+(require 'saveplace)
+(setq save-place-file "~/.emacs.d/saveplace")
+(setq-default save-place t)
+
 (provide 'global)

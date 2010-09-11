@@ -65,6 +65,12 @@
 (global-set-key (kbd "C-c y") 'duplicate-line)
 
 ;; duplicate a line and comment the first
-(global-set-key (kbd "C-c c") (lambda()(interactive)(duplicate-line t)))
+(global-set-key (kbd "C-c d") (lambda()(interactive)(duplicate-line t)))
+
+;;; inserts date
+(defun insert-date ()
+  "Insert a time-stamp according to locale's date and time format."
+  (interactive)
+  (insert (format-time-string "%c" (current-time))))
 
 (provide 'funs)

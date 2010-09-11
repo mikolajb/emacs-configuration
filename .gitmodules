@@ -31,3 +31,6 @@
 [submodule "plugins/emacs_chrome"]
 	path = plugins/emacs_chrome
 	url = http://github.com/stsquad/emacs_chrome.git
+[submodule "plugins/polish-holidays"]
+	path = plugins/polish-holidays
+	url = git@github.com:mikolajb/emacs-polish-holidays.git

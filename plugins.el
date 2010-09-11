@@ -41,10 +41,6 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/cucumber")
 (require 'feature-mode)
 
-;;; org-mode
-;; (add-to-list 'load-path "~/.emacs.d/plugins/org-mode/lisp")
-;; (require 'org-install)
-
 ;;; autopair
 (add-to-list 'load-path "~/.emacs.d/plugins/autopair")
 (require 'autopair)

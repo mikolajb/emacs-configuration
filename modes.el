@@ -52,6 +52,7 @@
 
 ;;; DIRED+: http://www.emacswiki.org/emacs/DiredPlus (installed with AutoInstall)
 (require 'dired+)
+(toggle-dired-find-file-reuse-dir 1)
 
 ;;; AUCTEX: http://www.gnu.org/software/auctex (pacman -S auctex)
 (load "auctex.el" nil t t)
@@ -70,10 +71,25 @@
 (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
 
 ;;; org-mode
+(require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
+(setq org-agenda-include-diary t)
+(setq org-default-notes-file (concat "~/org/notes.org"))
+(global-set-key "\C-cc" 'org-capture)
+(defun org-capture-frame ()
+  "turn the current frame into a small popup frame"
+  (modify-frame-parameters nil
+			   '((width . 120)
+			     (height . 20)))
+  (org-capture)
+  (delete-other-windows)
+ ;; (add-hook 'kill-buffer-hook '(lambda ()
+  ;; 				 (delete-frame)))
+  (raise-frame))
+
 
 ;;; Go lang mode
 (require 'go-mode-load)
@@ -81,5 +97,10 @@
 
 ;;; midnight - clean-buffer-list
 (require 'midnight)
+
+;;; calendar
+(load "~/.emacs.d/plugins/polish-holidays/polish-holidays.el")
+(add-hook 'calendar-today-visible-hook 'calendar-mark-today)
+(setq mark-holidays-in-calendar t)
 
 (provide 'modes)
