@@ -10,6 +10,7 @@
 (when (>= emacs-major-version 23)
   (add-to-list 'default-frame-alist '(font . "Droid Sans Mono Slashed-10")))
 
+(setq show-paren-delay 0)
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
