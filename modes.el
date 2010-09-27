@@ -1,13 +1,3 @@
-;;; AUTOINSTALL: http://www.emacswiki.org/emacs/AutoInstall
-(require 'auto-install)
-(setq auto-install-directory "~/.emacs.d/auto-install/")
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/auto-install"))
-
-;;; ICICLES: http://www.emacswiki.org/emacs/Icicle
-;; to install, run AutoInstalls 'auto-install-batch' comand and select 'icicles' extension name
-(require 'icicles)
-(icy-mode)
-
 ;;; RUBY: included in Emacs 23, Ruby package, also in ELPA
 ;; Based on http://infolab.stanford.edu/~manku/dotemacs.html
 (autoload 'ruby-mode "ruby-mode"
@@ -50,10 +40,6 @@
 (add-to-list 'auto-mode-alist '("\\.[eh]rl$" . erlang-mode))
 (add-to-list 'auto-mode-alist '("\\.yaws$" . erlang-mode))
 
-;;; DIRED+: http://www.emacswiki.org/emacs/DiredPlus (installed with AutoInstall)
-(require 'dired+)
-(toggle-dired-find-file-reuse-dir 1)
-
 ;;; AUCTEX: http://www.gnu.org/software/auctex (pacman -S auctex)
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
@@ -66,11 +52,11 @@
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 
-;;; HAML mode
+;;; HAML mode (installed with ELPA)
 (require 'haml-mode)
 (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
 
-;;; org-mode
+;;; org-mode (installed as archlinux AUR package: emacs-org-mode)
 (require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
@@ -91,7 +77,7 @@
   (raise-frame))
 
 
-;;; Go lang mode
+;;; Go lang mode (included in go language package)
 (require 'go-mode-load)
 (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
 

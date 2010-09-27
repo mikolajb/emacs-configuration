@@ -1,5 +1,26 @@
+;;; icicles
+(add-to-list 'load-path "~/.emacs.d/plugins/icicles")
+(require 'icicles)
+(icy-mode)
+
+;;; icomplete+ (downloaded from emacswiki)
+(add-to-list 'load-path "~/.emacs.d/plugins/icomplete-plus")
+(eval-after-load "icomplete" '(progn (require 'icomplete+)))
+
+;;; synonyms (downloaded from emacs wiki)
+;; download ftp://ibiblio.org/pub/docs/books/gutenberg/etext02/mthes10.zip
+(add-to-list 'load-path "~/.emacs.d/plugins/synonyms")
+(setq synonyms-file  "~/.emacs.d/plugins/synonyms/mthesaur.txt")
+(setq synonyms-cache-file "~/.emacs.d/synonyms.cache")
+(require 'synonyms)
+
+;;; dired-plus
+(add-to-list 'load-path "~/.emacs.d/plugins/dired-plus")
+(require 'dired+)
+(toggle-dired-find-file-reuse-dir 1)
+
 ;;; GRAPHVIZ
-(load-file "~/.emacs.d/plugins/graphviz-dot-mode.el")
+(load-file "~/.emacs.d/plugins/graphviz-dot-mode/graphviz-dot-mode.el")
 
 ;;; egg: http://github.com/bogolisk/egg
 (add-to-list 'load-path "~/.emacs.d/plugins/egg")
@@ -21,7 +42,7 @@
 (add-to-list 'auto-mode-alist '("\\.html\.erb$" . eruby-html-mumamo-mode))
 
 ;;; Textile: http://dev.nozav.org/textile-mode.html
-(load-file "~/.emacs.d/plugins/textile-mode.el")
+(add-to-list 'load-path "~/.emacs.d/plugins/textile-mode")
 (require 'textile-mode)
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
@@ -32,10 +53,6 @@
 ;; magit
 (add-to-list 'load-path "~/.emacs.d/plugins/magit")
 (require 'magit)
-
-;;; nav-emacs
-(add-to-list 'load-path "~/.emacs.d/plugins/emacs-nav")
-(require 'nav)
 
 ;;; cucumber
 (add-to-list 'load-path "~/.emacs.d/plugins/cucumber")
@@ -70,11 +87,6 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/scratch-el")
 (require 'scratch)
 
-;;; iedit
-(load-file "~/.emacs.d/plugins/iedit.el")
-(require 'iedit)
-;; (define-key global-map (kdb "C-;") 'iedit-mode)
-
 ;;; edit-server
 (load-file "~/.emacs.d/plugins/emacs_chrome/servers/edit-server.el")
 (require 'edit-server)
@@ -83,7 +95,7 @@
 (edit-server-start)
 
 ;;; browse-kill-ring
-(load-file "~/.emacs.d/plugins/browse-kill-ring.el")
+(add-to-list 'load-path "~/.emacs.d/plugins/browse-kill-ring")
 (require 'browse-kill-ring)
 (browse-kill-ring-default-keybindings)
 

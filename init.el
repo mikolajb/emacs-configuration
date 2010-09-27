@@ -1,5 +1,4 @@
 (require 'global)
-;; (require 'bindings)
 (require 'theme)
 (require 'modes)
 (require 'plugins)

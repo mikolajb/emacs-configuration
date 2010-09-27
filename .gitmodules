@@ -34,3 +34,27 @@
 [submodule "plugins/polish-holidays"]
 	path = plugins/polish-holidays
 	url = git@github.com:mikolajb/emacs-polish-holidays.git
+[submodule "plugins/icicles"]
+	path = plugins/icicles
+	url = http://github.com/emacsmirror/icicles.git
+[submodule "plugins/dired-plus"]
+	path = plugins/dired-plus
+	url = http://github.com/emacsmirror/dired-plus.git
+[submodule "plugins/nxhtml"]
+	path = plugins/nxhtml
+	url = http://github.com/emacsmirror/nxhtml.git
+[submodule "plugins/autopair"]
+	path = plugins/autopair
+	url = http://github.com/emacsmirror/autopair.git
+[submodule "plugins/icomplete-plus"]
+	path = plugins/icomplete-plus
+	url = http://github.com/emacsmirror/icomplete-plus.git
+[submodule "plugins/textile-mode"]
+	path = plugins/textile-mode
+	url = http://github.com/emacsmirror/textile-mode.git
+[submodule "plugins/browse-kill-ring"]
+	path = plugins/browse-kill-ring
+	url = http://github.com/emacsmirror/browse-kill-ring.git
+[submodule "plugins/graphviz-dot-mode"]
+	path = plugins/graphviz-dot-mode
+	url = http://github.com/emacsmirror/graphviz-dot-mode.git
