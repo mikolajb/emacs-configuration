@@ -10,12 +10,16 @@
 (when (>= emacs-major-version 23)
   (add-to-list 'default-frame-alist '(font . "Droid Sans Mono Slashed-10")))
 
+(show-paren-mode 1)
 (setq show-paren-delay 0)
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
 ;;; Desktops
 (desktop-save-mode 1)
+
+;;; savehist
+(savehist-mode 1)
 
 ;; automatycznie wykonywalny:
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
@@ -33,6 +37,7 @@
 (setq show-trailing-whitespace t)
 ; delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; (add-hook 'before-save-hook 'whitespace-cleanup)
 ;; make all "yes or no" prompts show "y or n" instead
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq scroll-step 1)
