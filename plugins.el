@@ -7,20 +7,10 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/icomplete-plus")
 (eval-after-load "icomplete" '(progn (require 'icomplete+)))
 
-;;; synonyms (downloaded from emacs wiki)
-;; download ftp://ibiblio.org/pub/docs/books/gutenberg/etext02/mthes10.zip
-(add-to-list 'load-path "~/.emacs.d/plugins/synonyms")
-(setq synonyms-file  "~/.emacs.d/plugins/synonyms/mthesaur.txt")
-(setq synonyms-cache-file "~/.emacs.d/synonyms.cache")
-(require 'synonyms)
-
 ;;; dired-plus
 (add-to-list 'load-path "~/.emacs.d/plugins/dired-plus")
 (require 'dired+)
 (toggle-dired-find-file-reuse-dir 1)
-
-;;; GRAPHVIZ
-(load-file "~/.emacs.d/plugins/graphviz-dot-mode/graphviz-dot-mode.el")
 
 ;;; egg: http://github.com/bogolisk/egg
 (add-to-list 'load-path "~/.emacs.d/plugins/egg")
@@ -98,5 +88,10 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/browse-kill-ring")
 (require 'browse-kill-ring)
 (browse-kill-ring-default-keybindings)
+
+;;; pretty-mode
+(add-to-list 'load-path "~/.emacs.d/plugins/pretty-mode")
+(require 'pretty-mode)
+(pretty-mode)
 
 (provide 'plugins)

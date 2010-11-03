@@ -55,6 +55,6 @@
 [submodule "plugins/browse-kill-ring"]
 	path = plugins/browse-kill-ring
 	url = http://github.com/emacsmirror/browse-kill-ring.git
-[submodule "plugins/graphviz-dot-mode"]
-	path = plugins/graphviz-dot-mode
-	url = http://github.com/emacsmirror/graphviz-dot-mode.git
+[submodule "plugins/pretty-mode"]
+	path = plugins/pretty-mode
+	url = http://github.com/mattharrison/pretty-mode.git
