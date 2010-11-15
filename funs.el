@@ -73,4 +73,28 @@
   (interactive)
   (insert (format-time-string "%c" (current-time))))
 
+(defun switch-to-term-buffer ()
+  "Switch to ansi term buffer."
+  (interactive)
+  (setq terms
+	(delq nil (mapcar (lambda (x)
+			    (setq n (buffer-name x))
+			    (if (string-match "\\*terminal\\|ansi-term\\|e?shell\\*" n)
+				n
+			      nil))
+			  (delq (current-buffer) (buffer-list)))))
+  (if terms
+      (switch-to-buffer (completing-read "select terminal: " terms nil t nil nil (car terms)))
+    (princ "no terminal buffers")))
+
+(defun run-ansi-term ()
+  "Runs ansi term."
+  (interactive)
+  (ansi-term "/bin/bash")
+  ;; (text-scale-decrease 1)
+  )
+
+(global-set-key (kbd "C-c t") 'switch-to-term-buffer)
+(global-set-key (kbd "C-c T") 'run-ansi-term)
+
 (provide 'funs)
