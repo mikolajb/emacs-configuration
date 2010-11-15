@@ -8,7 +8,7 @@
 (setq icon-title-format "Emacs - %b")
 
 (when (>= emacs-major-version 23)
-  (add-to-list 'default-frame-alist '(font . "Droid Sans Mono Slashed-10")))
+  (add-to-list 'default-frame-alist '(font . "Inconsolata-12")))
 
 (show-paren-mode 1)
 (setq show-paren-delay 0)
