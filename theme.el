@@ -12,7 +12,7 @@
    (overwrite-mode
     (set-cursor-color "magenta3"))
    (t
-    (set-cursor-color "tomato2"))))
+    (set-cursor-color "#D4213D"))))
 (add-hook 'post-command-hook 'select-cursor-color-according-to-mode)
 
 (provide 'theme)
