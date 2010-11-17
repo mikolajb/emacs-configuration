@@ -94,7 +94,13 @@
   ;; (text-scale-decrease 1)
   )
 
+(defun run-shell ()
+  "Runs new shell with uniq name."
+  (interactive)
+  (shell (generate-new-buffer-name "*shell*")))
+
 (global-set-key (kbd "C-c t") 'switch-to-term-buffer)
 (global-set-key (kbd "C-c T") 'run-ansi-term)
+(global-set-key (kbd "C-c S") 'run-shell)
 
 (provide 'funs)
