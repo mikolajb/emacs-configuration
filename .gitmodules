@@ -67,3 +67,6 @@
 [submodule "snippets/text-mode/latex-mode"]
 	path = snippets/text-mode/latex-mode
 	url = https://github.com/madsdk/yasnippets-latex.git
+[submodule "plugins/full-ack"]
+	path = plugins/full-ack
+	url = https://github.com/nschum/full-ack.git
