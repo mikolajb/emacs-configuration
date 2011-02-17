@@ -103,4 +103,15 @@
 (global-set-key (kbd "C-c T") 'run-ansi-term)
 (global-set-key (kbd "C-c S") 'run-shell)
 
+(defun toggle-fullscreen ()
+  (interactive)
+  (let ((current-value (frame-parameter nil 'fullscreen)))
+    (set-frame-parameter nil 'fullscreen
+             (if (equal 'fullboth current-value)
+                 (if (boundp 'old-fullscreen) old-fullscreen nil)
+               (progn (setq old-fullscreen current-value)
+                  'fullboth)))))
+
+(global-set-key [f11] 'toggle-fullscreen)
+
 (provide 'funs)
