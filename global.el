@@ -4,11 +4,14 @@
 (prefer-coding-system 'utf-8)
 
 ;; Frame title : set to buffer name
-(setq frame-title-format "Emacs - %f ")
-(setq icon-title-format "Emacs - %b")
+(setq frame-title-format '("" invocation-name ": "(:eval (if (buffer-file-name)
+							     (abbreviate-file-name (buffer-file-name))
+							   "%b"))))
+;; when minimized
+(setq icon-title-format '("" invocation-name ": %b"))
 
 (when (>= emacs-major-version 23)
-  (add-to-list 'default-frame-alist '(font . "Inconsolata-12")))
+  (add-to-list 'default-frame-alist '(font . "Consolas-11")))
 
 (show-paren-mode 1)
 (setq show-paren-delay 0)
