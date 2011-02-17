@@ -105,4 +105,8 @@
 (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
 (setq mark-holidays-in-calendar t)
 
+;;; pkgbuild-mode
+(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
+
 (provide 'modes)
