@@ -67,4 +67,7 @@
 (setq save-place-file "~/.emacs.d/saveplace")
 (setq-default save-place t)
 
+;;; ESHELL
+(setq eshell-prefer-lisp-functions t)
+
 (provide 'global)
