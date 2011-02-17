@@ -57,6 +57,8 @@
 ;;; AUCTEX: http://www.gnu.org/software/auctex (pacman -S auctex)
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
+(setq reftex-plug-into-AUCTeX t) ; reftex
+(setq-default TeX-master nil) ; query for master file
 
 ;;; MERCURIAL: http://www.emacswiki.org/emacs/MercurialMode (included in Mercurial package)
 (require 'mercurial)
