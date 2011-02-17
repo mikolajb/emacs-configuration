@@ -71,14 +71,29 @@
 ;; (add-hook 'edit-server-done-hook 'on-edit-server-done-do-backup)
 (edit-server-start)
 
+;;; sencodary selection
+(add-to-list 'load-path "~/.emacs.d/plugins/second-sel")
+(require 'second-sel)
+
 ;;; browse-kill-ring
 (add-to-list 'load-path "~/.emacs.d/plugins/browse-kill-ring")
 (require 'browse-kill-ring)
 (browse-kill-ring-default-keybindings)
 
+;;; browse-kill-ring-plus
+(add-to-list 'load-path "~/.emacs.d/plugins/browse-kill-ring-plus")
+(require 'browse-kill-ring+)
+
 ;;; pretty-mode
 (add-to-list 'load-path "~/.emacs.d/plugins/pretty-mode")
 (require 'pretty-mode)
 (pretty-mode)
+
+;;; full-ack
+(add-to-list 'load-path "~/.emacs.d/plugins/full-ack")
+(autoload 'ack-same "full-ack" nil t)
+(autoload 'ack "full-ack" nil t)
+(autoload 'ack-find-same-file "full-ack" nil t)
+(autoload 'ack-find-file "full-ack" nil t)
 
 (provide 'plugins)
