@@ -62,7 +62,7 @@
 ;; or choose some better bindings....
 
 ;; duplicate a line
-(global-set-key (kbd "C-c y") 'duplicate-line)
+(global-set-key (kbd "C-c D") 'duplicate-line)
 
 ;; duplicate a line and comment the first
 (global-set-key (kbd "C-c d") (lambda()(interactive)(duplicate-line t)))
@@ -87,6 +87,23 @@
       (switch-to-buffer (completing-read "select terminal: " terms nil t nil nil (car terms)))
     (princ "no terminal buffers")))
 
+(icicle-define-command icicle-switch-to-term-buffer
+  "Switch to ansi term buffer."         ; Doc string
+  switch-to-buffer                      ; Action function
+  "Switch to terminal: "                ; `completing-read' args
+  terms nil t nil nil (car terms) nil
+  ((terms                               ; Bindings
+    (delq nil (mapcar (lambda (x)
+			(setq n (buffer-name x))
+			(if (string-match "\\*terminal\\|ansi-term\\|e?shell\\*" n)
+			    n
+			  nil))
+		      (delq (current-buffer) (buffer-list))))))
+  (unless terms (error "No terminal buffers"))  ; First code
+  nil                                   ; Undo code
+  nil                                   ; Last code
+  )
+
 (defun run-ansi-term ()
   "Runs ansi term."
   (interactive)
@@ -99,7 +116,7 @@
   (interactive)
   (shell (generate-new-buffer-name "*shell*")))
 
-(global-set-key (kbd "C-c t") 'switch-to-term-buffer)
+(global-set-key (kbd "C-c t") 'icicle-switch-to-term-buffer)
 (global-set-key (kbd "C-c T") 'run-ansi-term)
 (global-set-key (kbd "C-c S") 'run-shell)
 
