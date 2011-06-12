@@ -93,10 +93,12 @@
   "Switch to terminal: "                ; `completing-read' args
   terms nil t nil nil (car terms) nil
   ((terms                               ; Bindings
-    (delq nil (mapcar (lambda (x)
-			(setq n (buffer-name x))
-			(if (string-match "\\*terminal\\|ansi-term\\|e?shell\\*" n)
-			    n
+    (delq nil (mapcar (lambda (buffer)
+			(if
+			    (member
+			     (with-current-buffer buffer major-mode)
+			     '(eshell-mode shell-mode term-mode))
+			    (buffer-name buffer)
 			  nil))
 		      (delq (current-buffer) (buffer-list))))))
   (unless terms (error "No terminal buffers"))  ; First code
