@@ -1,6 +1,3 @@
-[submodule "plugins/color-theme-irblack"]
-	path = plugins/color-theme-irblack
-	url = git://github.com/dz/ir_black_emacs.git
 [submodule "plugins/magit"]
 	path = plugins/magit
 	url = http://github.com/philjackson/magit.git
@@ -70,3 +67,6 @@
 [submodule "plugins/full-ack"]
 	path = plugins/full-ack
 	url = https://github.com/nschum/full-ack.git
+[submodule "plugins/color-theme-solarized"]
+	path = plugins/color-theme-solarized
+	url = https://github.com/sellout/emacs-color-theme-solarized.git
