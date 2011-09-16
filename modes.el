@@ -1,3 +1,7 @@
+;;; TRAMP
+
+(setq tramp-default-method "scpc")
+
 ;;; RUBY: included in Emacs 23, Ruby package, also in ELPA
 ;; Based on http://infolab.stanford.edu/~manku/dotemacs.html
 (autoload 'ruby-mode "ruby-mode"
@@ -30,9 +34,9 @@
 (add-hook 'ruby-mode-hook 'turn-on-font-lock)
 
 ;;; PYTHON: included in Emacs
-(autoload 'python-mode "python-mode.el" "Python mode." t)
-(setq auto-mode-alist (append '(("/*.\.py$" . python-mode)) auto-mode-alist))
-(setq auto-mode-alist (append '(("/*.\.tac$" . python-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("^wscript$" . python-mode)) auto-mode-alist))
+(add-to-list 'load-path "~/.emacs.d/test/python.el")
+(require 'python)
 
 ;;; pymacs
 (autoload 'pymacs-apply "pymacs")
@@ -58,7 +62,13 @@
 ;;; AUCTEX: http://www.gnu.org/software/auctex (pacman -S auctex)
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
 (setq reftex-plug-into-AUCTeX t) ; reftex
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq-default TeX-master nil) ; query for master file
 
 ;;; MERCURIAL: http://www.emacswiki.org/emacs/MercurialMode (included in Mercurial package)

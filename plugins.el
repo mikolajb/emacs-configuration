@@ -1,6 +1,7 @@
 ;;; icicles
 (add-to-list 'load-path "~/.emacs.d/plugins/icicles")
 (require 'icicles)
+(setq icicle-buffer-sort 'icicle-most-recent-first-p)
 (icy-mode)
 
 ;;; icomplete+ (downloaded from emacswiki)
@@ -10,11 +11,10 @@
 ;;; dired-plus
 (add-to-list 'load-path "~/.emacs.d/plugins/dired-plus")
 (require 'dired+)
-(toggle-dired-find-file-reuse-dir 1)
+(toggle-diredp-find-file-reuse-dir 1)
 
 ;;; egg: http://github.com/bogolisk/egg
 (add-to-list 'load-path "~/.emacs.d/plugins/egg")
-; (load "~/.emacs.d/plugins/egg/egg.el")
 (require 'egg)
 
 ;;; predictive: http://www.emacswiki.org/emacs/PredictiveMode (needed by nXhtml)
@@ -54,6 +54,7 @@
 (autopair-global-mode)
 (add-hook 'term-mode-hook
   #'(lambda () (setq autopair-dont-activate t)))
+(setq autopair-autowrap t)
 
 ;;; undo-tree
 (add-to-list 'load-path "~/.emacs.d/plugins/undo-tree")

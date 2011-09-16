@@ -19,7 +19,12 @@
 (load custom-file 'noerror)
 
 ;;; Desktops
+(setq desktop-restore-eager 20
+      desktop-lazy-verbose nil)
 (desktop-save-mode 1)
+
+;;; auto revert modified files
+(global-auto-revert-mode t)
 
 ;;; savehist
 (savehist-mode 1)
@@ -69,5 +74,9 @@
 
 ;;; ESHELL
 (setq eshell-prefer-lisp-functions t)
+
+;;; uniquify
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
 (provide 'global)
