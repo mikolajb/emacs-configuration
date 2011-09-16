@@ -108,7 +108,7 @@
 			    (buffer-name buffer)
 			  nil))
 		      (delq (current-buffer) (buffer-list))))))
-  (unless terms (error "No terminal buffers"))  ; First code
+  (unless terms (signal 'quit '("No terminal buffers")))  ; First code
   nil                                   ; Undo code
   nil                                   ; Last code
   )
