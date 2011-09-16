@@ -46,6 +46,13 @@
                (set-buffer-modified-p nil)))))))
 ;; (global-set-key (kbd "C-c r") 'rename-file-and-buffer)
 
+;; source: http://rawsyntax.com/post/6756157015/learn-emacs-delete-file-and-buffer
+(defun delete-file-and-buffer ()
+  "Deletes the current file and buffer, assumes file exists"
+  (interactive)
+  (delete-file buffer-file-name)
+  (kill-buffer (buffer-name)))
+
 (defun duplicate-line (&optional commentfirst)
   "comment line at point; if COMMENTFIRST is non-nil, comment the original"
   (interactive)
