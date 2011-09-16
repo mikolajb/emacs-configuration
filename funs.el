@@ -122,6 +122,30 @@
 (global-set-key (kbd "C-c T") 'run-ansi-term)
 (global-set-key (kbd "C-c S") 'run-shell)
 
+(defun rename-term-buffer ()
+  "renames terminal buffer"
+  (interactive)
+  (unless (member major-mode '(eshell-mode shell-mode term-mode))
+    (signal 'quit '("Not a terminal buffer")))
+  (setq buffer_names '((eshell-mode . "eshell") (shell-mode . "shell") (term-mode . "ansi-term")))
+  (setq new_name_part (read-from-minibuffer "name> "))
+  (rename-buffer (generate-new-buffer-name
+		  (concat "*"
+			  (cdr (assoc major-mode buffer_names))
+			  "-"
+			  new_name_part
+			  "*")))
+  )
+
+(add-hook 'term-mode-hook
+	  (lambda ()
+	    (define-key term-raw-map (kbd "C-c n") 'rename-term-buffer)
+	    (define-key term-mode-map (kbd "C-c n") 'rename-term-buffer)))
+
+(add-hook 'shell-mode-hook
+	  (lambda ()
+	    (define-key shell-mode-map (kbd "C-c n") 'rename-term-buffer)))
+
 (defun toggle-fullscreen ()
   (interactive)
   (let ((current-value (frame-parameter nil 'fullscreen)))
