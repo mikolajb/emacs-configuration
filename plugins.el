@@ -100,7 +100,7 @@
 (autoload 'ack-find-file "full-ack" nil t)
 
 ;;; iedit
-(add-to-list 'load-path "~/.emacs.d/test-plugins/emacs-iedit")
+(add-to-list 'load-path "~/.emacs.d/plugins/iedit")
 (require 'iedit)
 (setq iedit-only-at-word-boundaries nil)
 (define-key global-map (kbd "C-;") 'iedit-mode)

@@ -52,3 +52,6 @@
 [submodule "plugins/dutch-holidays"]
 	path = plugins/dutch-holidays
 	url = git://github.com/mikolajb/emacs-dutch-holidays.git
+[submodule "plugins/iedit"]
+	path = plugins/iedit
+	url = https://github.com/eproxus/emacs-iedit.git
