@@ -7,11 +7,16 @@
 (setq frame-title-format '("" invocation-name ": "(:eval (if (buffer-file-name)
 							     (abbreviate-file-name (buffer-file-name))
 							   "%b"))))
+
 ;; when minimized
 (setq icon-title-format '("" invocation-name ": %b"))
 
+;;; Default frame font and size
 (when (>= emacs-major-version 23)
-  (add-to-list 'default-frame-alist '(font . "Consolas-11")))
+  ;; (add-to-list 'default-frame-alist '(font . "Consolas-11"))
+  (add-to-list 'default-frame-alist '(font . "Cousine-10"))
+  (add-to-list 'default-frame-alist '(height . 32))
+  (add-to-list 'default-frame-alist '(width . 120)))
 
 (show-paren-mode 1)
 (setq show-paren-delay 0)
@@ -22,6 +27,25 @@
 (setq desktop-restore-eager 20
       desktop-lazy-verbose nil)
 (desktop-save-mode 1)
+
+;;; desktop-override-stale-locks begins here
+(defun emacs-process-p (pid)
+  "If pid is the process ID of an emacs process, return t, else nil.
+Also returns nil if pid is nil."
+  (when pid
+    (let* ((cmdline-file (concat "/proc/" (int-to-string pid) "/cmdline")))
+      (when (file-exists-p cmdline-file)
+	(with-temp-buffer
+	  (insert-file-contents-literally cmdline-file)
+	  (goto-char (point-min))
+	  (search-forward "emacs" nil t)
+	  pid)))))
+
+(defadvice desktop-owner (after pry-from-cold-dead-hands activate)
+  "Don't allow dead emacsen to own the desktop file."
+  (when (not (emacs-process-p ad-return-value))
+    (setq ad-return-value nil)))
+;;; desktop-override-stale-locks ends here
 
 ;;; auto revert modified files
 (global-auto-revert-mode t)
@@ -38,18 +62,26 @@
 (transient-mark-mode t)
 ; stops selection with a mouse being immediately injected to the kill ring
 (setq mouse-drag-copy-region nil)
-; stops killing/yanking interacting with primary X11 selection
+
+;; (when (<= emacs-major-version 23)
+;; stops killing/yanking interacting with primary X11 selection
 (setq x-select-enable-primary nil)
-; makes killing/yanking interact with clipboard X11 selection
+;; makes killing/yanking interact with clipboard X11 selection
 (setq x-select-enable-clipboard t)
-(setq show-trailing-whitespace t)
+;; )
+
 ; delete trailing whitespace before save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-;; (add-hook 'before-save-hook 'whitespace-cleanup)
+(setq whitespace-style '(trailing))
+(add-hook 'before-save-hook 'whitespace-cleanup)
 ;; make all "yes or no" prompts show "y or n" instead
 (fset 'yes-or-no-p 'y-or-n-p)
-(setq scroll-step 1)
-(setq backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
+;; smooth scrolling
+(setq scroll-step           1
+      scroll-conservatively 10000)
+; allows scrolling during isearch
+(put 'view-lossage 'isearch-scroll t)
+;; kills whole line, including following newline
+(setq kill-whole-line t)
 
 ;;; Electric minibuffer!
 ;;; When selecting a file to visit, // will mean / and
@@ -62,11 +94,14 @@
 (setq visible-bell t)
 (setq inhibit-startup-echo-area-message t
       inhibit-startup-message           t)
-(scroll-bar-mode nil)
+(scroll-bar-mode 0)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 ;; Don't insert instructions in the *scratch* buffer
 (setq initial-scratch-message nil)
+
+;;; move to trash instead of deleting
+(setq delete-by-moving-to-trash t)
 
 (require 'saveplace)
 (setq save-place-file "~/.emacs.d/saveplace")
@@ -78,5 +113,40 @@
 ;;; uniquify
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+
+;;; comint env to work with node.js
+(setenv "NODE_NO_READLINE" "1")
+
+;;; enable narrowing
+(put 'narrow-to-defun  'disabled nil)
+(put 'narrow-to-page   'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
+;;; re-builder syntax choice
+(setq reb-re-syntax 'string)
+
+;;; fly-spell in comments
+;(add-hook ‘prog-mode-hook ‘flyspell-prog-mode)
+
+;;; midnight mode
+(require 'midnight)
+(setq midnight-period 3600)
+
+;;; prelude
+(size-indication-mode t)
+;; Death to the tabs!
+(setq-default indent-tabs-mode nil)
+;; delete the selection with a keypress
+(delete-selection-mode t)
+(setq temporary-file-directory "~/.emacs.d/backups/")
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+;; use shift + arrow keys to switch between visible buffers
+(windmove-default-keybindings 'super)
+;; flyspell-mode does spell-checking on the fly as you type
+(setq ispell-program-name "aspell" ; use aspell instead of ispell
+      ispell-extra-args '("--sug-mode=ultra"))
 
 (provide 'global)
