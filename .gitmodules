@@ -49,9 +49,6 @@
 [submodule "plugins/full-ack"]
 	path = plugins/full-ack
 	url = https://github.com/nschum/full-ack.git
-[submodule "plugins/color-theme-solarized"]
-	path = plugins/color-theme-solarized
-	url = https://github.com/sellout/emacs-color-theme-solarized.git
 [submodule "plugins/dutch-holidays"]
 	path = plugins/dutch-holidays
 	url = git://github.com/mikolajb/emacs-dutch-holidays.git
