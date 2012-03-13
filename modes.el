@@ -1,6 +1,6 @@
 ;;; TRAMP
-
 (setq tramp-default-method "scpc")
+(setq tramp-chunksize 150)
 
 ;;; RUBY: included in Emacs 23, Ruby package, also in ELPA
 ;; Based on http://infolab.stanford.edu/~manku/dotemacs.html
@@ -35,8 +35,6 @@
 
 ;;; PYTHON: included in Emacs
 (setq auto-mode-alist (append '(("^wscript$" . python-mode)) auto-mode-alist))
-(add-to-list 'load-path "~/.emacs.d/test/python.el")
-(require 'python)
 
 ;;; pymacs
 (autoload 'pymacs-apply "pymacs")
@@ -69,6 +67,8 @@
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
+(add-hook 'LaTeX-mode-hook 'abbrev-mode)
 (setq-default TeX-master nil) ; query for master file
 
 ;;; MERCURIAL: http://www.emacswiki.org/emacs/MercurialMode (included in Mercurial package)
@@ -83,27 +83,6 @@
 (require 'haml-mode)
 (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
 
-;;; org-mode (installed as archlinux AUR package: emacs-org-mode)
-(require 'org-install)
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-(setq org-agenda-include-diary t)
-(setq org-default-notes-file (concat "~/org/notes.org"))
-(global-set-key "\C-cc" 'org-capture)
-(defun org-capture-frame ()
-  "turn the current frame into a small popup frame"
-  (modify-frame-parameters nil
-			   '((width . 120)
-			     (height . 20)))
-  (org-capture)
-  (delete-other-windows)
- ;; (add-hook 'kill-buffer-hook '(lambda ()
-  ;; 				 (delete-frame)))
-  (raise-frame))
-
-
 ;;; Go lang mode (included in go language package)
 (require 'go-mode-load)
 (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
@@ -112,12 +91,50 @@
 (require 'midnight)
 
 ;;; calendar
+(require 'calendar)
+(require 'holidays)
+(calendar-set-date-style 'european)
 (load "~/.emacs.d/plugins/polish-holidays/polish-holidays.el")
 (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
 (setq mark-holidays-in-calendar t)
+(setq holiday-general-holidays (append swieta-panstwowe-pozostałe-święta
+                                       ustawowo-wolne-od-pracy
+                                       swieta-katolickie))
+(setq all-christian-calendar-holidays t)
+(load "~/.emacs.d/plugins/dutch-holidays/dutch-holidays.el")
+(setq holiday-other-holidays dutch-national-holidays)
+(setq holiday-hebrew-holidays nil)
+(setq holiday-islamic-holidays nil)
+(setq holiday-oriental-holidays nil)
+;; hack - remove when calendar will be fixed
+(setq calendar-holidays
+      (append holiday-general-holidays
+              holiday-other-holidays
+              holiday-christian-holidays
+              holiday-solar-holidays))
 
 ;;; pkgbuild-mode
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
 (setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
+;;(add-hook 'pkgbuild-mode-hook
+;;          '(lambda ()
+;;             (add-hook
+;;              'kill-buffer-hook
+;;              '(lambda ()
+;;                 (let  (
+;;                        (stderr-buffer (concat "*PKGBUILD(" (pkgbuild-get-directory (buffer-file-name)) ") stderr*"))
+;;                        (stdout-buffer (concat "*PKGBUILD(" (pkgbuild-get-directory (buffer-file-name)) ") stdout*")))
+;;                   (if (get-buffer stderr-buffer) (kill-buffer stderr-buffer))
+;;                  (if (get-buffer stdout-buffer) (kill-buffer stdout-buffer))
+;;                   )
+;;                 ))))
+
+;;; js2-mode
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+;;; dired customizations
+(setq dired-listing-switches "-alh")
+(setq directory-free-space-args "-Ph")
 
 (provide 'modes)
