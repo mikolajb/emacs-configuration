@@ -37,18 +37,12 @@
 [submodule "plugins/textile-mode"]
 	path = plugins/textile-mode
 	url = http://github.com/emacsmirror/textile-mode.git
-[submodule "plugins/browse-kill-ring"]
-	path = plugins/browse-kill-ring
-	url = http://github.com/emacsmirror/browse-kill-ring.git
 [submodule "plugins/pretty-mode"]
 	path = plugins/pretty-mode
 	url = http://github.com/mattharrison/pretty-mode.git
 [submodule "plugins/second-sel"]
 	path = plugins/second-sel
 	url = https://github.com/emacsmirror/second-sel.git
-[submodule "plugins/browse-kill-ring-plus"]
-	path = plugins/browse-kill-ring-plus
-	url = https://github.com/emacsmirror/browse-kill-ring-plus.git
 [submodule "snippets/text-mode/latex-mode"]
 	path = snippets/text-mode/latex-mode
 	url = https://github.com/madsdk/yasnippets-latex.git
