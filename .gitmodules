@@ -21,7 +21,7 @@
 	url = http://github.com/stsquad/emacs_chrome.git
 [submodule "plugins/polish-holidays"]
 	path = plugins/polish-holidays
-	url = git@github.com:mikolajb/emacs-polish-holidays.git
+	url = https://github.com/mikolajb/emacs-polish-holidays.git
 [submodule "plugins/icicles"]
 	path = plugins/icicles
 	url = http://github.com/emacsmirror/icicles.git
