@@ -2,20 +2,14 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/icicles")
 (require 'icicles)
 (setq icicle-buffer-sort 'icicle-most-recent-first-p)
+(setq icicle-saved-completion-sets
+      '("projekty" "~/projekty"))
 (icy-mode)
-
-;;; icomplete+ (downloaded from emacswiki)
-(add-to-list 'load-path "~/.emacs.d/plugins/icomplete-plus")
-(eval-after-load "icomplete" '(progn (require 'icomplete+)))
 
 ;;; dired-plus
 (add-to-list 'load-path "~/.emacs.d/plugins/dired-plus")
 (require 'dired+)
 (toggle-diredp-find-file-reuse-dir 1)
-
-;;; egg: http://github.com/bogolisk/egg
-(add-to-list 'load-path "~/.emacs.d/plugins/egg")
-(require 'egg)
 
 ;;; predictive: http://www.emacswiki.org/emacs/PredictiveMode (needed by nXhtml)
 (add-to-list 'load-path "~/.emacs.d/plugins/predictive")
@@ -28,8 +22,11 @@
       predictive-which-dict t)
 
 ;;; nXhtml: http://ourcomments.org/Emacs/nXhtml/doc/nxhtml.html
-(load "~/.emacs.d/plugins/nxhtml/autostart.el")
-(add-to-list 'auto-mode-alist '("\\.html\.erb$" . eruby-html-mumamo-mode))
+;; (load "~/.emacs.d/plugins/nxhtml/autostart.el")
+;; (add-to-list 'auto-mode-alist '("\\.html\.erb$" . eruby-html-mumamo-mode))
+;; (sml-modeline-mode 1)
+;; ;; yas in nxhtml
+;; (yas/define-snippets 'nxhtml-mode nil 'html-mode)
 
 ;;; Textile: http://dev.nozav.org/textile-mode.html
 (add-to-list 'load-path "~/.emacs.d/plugins/textile-mode")
@@ -53,8 +50,12 @@
 (require 'autopair)
 (autopair-global-mode)
 (add-hook 'term-mode-hook
-  #'(lambda () (setq autopair-dont-activate t)))
+	  #'(lambda () (setq autopair-dont-activate t)))
+; emacs24 workaround
+(set-default 'autopair-dont-activate
+	     #'(lambda () (eq major-mode 'term-mode)))
 (setq autopair-autowrap t)
+(setq autopair-blink-delay 0.05)
 
 ;;; undo-tree
 (add-to-list 'load-path "~/.emacs.d/plugins/undo-tree")
@@ -75,15 +76,16 @@
 ;;; sencodary selection
 (add-to-list 'load-path "~/.emacs.d/plugins/second-sel")
 (require 'second-sel)
-
-;;; browse-kill-ring
-(add-to-list 'load-path "~/.emacs.d/plugins/browse-kill-ring")
-(require 'browse-kill-ring)
-(browse-kill-ring-default-keybindings)
-
-;;; browse-kill-ring-plus
-(add-to-list 'load-path "~/.emacs.d/plugins/browse-kill-ring-plus")
-(require 'browse-kill-ring+)
+;;; following taken from setup-keys.el
+;; Additional definitions for some standard mouse commands:
+;; SGI does not pass all ALT-mouse stuff thru to Emacs, so use C-M-mouse also:
+(global-set-key [C-M-mouse-1] 'mouse-start-secondary)
+(global-set-key [C-M-drag-mouse-1] 'mouse-set-secondary)
+(global-set-key [C-M-down-mouse-1] 'mouse-drag-secondary)
+(global-set-key [C-M-mouse-3] 'mouse-secondary-save-then-kill)
+(global-set-key [C-M-mouse-2] 'mouse-yank-secondary)
+(global-set-key [(control meta ?y)] 'secondary-dwim)
+(define-key isearch-mode-map "\C-\M-y" 'isearch-yank-secondary)
 
 ;;; pretty-mode
 (add-to-list 'load-path "~/.emacs.d/plugins/pretty-mode")
@@ -96,5 +98,11 @@
 (autoload 'ack "full-ack" nil t)
 (autoload 'ack-find-same-file "full-ack" nil t)
 (autoload 'ack-find-file "full-ack" nil t)
+
+;;; iedit
+(add-to-list 'load-path "~/.emacs.d/test-plugins/emacs-iedit")
+(require 'iedit)
+(setq iedit-only-at-word-boundaries nil)
+(define-key global-map (kbd "C-;") 'iedit-mode)
 
 (provide 'plugins)

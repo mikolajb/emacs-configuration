@@ -7,21 +7,12 @@
 [submodule "plugins/cucumber"]
 	path = plugins/cucumber
 	url = http://github.com/michaelklishin/cucumber.el.git
-[submodule "plugins/twilight-emacs"]
-	path = plugins/twilight-emacs
-	url = http://github.com/crafterm/twilight-emacs.git
 [submodule "plugins/color-theme-tangotango"]
 	path = plugins/color-theme-tangotango
 	url = http://github.com/juba/color-theme-tangotango.git
 [submodule "plugins/undo-tree"]
 	path = plugins/undo-tree
 	url = http://www.dr-qubit.org/git/undo-tree.git
-[submodule "plugins/egg"]
-	path = plugins/egg
-	url = http://github.com/byplayer/egg.git
-[submodule "plugins/multi-term"]
-	path = plugins/multi-term
-	url = http://github.com/emacsmirror/multi-term.git
 [submodule "plugins/scratch-el"]
 	path = plugins/scratch-el
 	url = http://github.com/ieure/scratch-el.git
@@ -43,9 +34,6 @@
 [submodule "plugins/autopair"]
 	path = plugins/autopair
 	url = http://github.com/emacsmirror/autopair.git
-[submodule "plugins/icomplete-plus"]
-	path = plugins/icomplete-plus
-	url = http://github.com/emacsmirror/icomplete-plus.git
 [submodule "plugins/textile-mode"]
 	path = plugins/textile-mode
 	url = http://github.com/emacsmirror/textile-mode.git
