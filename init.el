@@ -1,12 +1,7 @@
 (require 'global)
 (require 'theme)
-(package-initialize)
-(require 'modes)
-(require 'plugins)
-(require 'funs)
-(require 'snippets)
-(require 'orgmode-settings)
 
+(package-initialize)
 ;; Add the original Emacs Lisp Package Archive
 (add-to-list 'package-archives
              '("elpa" . "http://tromey.com/elpa/"))
@@ -16,5 +11,11 @@
 ;; And GNU
 (add-to-list 'package-archives
 	     '("gnu" . "http://elpa.gnu.org/packages/"))
+
+(require 'modes)
+(require 'plugins)
+(require 'funs)
+(require 'snippets)
+(require 'orgmode-settings)
 
 (provide 'init)
