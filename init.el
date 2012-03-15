@@ -17,5 +17,6 @@
 (require 'funs)
 (require 'snippets)
 (require 'orgmode-settings)
+(require 'powerline)
 
 (provide 'init)
