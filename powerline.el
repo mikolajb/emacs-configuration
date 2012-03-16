@@ -140,10 +140,10 @@ static char * arrow_right[] = {
   (powerline-make side
                   "%I"
                   color1 color2))
-(defun powerline-rmw
+(defun powerline-coding
   (side color1 &optional color2)
   (powerline-make side
-                  "%*"
+                  (format "%s" buffer-file-coding-system)
                   color1 color2))
 (defun powerline-major-mode
   (side color1 &optional color2)
@@ -188,8 +188,8 @@ static char * arrow_right[] = {
                       color1 color2)
     ""))
 (setq-default mode-line-format
-              (list '(:eval (powerline-rmw            'left   nil  ))
-                    '(:eval (powerline-buffer-size    'left   nil  ))
+              (list '(:eval (powerline-buffer-size    'left   nil  ))
+                    '(:eval (powerline-coding         'left   nil  ))
                     '(:eval (powerline-buffer-name    'left   nil  powerline-color1  ))
                     '(:eval (powerline-major-mode     'left        powerline-color1  ))
                     '(:eval (powerline-minor-modes    'left        powerline-color1  powerline-color2  ))
