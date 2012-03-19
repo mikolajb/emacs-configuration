@@ -1,11 +1,11 @@
 (defvar powerline-color1)
 (defvar powerline-color2)
 
-(setq powerline-color1 "grey22")
-(setq powerline-color2 "grey40")
+(setq powerline-color1 "#888A85")
+(setq powerline-color2 "#555753")
 
 (set-face-attribute 'mode-line nil
-                    :background "#FCAF3E"
+                    :background "#E9B96E"
                     :box nil)
 (set-face-attribute 'mode-line-inactive nil
                     :box nil)
@@ -82,6 +82,7 @@ static char * arrow_right[] = {
                             :box nil)
         cface)
     nil))
+
 (defun powerline-make-face-bold ()
   (let ((cface (intern "powerline-bold")))
         (make-face cface)
@@ -89,11 +90,21 @@ static char * arrow_right[] = {
                             :weight 'bold
                             :box nil)
         cface))
+
+(defun powerline-make-face-italics ()
+  (let ((cface (intern "powerline-italics")))
+        (make-face cface)
+        (set-face-attribute cface nil
+                            :slant 'italic
+                            :box nil)
+        cface))
+
 (setq-default
  mode-line-format
- (list '(:eval " %I")
-       '(:eval (format " %s" buffer-file-coding-system))
-       '(:eval (propertize " %b " 'face (powerline-make-face-bold)))
+ (list '(:eval (propertize (format " %s" buffer-file-coding-system)
+                           'face (powerline-make-face-italics)))
+       '(:eval (propertize " %b "
+                           'face (powerline-make-face-bold)))
        '(:eval (propertize " "
                            'display (arrow-right-xpm nil powerline-color1)))
        ;; =>
@@ -115,7 +126,7 @@ static char * arrow_right[] = {
                            'face (powerline-make-face powerline-color2))
                  ""))
        '(:eval (propertize " "
-                           'display '(space :align-to (- right-fringe 20))
+                           'display '(space :align-to (- right-fringe 27))
                            'face (powerline-make-face powerline-color2)))
        ;; <=
        '(:eval (propertize " "
@@ -129,6 +140,8 @@ static char * arrow_right[] = {
                            'display (arrow-left-xpm
                                      powerline-color1
                                      nil)))
+       '(:eval (propertize " %5I"
+                           'face (powerline-make-face-italics)))
        '(:eval " %4l")
        '(:eval " %3c")))
 
