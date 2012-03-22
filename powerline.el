@@ -1,11 +1,11 @@
 (defvar powerline-color1)
 (defvar powerline-color2)
 
-(setq powerline-color1 "#888A85")
+(setq powerline-color1 "#888a85")
 (setq powerline-color2 "#555753")
 
 (set-face-attribute 'mode-line nil
-                    :background "#E9B96E"
+                    :background "#8ae234"
                     :box nil)
 (set-face-attribute 'mode-line-inactive nil
                     :box nil)
@@ -90,6 +90,7 @@ static char * arrow_right[] = {
                             :weight 'bold
                             :box nil)
         cface))
+
 (defun powerline-make-face-italics ()
   (let ((cface (intern "powerline-italics")))
         (make-face cface)
@@ -139,8 +140,10 @@ static char * arrow_right[] = {
        '(:eval (propertize "%n"
                            'face (powerline-make-face powerline-color2)))
        '(:eval (if (buffer-file-name (current-buffer))
-                   (propertize (format "%s" (vc-mode-line (buffer-file-name (current-buffer))))
-                           'face (powerline-make-face powerline-color2))
+                   (propertize
+                    (format "%s" (vc-mode-line
+                                  (buffer-file-name (current-buffer))))
+                    'face (powerline-make-face powerline-color2))
                  ""))
        '(:eval (propertize " "
                            'display '(space :align-to (- right-fringe 25))

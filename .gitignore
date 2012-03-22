@@ -1,6 +1,10 @@
 *~
 elpa/*
+backups
 saveplace
+eshell/*
+history
+image-dired
 session.*
 tramp
 url/*
