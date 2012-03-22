@@ -90,7 +90,6 @@ static char * arrow_right[] = {
                             :weight 'bold
                             :box nil)
         cface))
-
 (defun powerline-make-face-italics ()
   (let ((cface (intern "powerline-italics")))
         (make-face cface)
@@ -98,6 +97,24 @@ static char * arrow_right[] = {
                             :slant 'italic
                             :box nil)
         cface))
+
+(defun current-position ()
+  (let ((lines-to-point (save-restriction
+                          (widen)
+                          (+ 1 (count-lines (point-min) (point))))))
+    (format " %03d:%04d"
+            (current-column)
+            lines-to-point)))
+
+(defun percentage-position ()
+    (let ((lines-to-point (save-restriction
+                          (widen)
+                          (+ 1 (count-lines (point-min) (point)))))
+        (lines-from-point (save-restriction
+                            (widen)
+                            (count-lines (point) (point-max)))))
+          (format " %5.1f%%%%"
+            (/ (* 100.0 lines-to-point) (+ lines-to-point lines-from-point)))))
 
 (setq-default
  mode-line-format
@@ -126,23 +143,22 @@ static char * arrow_right[] = {
                            'face (powerline-make-face powerline-color2))
                  ""))
        '(:eval (propertize " "
-                           'display '(space :align-to (- right-fringe 27))
+                           'display '(space :align-to (- right-fringe 25))
                            'face (powerline-make-face powerline-color2)))
-       ;; <=
        '(:eval (propertize " "
                            'display (arrow-left-xpm
                                      powerline-color2
                                      powerline-color1)))
-       '(:eval (propertize " %6p "
-                           'face (powerline-make-face powerline-color1)))
        ;; <=
+       '(:eval (propertize " %3I "
+                           'face (powerline-make-face powerline-color1)))
        '(:eval (propertize " "
                            'display (arrow-left-xpm
                                      powerline-color1
                                      nil)))
-       '(:eval (propertize " %5I"
-                           'face (powerline-make-face-italics)))
-       '(:eval " %4l")
-       '(:eval " %3c")))
+       ;; <=
+       '(:eval (propertize (percentage-position)
+                'face (powerline-make-face-italics)))
+       '(:eval (current-position))))
 
 (provide 'powerline)
