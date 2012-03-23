@@ -50,7 +50,7 @@
 (defun delete-file-and-buffer ()
   "Deletes the current file and buffer, assumes file exists"
   (interactive)
-  (delete-file buffer-file-name)
+  (move-file-to-trash buffer-file-name)
   (kill-buffer (buffer-name)))
 
 (defun duplicate-line (&optional commentfirst)
@@ -163,5 +163,51 @@
                   'fullboth)))))
 
 (global-set-key [f11] 'toggle-fullscreen)
+
+(defun set-encoding-in-comment ()
+  "Sets coding"
+  (interactive)
+  (save-excursion
+    (widen)
+    (goto-char (point-min))
+    (when (re-search-forward "[^\0-\177]" nil t)
+      (goto-char (point-min))
+      (let ((coding-system
+	     (or coding-system-for-write
+		 buffer-file-coding-system)))
+	(if coding-system
+	    (setq coding-system
+		  (or (coding-system-get coding-system 'mime-charset)
+		      (coding-system-change-eol-conversion coding-system nil))))
+	(setq coding-system
+	      (if coding-system
+		  (symbol-name coding-system)
+		"ascii-8bit"))
+	(if (looking-at "^#!") (beginning-of-line 2))
+	(cond ((looking-at "\\s *#.*-\*-\\s *\\(en\\)?coding\\s *:\\s *\\([-a-z0-9_]*\\)\\s *\\(;\\|-\*-\\)")
+	       (unless (string= (match-string 2) coding-system)
+		 (goto-char (match-beginning 2))
+		 (delete-region (point) (match-end 2))
+		 (and (looking-at "-\*-")
+		      (let ((n (skip-chars-backward " ")))
+			(cond ((= n 0) (insert "  ") (backward-char))
+			      ((= n -1) (insert " "))
+			      ((forward-char)))))
+		 (insert coding-system)))
+	      ((looking-at "\\s *#.*coding\\s *[:=]"))
+	      (t (insert "# -*- coding: " coding-system " -*-\n"))
+	      )))))
+
+(defun tramp-cleanup-star ()
+  "Cleanup all connections and buffers"
+  (interactive)
+  (tramp-cleanup-all-connections)
+  (tramp-cleanup-all-buffers))
+
+(defun astyle-beautify-region ()
+  "Astyle region"
+  (interactive)
+  (let ((cmd "astyle --style=1tbs --pad-oper --pad-header --unpad-paren --indent=spaces=2 --break-blocks"))
+    (shell-command-on-region (region-beginning) (region-end) cmd (current-buffer) t)))
 
 (provide 'funs)
