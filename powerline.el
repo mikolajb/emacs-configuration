@@ -99,24 +99,6 @@ static char * arrow_right[] = {
                             :box nil)
         cface))
 
-(defun current-position ()
-  (let ((lines-to-point (save-restriction
-                          (widen)
-                          (+ 1 (count-lines (point-min) (point))))))
-    (format " %03d:%04d"
-            (current-column)
-            lines-to-point)))
-
-(defun percentage-position ()
-    (let ((lines-to-point (save-restriction
-                          (widen)
-                          (+ 1 (count-lines (point-min) (point)))))
-        (lines-from-point (save-restriction
-                            (widen)
-                            (count-lines (point) (point-max)))))
-          (format " %5.1f%%%%"
-            (/ (* 100.0 lines-to-point) (+ lines-to-point lines-from-point)))))
-
 (setq-default
  mode-line-format
  (list '(:eval (propertize (format " %s" buffer-file-coding-system)
@@ -160,8 +142,13 @@ static char * arrow_right[] = {
                                      powerline-color1
                                      nil)))
        ;; <=
-       '(:eval (propertize (percentage-position)
-                'face (powerline-make-face-italics)))
-       '(:eval (current-position))))
+       '(:eval (propertize (format " %5.1f%%%%"
+                                   (/ (* 100.0
+                                         (line-number-at-pos (window-end)))
+                                      (line-number-at-pos (point-max))))
+                           'face (powerline-make-face-italics)))
+       '(:eval (format " %03d:%04d"
+                       (1+ (current-column))
+                       (line-number-at-pos)))))
 
 (provide 'powerline)
