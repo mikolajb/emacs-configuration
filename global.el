@@ -76,8 +76,13 @@ Also returns nil if pid is nil."
 ;; make all "yes or no" prompts show "y or n" instead
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; smooth scrolling
-(setq scroll-step           1
-      scroll-conservatively 10000)
+(setq scroll-step 1
+      auto-window-vscroll nil
+      scroll-conservatively 10000
+      scroll-preserve-screen-position 'tak
+      mouse-wheel-follow-mouse 't
+      mouse-wheel-progressive-speed nil
+      mouse-wheel-scroll-amount '(1 ((shift) . 1)))
 ; allows scrolling during isearch
 (put 'view-lossage 'isearch-scroll t)
 ;; kills whole line, including following newline
@@ -144,7 +149,7 @@ Also returns nil if pid is nil."
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 ;; use shift + arrow keys to switch between visible buffers
-(windmove-default-keybindings 'super)
+(windmove-default-keybindings 'meta)
 ;; flyspell-mode does spell-checking on the fly as you type
 (setq ispell-program-name "aspell" ; use aspell instead of ispell
       ispell-extra-args '("--sug-mode=ultra"))
