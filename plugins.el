@@ -1,3 +1,8 @@
+;;; dired-plus
+(add-to-list 'load-path "~/.emacs.d/plugins/dired-plus")
+(require 'dired+)
+(toggle-diredp-find-file-reuse-dir 1)
+
 ;;; icicles
 (add-to-list 'load-path "~/.emacs.d/plugins/icicles")
 (require 'icicles)
@@ -5,11 +10,6 @@
 (setq icicle-saved-completion-sets
       '("projekty" "~/projekty"))
 (icy-mode)
-
-;;; dired-plus
-(add-to-list 'load-path "~/.emacs.d/plugins/dired-plus")
-(require 'dired+)
-(toggle-diredp-find-file-reuse-dir 1)
 
 ;;; predictive: http://www.emacswiki.org/emacs/PredictiveMode (needed by nXhtml)
 (add-to-list 'load-path "~/.emacs.d/plugins/predictive")
