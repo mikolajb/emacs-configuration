@@ -210,4 +210,11 @@
   (let ((cmd "astyle --style=1tbs --pad-oper --pad-header --unpad-paren --indent=spaces=2 --break-blocks"))
     (shell-command-on-region (region-beginning) (region-end) cmd (current-buffer) t)))
 
+(defun beautify-json ()
+  (interactive)
+  (let ((b (if mark-active (min (point) (mark)) (point-min)))
+        (e (if mark-active (max (point) (mark)) (point-max))))
+    (shell-command-on-region b e
+     "python -mjson.tool" (current-buffer) t)))
+
 (provide 'funs)
