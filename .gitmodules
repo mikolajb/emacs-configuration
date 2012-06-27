@@ -1,9 +1,6 @@
 [submodule "plugins/magit"]
 	path = plugins/magit
-	url = http://github.com/philjackson/magit.git
-[submodule "plugins/gist"]
-	path = plugins/gist
-	url = git://github.com/defunkt/gist.el.git
+	url = https://github.com/magit/magit.git
 [submodule "plugins/cucumber"]
 	path = plugins/cucumber
 	url = http://github.com/michaelklishin/cucumber.el.git
@@ -33,7 +30,7 @@
 	url = http://github.com/emacsmirror/nxhtml.git
 [submodule "plugins/autopair"]
 	path = plugins/autopair
-	url = http://github.com/emacsmirror/autopair.git
+	url = https://github.com/capitaomorte/autopair.git
 [submodule "plugins/textile-mode"]
 	path = plugins/textile-mode
 	url = http://github.com/emacsmirror/textile-mode.git

@@ -33,10 +33,6 @@
 (require 'textile-mode)
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
-;; gist
-(add-to-list 'load-path "~/.emacs.d/plugins/gist")
-(require 'gist)
-
 ;; magit
 (add-to-list 'load-path "~/.emacs.d/plugins/magit")
 (require 'magit)
@@ -103,6 +99,6 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/iedit")
 (require 'iedit)
 (setq iedit-only-at-word-boundaries nil)
-(define-key global-map (kbd "C-;") 'iedit-mode)
+(define-key global-map (kbd "C-c C-;") 'iedit-mode)
 
 (provide 'plugins)
