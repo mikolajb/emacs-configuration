@@ -16,26 +16,45 @@
 ;;; terminal colors
 (setq ansi-color-for-comint-mode t)
 (setq ansi-color-for-comint-mode-on t)
-(setq ansi-color-names-vector
-      ["#000000"           ; black
-       "#CC0000"           ; red
-       "#4E9A06"           ; green
-       "#C4A000"           ; yellow
-       "#3465A4"           ; blue
-       "#75507B"           ; magenta
-       "#06989A"           ; cyan
-       "#D3D7CF"]          ; white
-      )
-(setq ansi-term-color-vector
-      [unspecified
-       "#555753"           ; black
-       "#EF2929"           ; red
-       "#8AE234"           ; green
-       "#FCE94F"           ; yellow
-       "#729FCF"           ; blue
-       "#AD7FA8"           ; magenta
-       "#34E2E2"           ; cyan
-       "#EEEEEC"]          ; white
-      )
+
+(defface term-color-black
+  '((t :foreground "#555753" :background "#555753"))
+  "Face used to render black color code."
+  :group 'term)
+
+(defface term-color-red
+  '((t :foreground "#EF2929" :background "#EF2929"))
+  "Face used to render red color code."
+  :group 'term)
+
+(defface term-color-green
+  '((t :foreground "#8AE234" :background "#8AE234"))
+  "Face used to render green color code."
+  :group 'term)
+
+(defface term-color-yellow
+  '((t :foreground "#FCE94F" :background "#FCE94F"))
+  "Face used to render yellow color code."
+  :group 'term)
+
+(defface term-color-blue
+  '((t :foreground "#729FCF" :background "#729FCF"))
+  "Face used to render blue color code."
+  :group 'term)
+
+(defface term-color-magenta
+  '((t :foreground "#AD7FA8" :background "#AD7FA8"))
+  "Face used to render magenta color code."
+  :group 'term)
+
+(defface term-color-cyan
+  '((t :foreground "#34E2E2" :background "#34E2E2"))
+  "Face used to render cyan color code."
+  :group 'term)
+
+(defface term-color-white
+  '((t :foreground "#EEEEEC" :background "#EEEEEC"))
+  "Face used to render white color code."
+  :group 'term)
 
 (provide 'theme)
