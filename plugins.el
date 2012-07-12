@@ -46,10 +46,7 @@
 (require 'autopair)
 (autopair-global-mode)
 (add-hook 'term-mode-hook
-	  #'(lambda () (setq autopair-dont-activate t)))
-; emacs24 workaround
-(set-default 'autopair-dont-activate
-	     #'(lambda () (eq major-mode 'term-mode)))
+	  #'(lambda () (autopair-mode -1)))
 (setq autopair-autowrap t)
 (setq autopair-blink-delay 0.05)
 
