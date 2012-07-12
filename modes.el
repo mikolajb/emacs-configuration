@@ -1,5 +1,16 @@
+;;; TERM
+(add-hook 'term-mode-hook
+          (function
+           (lambda ()
+             (setq term-prompt-regexp "^[^#$%>\n]*[#$%>ϱϑ] *")
+             (make-local-variable 'mouse-yank-at-point)
+             (make-local-variable 'transient-mark-mode)
+             (setq mouse-yank-at-point t)
+             (auto-fill-mode -1)
+             (setq tab-width 8 ))))
+
 ;;; TRAMP
-(setq tramp-default-method "scpc")
+(setq tramp-default-method "scpx")
 (setq tramp-chunksize 150)
 
 ;;; RUBY: included in Emacs 23, Ruby package, also in ELPA
