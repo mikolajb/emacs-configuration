@@ -87,7 +87,7 @@
       (if (string-match "LATEX_CMD: xelatex" (buffer-string))
           (setq org-export-latex-classes
                 (cons '("article"
-                        "\\documentclass[11pt,article,oneside]{memoir}"
+                        "\\documentclass[12pt]{article}"
                         ("\\section{%s}" . "\\section*{%s}")
                         ("\\subsection{%s}" . "\\subsection*{%s}")
                         ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -96,5 +96,13 @@
                       org-export-latex-classes))))
 
 (add-hook 'org-export-latex-after-initial-vars-hook 'my-auto-tex-parameters)
+
+(defun org-mode-reftex-setup ()
+  (load-library "reftex")
+  (and (buffer-file-name)
+       (file-exists-p (buffer-file-name))
+       (reftex-parse-all))
+  (define-key org-mode-map (kbd "C-c )") 'reftex-citation))
+(add-hook 'org-mode-hook 'org-mode-reftex-setup)
 
 (provide 'orgmode-settings)
