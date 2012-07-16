@@ -36,6 +36,8 @@
 ;; magit
 (add-to-list 'load-path "~/.emacs.d/plugins/magit")
 (require 'magit)
+(add-hook 'magit-log-edit-mode-hook 'flyspell-mode)
+(add-hook 'magit-log-edit-mode-hook 'auto-fill-mode)
 
 ;;; cucumber
 (add-to-list 'load-path "~/.emacs.d/plugins/cucumber")
