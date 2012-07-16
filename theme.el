@@ -17,6 +17,9 @@
 (setq ansi-color-for-comint-mode t)
 (setq ansi-color-for-comint-mode-on t)
 
+(setq term-default-fg-color "#EEEEEC")
+(setq term-default-bg-color "#2e3436")
+
 (defface term-color-black
   '((t :foreground "#555753" :background "#555753"))
   "Face used to render black color code."
