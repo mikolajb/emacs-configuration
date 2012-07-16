@@ -105,4 +105,7 @@
   (define-key org-mode-map (kbd "C-c )") 'reftex-citation))
 (add-hook 'org-mode-hook 'org-mode-reftex-setup)
 
+(add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'org-mode-hook 'auto-fill-mode)
+
 (provide 'orgmode-settings)
