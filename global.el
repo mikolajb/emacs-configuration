@@ -13,8 +13,8 @@
 
 ;;; Default frame font and size
 (when (>= emacs-major-version 23)
-  ;; (add-to-list 'default-frame-alist '(font . "Consolas-11"))
-  (add-to-list 'default-frame-alist '(font . "Cousine-10"))
+  (add-to-list 'default-frame-alist '(font . "Consolas-10"))
+  ;; (add-to-list 'default-frame-alist '(font . "Cousine-10"))
   (add-to-list 'default-frame-alist '(height . 32))
   (add-to-list 'default-frame-alist '(width . 120)))
 
@@ -111,9 +111,6 @@ Also returns nil if pid is nil."
 (require 'saveplace)
 (setq save-place-file "~/.emacs.d/saveplace")
 (setq-default save-place t)
-
-;;; ESHELL
-(setq eshell-prefer-lisp-functions t)
 
 ;;; uniquify
 (require 'uniquify)

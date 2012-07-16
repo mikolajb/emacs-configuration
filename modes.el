@@ -9,6 +9,12 @@
              (auto-fill-mode -1)
              (setq tab-width 8 ))))
 
+;;; SHELL
+(add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
+
+;;; ESHELL
+(setq eshell-prefer-lisp-functions t)
+
 ;;; TRAMP
 (setq tramp-default-method "scpx")
 (setq tramp-chunksize 150)
