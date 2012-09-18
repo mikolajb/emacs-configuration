@@ -100,4 +100,7 @@
 (setq iedit-only-at-word-boundaries nil)
 (define-key global-map (kbd "C-c C-;") 'iedit-mode)
 
+;;; Sawzall
+(load-file "~/.emacs.d/plugins/sawzall.el")
+
 (provide 'plugins)
