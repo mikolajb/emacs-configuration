@@ -1,5 +1,4 @@
 (require 'global)
-(require 'theme)
 
 (package-initialize)
 ;; Add the original Emacs Lisp Package Archive
@@ -12,11 +11,12 @@
 (add-to-list 'package-archives
 	     '("gnu" . "http://elpa.gnu.org/packages/"))
 
+(require 'theme)
 (require 'modes)
 (require 'plugins)
 (require 'funs)
 (require 'snippets)
 (require 'orgmode-settings)
-(require 'powerline)
+;; (require 'powerline)
 
 (provide 'init)
