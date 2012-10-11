@@ -53,49 +53,59 @@
 
 (add-hook 'org-export-latex-after-initial-vars-hook 'my-auto-tex-cmd)
 
-(defun my-auto-tex-parameters ()
-      "Automatically select the tex packages to include."
-      ;; default packages for ordinary latex or pdflatex export
-      (setq org-export-latex-default-packages-alist
-            '(("AUTO" "inputenc" t)
-              ("T1"   "fontenc"   t)
-              (""     "fixltx2e"  nil)
-              (""     "wrapfig"   nil)
-              (""     "soul"      t)
-              (""     "textcomp"  t)
-              (""     "marvosym"  t)
-              (""     "wasysym"   t)
-              (""     "latexsym"  t)
-              (""     "amssymb"   t)
-              (""     "hyperref"  nil)))
+(setq org-export-latex-default-packages-alist
+      '(("AUTO" "inputenc" t)
+        ("T1"   "fontenc"   t)
+        (""     "fixltx2e"  nil)
+        (""     "wrapfig"   nil)
+        (""     "soul"      t)
+        (""     "textcomp"  t)
+        (""     "marvosym"  t)
+        (""     "wasysym"   t)
+        (""     "latexsym"  t)
+        (""     "amssymb"   t)
+        (""     "hyperref"  nil)))
 
-      ;; Packages to include when xelatex is used
-      (if (string-match "LATEX_CMD: xelatex" (buffer-string))
-          (setq org-export-latex-default-packages-alist
-                '(("" "fontspec" t)
-                  ("" "xltxtra" t)
-                  ("" "fullpage" t)
-                  ("" "listings" t)
-                  ("" "url" t)
-                  ("" "rotating" t)
-                  ("american" "babel" t)
-                  ("babel" "csquotes" t)
-                  ("" "soul" t)
-                  ("xetex,citecolor=black,linkcolor=black,urlcolor=black,colorlinks=true" "hyperref" nil)
-                  )))
+;; Packages to include when xelatex is used
+(setq org-export-latex-default-packages-alist
+          '(("" "fontspec" t)
+            ("" "xltxtra" t)
+            ("" "fullpage" t)
+            ("" "listings" t)
+            ("" "url" t)
+            ("" "rotating" t)
+            ("american" "babel" t)
+            ("babel" "csquotes" t)
+            ("" "soul" t)
+            ("xetex,citecolor=black,linkcolor=black,urlcolor=black,colorlinks=true" "hyperref" nil)
+            ))
 
-      (if (string-match "LATEX_CMD: xelatex" (buffer-string))
-          (setq org-export-latex-classes
-                (cons '("article"
-                        "\\documentclass[12pt]{article}"
-                        ("\\section{%s}" . "\\section*{%s}")
-                        ("\\subsection{%s}" . "\\subsection*{%s}")
-                        ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                        ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                        ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-                      org-export-latex-classes))))
-
-(add-hook 'org-export-latex-after-initial-vars-hook 'my-auto-tex-parameters)
+(unless (boundp 'org-export-latex-classes)
+  (setq org-export-latex-classes nil))
+(add-to-list 'org-export-latex-classes
+             '("article"
+               "\\documentclass[12pt]{article}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+(add-to-list 'org-export-latex-classes
+             '("report"
+               "\\documentclass[12pt]{report}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+(add-to-list 'org-export-latex-classes
+             '("commit-report"
+               "\\documentclass[12pt]{commit-report}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 (defun org-mode-reftex-setup ()
   (load-library "reftex")
