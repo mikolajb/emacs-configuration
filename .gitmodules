@@ -52,3 +52,6 @@
 [submodule "plugins/iedit"]
 	path = plugins/iedit
 	url = https://github.com/eproxus/emacs-iedit.git
+[submodule "plugins/multiple-cursors"]
+	path = plugins/multiple-cursors
+	url = https://github.com/magnars/multiple-cursors.el.git
