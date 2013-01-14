@@ -1,4 +1,4 @@
-(load-theme 'sanityinc-solarized-light)
+(load-theme 'sanityinc-solarized-dark)
 
 (defun select-cursor-color-according-to-mode ()
   (blink-cursor-mode 0)
@@ -16,5 +16,8 @@
 ;;; terminal colors
 (setq ansi-color-for-comint-mode t)
 (setq ansi-color-for-comint-mode-on t)
+
+(custom-set-faces
+ '(variable-pitch ((t (:family "Calibri")))))
 
 (provide 'theme)
