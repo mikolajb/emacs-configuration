@@ -52,11 +52,6 @@
 (setq autopair-autowrap t)
 (setq autopair-blink-delay 0.05)
 
-;;; undo-tree
-(add-to-list 'load-path "~/.emacs.d/plugins/undo-tree")
-(require 'undo-tree)
-(global-undo-tree-mode)
-
 ;;; scratch-el
 (add-to-list 'load-path "~/.emacs.d/plugins/scratch-el")
 (require 'scratch)
