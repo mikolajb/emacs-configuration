@@ -39,10 +39,6 @@
 (add-hook 'magit-log-edit-mode-hook 'flyspell-mode)
 (add-hook 'magit-log-edit-mode-hook 'auto-fill-mode)
 
-;;; cucumber
-(add-to-list 'load-path "~/.emacs.d/plugins/cucumber")
-(require 'feature-mode)
-
 ;;; autopair
 (add-to-list 'load-path "~/.emacs.d/plugins/autopair")
 (require 'autopair)
@@ -62,20 +58,6 @@
 ;; (setq edit-server-new-frame nil)
 ;; (add-hook 'edit-server-done-hook 'on-edit-server-done-do-backup)
 (edit-server-start)
-
-;;; sencodary selection
-(add-to-list 'load-path "~/.emacs.d/plugins/second-sel")
-(require 'second-sel)
-;;; following taken from setup-keys.el
-;; Additional definitions for some standard mouse commands:
-;; SGI does not pass all ALT-mouse stuff thru to Emacs, so use C-M-mouse also:
-(global-set-key [C-M-mouse-1] 'mouse-start-secondary)
-(global-set-key [C-M-drag-mouse-1] 'mouse-set-secondary)
-(global-set-key [C-M-down-mouse-1] 'mouse-drag-secondary)
-(global-set-key [C-M-mouse-3] 'mouse-secondary-save-then-kill)
-(global-set-key [C-M-mouse-2] 'mouse-yank-secondary)
-(global-set-key [(control meta ?y)] 'secondary-dwim)
-(define-key isearch-mode-map "\C-\M-y" 'isearch-yank-secondary)
 
 ;;; pretty-mode
 (add-to-list 'load-path "~/.emacs.d/plugins/pretty-mode")
