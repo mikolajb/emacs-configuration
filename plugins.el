@@ -28,11 +28,6 @@
 ;; ;; yas in nxhtml
 ;; (yas/define-snippets 'nxhtml-mode nil 'html-mode)
 
-;;; Textile: http://dev.nozav.org/textile-mode.html
-(add-to-list 'load-path "~/.emacs.d/plugins/textile-mode")
-(require 'textile-mode)
-(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
-
 ;; magit
 (add-to-list 'load-path "~/.emacs.d/plugins/magit")
 (require 'magit)
