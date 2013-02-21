@@ -22,9 +22,6 @@
 [submodule "plugins/autopair"]
 	path = plugins/autopair
 	url = https://github.com/capitaomorte/autopair.git
-[submodule "plugins/pretty-mode"]
-	path = plugins/pretty-mode
-	url = http://github.com/mattharrison/pretty-mode.git
 [submodule "snippets/text-mode/latex-mode"]
 	path = snippets/text-mode/latex-mode
 	url = https://github.com/madsdk/yasnippets-latex.git
@@ -34,9 +31,6 @@
 [submodule "plugins/dutch-holidays"]
 	path = plugins/dutch-holidays
 	url = git://github.com/mikolajb/emacs-dutch-holidays.git
-[submodule "plugins/iedit"]
-	path = plugins/iedit
-	url = https://github.com/eproxus/emacs-iedit.git
 [submodule "plugins/multiple-cursors"]
 	path = plugins/multiple-cursors
 	url = https://github.com/magnars/multiple-cursors.el.git
