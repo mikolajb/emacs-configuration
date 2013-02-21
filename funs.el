@@ -116,7 +116,7 @@
 (defun run-ansi-term ()
   "Runs ansi term."
   (interactive)
-  (ansi-term "/bin/bash")
+  (ansi-term "/bin/zsh")
   ;; (text-scale-decrease 1)
   )
 
@@ -144,10 +144,10 @@
 			  "*")))
   )
 
-;; (add-hook 'term-mode-hook
-;; 	  (lambda ()
-;; 	    (define-key term-raw-map (kbd "C-c n") 'rename-term-buffer)
-;; 	    (define-key term-mode-map (kbd "C-c n") 'rename-term-buffer)))
+(add-hook 'term-mode-hook
+	  (lambda ()
+	    (define-key term-raw-map (kbd "C-c n") 'rename-term-buffer)
+	    (define-key term-mode-map (kbd "C-c n") 'rename-term-buffer)))
 
 (add-hook 'shell-mode-hook
 	  (lambda ()
