@@ -18,6 +18,7 @@
 ;;; TRAMP
 (setq tramp-default-method "scpx")
 (setq tramp-chunksize 150)
+(setq tramp-backup-directory-alist backup-directory-alist)
 
 ;;; RUBY: included in Emacs 23, Ruby package, also in ELPA
 ;; Based on http://infolab.stanford.edu/~manku/dotemacs.html
