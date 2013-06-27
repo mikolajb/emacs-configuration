@@ -129,6 +129,26 @@
 (global-set-key (kbd "C-c T") 'run-ansi-term)
 (global-set-key (kbd "C-c S") 'run-shell)
 
+(defun shell-on-top ()
+  "Puts last used shell on top and restores the previous window configuration."
+  (interactive)
+  (if (member (with-current-buffer (current-buffer) major-mode)
+              '(eshell-mode shell-mode term-mode))
+      (jump-to-register ?1)
+
+    (window-configuration-to-register ?1)
+    (switch-to-buffer
+     (car (delq nil (mapcar
+                     (lambda (x)
+                       (setq n (buffer-name x))
+                       (if (string-match "\\*terminal\\|ansi-term\\|e?shell\\*" n)
+                           n
+                         nil))
+                     (delq (current-buffer) (buffer-list))))))
+    (delete-other-windows)))
+
+(global-set-key [f12] 'shell-on-top)
+
 (defun rename-term-buffer ()
   "renames terminal buffer"
   (interactive)
@@ -152,17 +172,6 @@
 (add-hook 'shell-mode-hook
 	  (lambda ()
 	    (define-key shell-mode-map (kbd "C-c n") 'rename-term-buffer)))
-
-(defun toggle-fullscreen ()
-  (interactive)
-  (let ((current-value (frame-parameter nil 'fullscreen)))
-    (set-frame-parameter nil 'fullscreen
-             (if (equal 'fullboth current-value)
-                 (if (boundp 'old-fullscreen) old-fullscreen nil)
-               (progn (setq old-fullscreen current-value)
-                  'fullboth)))))
-
-(global-set-key [f11] 'toggle-fullscreen)
 
 (defun set-encoding-in-comment ()
   "Sets coding"
