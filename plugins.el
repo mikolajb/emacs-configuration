@@ -7,26 +7,7 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/icicles")
 (require 'icicles)
 (setq icicle-buffer-sort 'icicle-most-recent-first-p)
-(setq icicle-saved-completion-sets
-      '("projekty" "~/projekty"))
 (icy-mode)
-
-;;; predictive: http://www.emacswiki.org/emacs/PredictiveMode (needed by nXhtml)
-(add-to-list 'load-path "~/.emacs.d/plugins/predictive")
-(autoload 'predictive-mode "predictive" "predictive" t)
-(set-default 'predictive-auto-add-to-dict t)
-(setq predictive-main-dict 'rpg-dictionary
-      predictive-auto-learn t
-      predictive-add-to-dict-ask nil
-      predictive-use-auto-learn-cache nil
-      predictive-which-dict t)
-
-;;; nXhtml: http://ourcomments.org/Emacs/nXhtml/doc/nxhtml.html
-;; (load "~/.emacs.d/plugins/nxhtml/autostart.el")
-;; (add-to-list 'auto-mode-alist '("\\.html\.erb$" . eruby-html-mumamo-mode))
-;; (sml-modeline-mode 1)
-;; ;; yas in nxhtml
-;; (yas/define-snippets 'nxhtml-mode nil 'html-mode)
 
 ;; magit
 (add-to-list 'load-path "~/.emacs.d/plugins/magit")
