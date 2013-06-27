@@ -1,36 +1,52 @@
 [submodule "plugins/magit"]
 	path = plugins/magit
 	url = https://github.com/magit/magit.git
+        branch = master
 [submodule "plugins/color-theme-tangotango"]
 	path = plugins/color-theme-tangotango
 	url = http://github.com/juba/color-theme-tangotango.git
+        branch = master
 [submodule "plugins/scratch-el"]
 	path = plugins/scratch-el
 	url = http://github.com/ieure/scratch-el.git
+        branch = master
 [submodule "plugins/emacs_chrome"]
 	path = plugins/emacs_chrome
 	url = http://github.com/stsquad/emacs_chrome.git
+        branch = master
 [submodule "plugins/polish-holidays"]
 	path = plugins/polish-holidays
 	url = https://github.com/mikolajb/emacs-polish-holidays.git
+        branch = master
 [submodule "plugins/icicles"]
 	path = plugins/icicles
 	url = http://github.com/emacsmirror/icicles.git
+        branch = master
 [submodule "plugins/dired-plus"]
 	path = plugins/dired-plus
 	url = http://github.com/emacsmirror/dired-plus.git
+        branch = master
 [submodule "plugins/autopair"]
 	path = plugins/autopair
 	url = https://github.com/capitaomorte/autopair.git
+        branch = master
 [submodule "snippets/text-mode/latex-mode"]
 	path = snippets/text-mode/latex-mode
 	url = https://github.com/madsdk/yasnippets-latex.git
+        branch = master
 [submodule "plugins/full-ack"]
 	path = plugins/full-ack
 	url = https://github.com/nschum/full-ack.git
+        branch = master
 [submodule "plugins/dutch-holidays"]
 	path = plugins/dutch-holidays
 	url = git://github.com/mikolajb/emacs-dutch-holidays.git
+        branch = master
 [submodule "plugins/multiple-cursors"]
 	path = plugins/multiple-cursors
 	url = https://github.com/magnars/multiple-cursors.el.git
+        branch = master
+[submodule "plugins/zenburn-emacs"]
+	path = plugins/zenburn-emacs
+	url = https://github.com/bbatsov/zenburn-emacs.git
+	branch = master

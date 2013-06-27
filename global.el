@@ -12,11 +12,8 @@
 (setq icon-title-format '("" invocation-name ": %b"))
 
 ;;; Default frame font and size
-(when (>= emacs-major-version 23)
-  (add-to-list 'default-frame-alist '(font . "Consolas-12"))
-  ;; (add-to-list 'default-frame-alist '(font . "Cousine-10"))
-  (add-to-list 'default-frame-alist '(height . 32))
-  (add-to-list 'default-frame-alist '(width . 120)))
+(add-to-list 'default-frame-alist '(height . 32))
+(add-to-list 'default-frame-alist '(width . 120))
 
 (show-paren-mode 1)
 (setq show-paren-delay 0)
