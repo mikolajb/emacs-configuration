@@ -28,77 +28,45 @@
 
 (setq org-export-latex-listings t)
 
-;; Originally taken from Bruno Tavernier: http://thread.gmane.org/gmane.emacs.orgmode/31150/focus=31432
-;; but adapted to use latexmk 4.20 or higher.
-(defun my-auto-tex-cmd ()
-  "When exporting from .org with latex, automatically run latex,
-     pdflatex, or xelatex as appropriate, using latexmk."
-  (let ((texcmd)))
-  ;; default command: oldstyle latex via dvi
-  (setq texcmd "latexmk -dvi -pdfps -quiet %f")
-  ;; pdflatex -> .pdf
-  (if (string-match "LATEX_CMD: pdflatex" (buffer-string))
-      (setq texcmd "latexmk -pdf -quiet %f"))
-  ;; xelatex -> .pdf
-  (if (string-match "LATEX_CMD: xelatex" (buffer-string))
-      (setq texcmd "latexmk -pdflatex=xelatex -pdf -quiet %f"))
-  ;; LaTeX compilation command
-  (setq org-latex-to-pdf-process (list texcmd)))
-
 ;; Specify default packages to be included in every tex file, whether pdflatex or xelatex
 (setq org-export-latex-packages-alist
       '(("" "graphicx" t)
         ("" "longtable" nil)
         ("" "float" nil)))
 
-(add-hook 'org-export-latex-after-initial-vars-hook 'my-auto-tex-cmd)
-
-(setq org-export-latex-default-packages-alist
-      '(("AUTO" "inputenc" t)
-        ("T1"   "fontenc"   t)
-        (""     "fixltx2e"  nil)
-        (""     "wrapfig"   nil)
-        (""     "soul"      t)
-        (""     "textcomp"  t)
-        (""     "marvosym"  t)
-        (""     "wasysym"   t)
-        (""     "latexsym"  t)
-        (""     "amssymb"   t)
-        (""     "hyperref"  nil)))
-
 ;; Packages to include when xelatex is used
-(setq org-export-latex-default-packages-alist
+(setq org-latex-default-packages-alist
           '(("" "fontspec" t)
             ("" "xltxtra" t)
-            ("" "fullpage" t)
             ("" "listings" t)
             ("" "url" t)
             ("" "rotating" t)
-            ("american" "babel" t)
+            ("margin=2cm" "geometry")
+            ("english" "babel" t)
             ("babel" "csquotes" t)
             ("" "soul" t)
             ("xetex,citecolor=black,linkcolor=black,urlcolor=black,colorlinks=true" "hyperref" nil)
             ))
 
-(unless (boundp 'org-export-latex-classes)
-  (setq org-export-latex-classes nil))
-(add-to-list 'org-export-latex-classes
+(unless (boundp 'org-latex-classes)
+  (setq org-latex-classes nil))
+(add-to-list 'org-latex-classes
              '("article"
-               "\\documentclass[12pt]{article}"
+               "\\documentclass[12pt,a4paper]{article}"
                ("\\section{%s}" . "\\section*{%s}")
                ("\\subsection{%s}" . "\\subsection*{%s}")
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-(add-to-list 'org-export-latex-classes
+(add-to-list 'org-latex-classes
              '("report"
-               "\\documentclass[12pt]{report}"
+               "\\documentclass[12pt,a4paper]{report}"
                ("\\section{%s}" . "\\section*{%s}")
                ("\\subsection{%s}" . "\\subsection*{%s}")
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-(add-to-list 'org-export-latex-classes
+(add-to-list 'org-latex-classes
              '("commit-report"
                "\\documentclass[12pt]{commit-report}"
                ("\\section{%s}" . "\\section*{%s}")
