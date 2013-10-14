@@ -3,6 +3,10 @@
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
+;; sets text mode as initial major mode in scratch
+(setq initial-major-mode 'text-mode)
+(add-hook 'text-mode-hook 'flyspell-mode)
+
 ;; Frame title : set to buffer name
 (setq frame-title-format '("" invocation-name ": "(:eval (if (buffer-file-name)
 							     (abbreviate-file-name (buffer-file-name))
@@ -107,7 +111,7 @@
 (require 'midnight)
 (setq midnight-period 3600)
 
-;;; prelude
+;;; from prelude
 (size-indication-mode t)
 ;; Death to the tabs!
 (setq-default indent-tabs-mode nil)
@@ -123,5 +127,14 @@
 ;; flyspell-mode does spell-checking on the fly as you type
 (setq ispell-program-name "aspell" ; use aspell instead of ispell
       ispell-extra-args '("--sug-mode=ultra"))
+
+;;; from technomacy/better-defaults
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+
+(global-set-key (kbd "M-/") 'hippie-expand)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (provide 'global)
