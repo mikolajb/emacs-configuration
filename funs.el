@@ -94,6 +94,7 @@
       (switch-to-buffer (completing-read "select terminal: " terms nil t nil nil (car terms)))
     (princ "no terminal buffers")))
 
+(require 'icicles-mac)
 (icicle-define-command icicle-switch-to-term-buffer
   "Switch to ansi term buffer."         ; Doc string
   switch-to-buffer                      ; Action function
@@ -116,9 +117,7 @@
 (defun run-ansi-term ()
   "Runs ansi term."
   (interactive)
-  (ansi-term "/bin/zsh")
-  ;; (text-scale-decrease 1)
-  )
+  (ansi-term "/bin/zsh"))
 
 (defun run-shell ()
   "Runs new shell with uniq name."
@@ -137,7 +136,7 @@
       (jump-to-register ?1)
 
     (window-configuration-to-register ?1)
-    (switch-to-buffer
+    (setq term-buffer
      (car (delq nil (mapcar
                      (lambda (x)
                        (setq n (buffer-name x))
@@ -145,6 +144,7 @@
                            n
                          nil))
                      (delq (current-buffer) (buffer-list))))))
+    (if term-buffer (switch-to-buffer term-buffer) (run-ansi-term))
     (delete-other-windows)))
 
 (global-set-key [f12] 'shell-on-top)
