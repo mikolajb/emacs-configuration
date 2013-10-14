@@ -1,3 +1,22 @@
+(defvar my-packages '(haml-mode
+                      yaml-mode
+                      yasnippet
+                      zeitgeist
+                      clojure-mode
+                      nrepl
+                      dired+
+                      icicles
+                      magit
+                      autopair
+                      scratch
+                      edit-server
+                      full-ack
+                      multiple-cursors))
+
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
+
 ;;; TERM
 (add-hook 'term-mode-hook
           (function
@@ -112,15 +131,9 @@
 (require 'calendar)
 (require 'holidays)
 (calendar-set-date-style 'european)
-(load "~/.emacs.d/plugins/polish-holidays/polish-holidays.el")
 (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
 (setq mark-holidays-in-calendar t)
-(setq holiday-general-holidays (append swieta-panstwowe-pozostałe-święta
-                                       ustawowo-wolne-od-pracy
-                                       swieta-katolickie))
 (setq all-christian-calendar-holidays t)
-(load "~/.emacs.d/plugins/dutch-holidays/dutch-holidays.el")
-(setq holiday-other-holidays dutch-national-holidays)
 (setq holiday-hebrew-holidays nil)
 (setq holiday-islamic-holidays nil)
 (setq holiday-oriental-holidays nil)
@@ -154,5 +167,56 @@
 ;;; dired customizations
 (setq dired-listing-switches "-alh")
 (setq directory-free-space-args "-Ph")
+
+;;; dired-plus
+(require 'dired+)
+(toggle-diredp-find-file-reuse-dir 1)
+
+;;; zeitgeist
+(require 'zeitgeist)
+
+;;; icicles
+(require 'icicles)
+(setq icicle-buffer-sort 'icicle-most-recent-first-p)
+(icy-mode)
+
+;; magit
+(require 'magit)
+(add-hook 'magit-log-edit-mode-hook 'flyspell-mode)
+(add-hook 'magit-log-edit-mode-hook 'auto-fill-mode)
+
+;;; autopair
+(require 'autopair)
+(autopair-global-mode)
+(add-hook 'term-mode-hook
+	  #'(lambda () (autopair-mode -1)))
+(setq autopair-autowrap t)
+(setq autopair-blink-delay 0.05)
+
+;;; scratch-el
+(require 'scratch)
+
+;;; edit-server
+(require 'edit-server)
+;; (setq edit-server-new-frame nil)
+;; (add-hook 'edit-server-done-hook 'on-edit-server-done-do-backup)
+(edit-server-start)
+
+;;; full-ack
+(autoload 'ack-same "full-ack" nil t)
+(autoload 'ack "full-ack" nil t)
+(autoload 'ack-find-same-file "full-ack" nil t)
+(autoload 'ack-find-file "full-ack" nil t)
+
+
+;;; Multiple cursors
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;; (add-to-list 'load-path "~/.emacs.d/plugins/ltc")
+;; (autoload 'ltc-mode "ltc-mode" "" t)
 
 (provide 'modes)
