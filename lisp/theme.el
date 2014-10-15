@@ -8,9 +8,9 @@
   (let ((current-value (frame-parameter nil 'fullscreen)))
     (if (equal 'fullboth current-value)
         (set-face-attribute 'default nil :height 125))
+    (toggle-frame-fullscreen)
     (if (not (equal 'fullboth current-value))
-        (set-face-attribute 'default nil :height 140)))
-  (toggle-frame-fullscreen))
+        (set-face-attribute 'default nil :height 140))))
 
 (global-set-key [f11] 'toggle-fullscreen)
 
