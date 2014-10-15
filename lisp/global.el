@@ -16,8 +16,8 @@
 (setq icon-title-format '("" invocation-name ": %b"))
 
 ;;; Default frame font and size
-(add-to-list 'default-frame-alist '(height . 32))
-(add-to-list 'default-frame-alist '(width . 120))
+(add-to-list 'default-frame-alist '(height . 28))
+(add-to-list 'default-frame-alist '(width . 110))
 
 (show-paren-mode 1)
 (setq show-paren-delay 0)

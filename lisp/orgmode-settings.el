@@ -26,10 +26,10 @@
 
 ;;; from orgmode.org/worg/org-faq.html
 
-(setq org-export-latex-listings t)
+(setq org-latex-listings t)
 
 ;; Specify default packages to be included in every tex file, whether pdflatex or xelatex
-(setq org-export-latex-packages-alist
+(setq org-latex-packages-alist
       '(("" "graphicx" t)
         ("" "longtable" nil)
         ("" "float" nil)))
@@ -48,8 +48,8 @@
             ("xetex,citecolor=black,linkcolor=black,urlcolor=black,colorlinks=true" "hyperref" nil)
             ))
 
-(unless (boundp 'org-latex-classes)
-  (setq org-latex-classes nil))
+(require 'ox-latex)
+(setq org-latex-listings t)
 (add-to-list 'org-latex-classes
              '("article"
                "\\documentclass[12pt,a4paper]{article}"
@@ -85,5 +85,13 @@
 
 (add-hook 'org-mode-hook 'flyspell-mode)
 (add-hook 'org-mode-hook 'auto-fill-mode)
+
+(defun org-export-to-latex-in-pwd
+    (name &optional async subtreep visible-only body-only ext-plist)
+  (interactive)
+  (let ((outfile (concat (file-name-as-directory (getenv "PWD")) name)))
+    (print outfile)
+    (org-export-to-file 'latex outfile
+      async subtreep visible-only body-only ext-plist)))
 
 (provide 'orgmode-settings)

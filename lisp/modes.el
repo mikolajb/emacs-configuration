@@ -26,7 +26,8 @@
              (make-local-variable 'transient-mark-mode)
              (setq mouse-yank-at-point t)
              (auto-fill-mode -1)
-             (setq tab-width 8 ))))
+             (setq tab-width 8 )
+             (yas-minor-mode -1))))
 
 ;;; SHELL
 (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
@@ -145,8 +146,8 @@
               holiday-solar-holidays))
 
 ;;; pkgbuild-mode
-(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
-(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
+;; (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+;; (setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
 ;;(add-hook 'pkgbuild-mode-hook
 ;;          '(lambda ()
 ;;             (add-hook
@@ -161,11 +162,10 @@
 ;;                 ))))
 
 ;;; js2-mode
-(autoload 'js2-mode "js2" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;;; dired customizations
-(setq dired-listing-switches "-alh")
+(setq dired-listing-switches "-alh --group-directories-first")
 (setq directory-free-space-args "-Ph")
 
 ;;; dired-plus

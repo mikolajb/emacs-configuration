@@ -1,21 +1,16 @@
-(load-file "~/.emacs.d/plugins/zenburn-emacs/zenburn-theme.el")
 (load-theme 'zenburn)
 (blink-cursor-mode -1)
 
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 125)
 
 (defun toggle-fullscreen ()
   (interactive)
   (let ((current-value (frame-parameter nil 'fullscreen)))
     (if (equal 'fullboth current-value)
-        (set-face-attribute 'default nil :height 120))
-    (set-frame-parameter nil 'fullscreen
-             (if (equal 'fullboth current-value)
-                 (if (boundp 'old-fullscreen) old-fullscreen nil)
-               (progn (setq old-fullscreen current-value)
-                  'fullboth)))
+        (set-face-attribute 'default nil :height 125))
     (if (not (equal 'fullboth current-value))
-        (set-face-attribute 'default nil :height 132))))
+        (set-face-attribute 'default nil :height 140)))
+  (toggle-frame-fullscreen))
 
 (global-set-key [f11] 'toggle-fullscreen)
 
@@ -37,6 +32,6 @@
 (setq ansi-color-for-comint-mode-on t)
 
 (custom-set-faces
- '(variable-pitch ((t (:family "Calibri")))))
+ '(variable-pitch ((t (:family "Corbel")))))
 
 (provide 'theme)
