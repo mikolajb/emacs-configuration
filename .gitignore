@@ -10,3 +10,4 @@ tramp
 url/*
 custom.el
 lisp/secret.el
+.mc-lists.el
