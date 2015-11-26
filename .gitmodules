@@ -14,3 +14,6 @@
 	path = plugins/zenburn-emacs
 	url = https://github.com/bbatsov/zenburn-emacs.git
 	branch = master
+[submodule "plugins/solarized-emacs"]
+	path = plugins/solarized-emacs
+	url = git@github.com:mikolajb/solarized-emacs.git
