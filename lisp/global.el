@@ -3,8 +3,9 @@
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-;; sets text mode as initial major mode in scratch
-(setq initial-major-mode 'text-mode)
+;; open a list of a recently opened files in a initial buffer
+(recentf-mode 1)
+(setq initial-buffer-choice 'recentf-open-files)
 (add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Frame title : set to buffer name
@@ -16,12 +17,18 @@
 (setq icon-title-format '("" invocation-name ": %b"))
 
 ;;; Default frame font and size
-(add-to-list 'default-frame-alist '(height . 28))
-(add-to-list 'default-frame-alist '(width . 110))
+(if (boundp 'latex-editor)
+    (progn
+      (add-to-list 'default-frame-alist '(height . 24))
+      (add-to-list 'default-frame-alist '(width . 100)))
+  (add-to-list 'default-frame-alist '(height . 28))
+  (add-to-list 'default-frame-alist '(width . 110)))
 
 (show-paren-mode 1)
 (setq show-paren-delay 0)
-(setq custom-file "~/.emacs.d/custom.el")
+(if (boundp 'latex-editor)
+    (setq custom-file "~/.emacs-latex.d/custom.el")
+    (setq custom-file "~/.emacs.d/custom.el"))
 (load custom-file 'noerror)
 
 ;;; auto revert modified files
@@ -86,7 +93,9 @@
 (setq delete-by-moving-to-trash t)
 
 (require 'saveplace)
-(setq save-place-file "~/.emacs.d/saveplace")
+(if (boundp 'latex-editor)
+    (setq save-place-file "~/.emacs-latex.d/saveplace")
+    (setq save-place-file "~/.emacs.d/saveplace"))
 (setq-default save-place t)
 
 ;;; uniquify
@@ -115,9 +124,12 @@
 (size-indication-mode t)
 ;; Death to the tabs!
 (setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 ;; delete the selection with a keypress
 (delete-selection-mode t)
-(setq temporary-file-directory "~/.emacs.d/backups/")
+(if (boundp 'latex-editor)
+    (setq temporary-file-directory "~/.emacs-latex.d/backups/")
+    (setq temporary-file-directory "~/.emacs.d/backups/"))
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms

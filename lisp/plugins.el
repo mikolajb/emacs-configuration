@@ -7,4 +7,12 @@
 (load "~/.emacs.d/plugins/dutch-holidays/dutch-holidays.el")
 (setq holiday-other-holidays dutch-national-holidays)
 
+;;; ERLANG: included in Erlang/OTP
+(add-to-list 'load-path "/usr/lib/erlang/lib/tools-2.7.2/emacs/")
+(setq erlang-root-dir "/usr/lib/erlang")
+(setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
+(require 'erlang-start)
+(add-to-list 'auto-mode-alist '("\\.[eh]rl$" . erlang-mode))
+(add-to-list 'auto-mode-alist '("\\.yaws$" . erlang-mode))
+
 (provide 'plugins)
