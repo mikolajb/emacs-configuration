@@ -1,9 +1,12 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/solarized-emacs/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/solarized-emacs/")
 
+(add-to-list 'load-path "~/.emacs.d/plugins/dracula-theme/emacs/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/dracula-theme/emacs/")
+
 (if (boundp 'latex-editor)
     (load-theme 'leuven)
-    (load-theme 'solarized-dark))
+    (load-theme 'dracula))
 (blink-cursor-mode -1)
 
 (set-face-attribute 'default nil :height 125)

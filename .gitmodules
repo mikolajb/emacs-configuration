@@ -17,3 +17,6 @@
 [submodule "plugins/solarized-emacs"]
 	path = plugins/solarized-emacs
 	url = git@github.com:mikolajb/solarized-emacs.git
+[submodule "plugins/dracula-theme"]
+	path = plugins/dracula-theme
+	url = git://github.com/mikolajb/dracula-theme.git
