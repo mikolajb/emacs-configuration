@@ -149,6 +149,7 @@
 (require 'magit)
 (add-hook 'magit-log-edit-mode-hook 'flyspell-mode)
 (add-hook 'magit-log-edit-mode-hook 'auto-fill-mode)
+(global-set-key [f10] 'magit-status)
 
 ;;; autopair
 (require 'autopair)
@@ -205,5 +206,8 @@
   (smex-initialize)
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "M-X") 'smex-major-mode-commands))
+
+;;; Flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 (provide 'modes)
