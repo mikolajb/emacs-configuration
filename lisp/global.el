@@ -149,4 +149,7 @@
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+;;; enable downcase-region command C-x C-l
+(put 'downcase-region 'disabled nil)
+
 (provide 'global)

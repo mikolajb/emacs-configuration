@@ -8,7 +8,6 @@
   (setq my-packages (append my-packages '(haml-mode
                                           yaml-mode
                                           yasnippet
-                                          zeitgeist
                                           clojure-mode
                                           nrepl
                                           dired+
@@ -96,6 +95,7 @@
   (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
   (setq gofmt-command "/home/mikolaj/projects/go-workspace/bin/goimports")
   (add-hook 'before-save-hook 'gofmt-before-save)
+  (setenv "GOPATH" "/home/mikolaj/projects/go-workspace")
 
   ;; midnight - clean-buffer-list
   (require 'midnight)
@@ -127,9 +127,6 @@
   ;; dired-plus
   (require 'dired+)
   (toggle-diredp-find-file-reuse-dir 1)
-
-  ;; zeitgeist
-  (require 'zeitgeist)
 
   ;; icicles
   (require 'icicles)
