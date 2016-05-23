@@ -4,9 +4,12 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/dracula-theme/emacs/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/dracula-theme/emacs/")
 
+(add-to-list 'load-path "~/.emacs.d/plugins/emacs-material-theme/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/emacs-material-theme/")
+
 (if (boundp 'latex-editor)
     (load-theme 'leuven)
-    (load-theme 'dracula))
+    (load-theme 'material))
 (blink-cursor-mode -1)
 
 (set-face-attribute 'default nil :height 125)
