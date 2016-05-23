@@ -2,6 +2,9 @@
                       autopair
                       writeroom-mode
                       multiple-cursors
+                      drag-stuff
+                      figlet
+                      go-mode
                       smex))
 
 (unless (boundp 'latex-editor)
@@ -206,5 +209,8 @@
 
 ;;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
+
+;; Drag stuff mode
+(drag-stuff-global-mode 1)
 
 (provide 'modes)
