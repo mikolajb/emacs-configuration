@@ -20,3 +20,6 @@
 [submodule "plugins/dracula-theme"]
 	path = plugins/dracula-theme
 	url = git://github.com/mikolajb/dracula-theme.git
+[submodule "plugins/emacs-material-theme"]
+	path = plugins/emacs-material-theme
+	url = git@github.com:mikolajb/emacs-material-theme.git
