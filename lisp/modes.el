@@ -12,7 +12,6 @@
                                           yaml-mode
                                           yasnippet
                                           clojure-mode
-                                          nrepl
                                           dired+
                                           icicles
                                           auto-complete

@@ -54,9 +54,9 @@
              (set-fontset-font t 'unicode "Segoe UI Symbol" nil 'prepend)))
 
 (defun my-latex-mode-faces ()
-  "Sets a face for a buffer."
+  "Set a face for a buffer."
   (face-remap-set-base
-   'default '(:height 160)))
+   'default '(:height 140)))
 (when (boundp 'latex-editor)
   (add-hook 'LaTeX-mode-hook 'my-latex-mode-faces))
 

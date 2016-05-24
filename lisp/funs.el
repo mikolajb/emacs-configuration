@@ -228,8 +228,10 @@
                                "python -mjson.tool" (current-buffer) t))))
 
 (defun insert-date ()
+  "Insert current date."
   (interactive)
-  (insert (format-time-string "%d-%b-%Y")))
+  (let ((system-time-locale "en_US"))
+  (insert (format-time-string "%e-%b-%Y"))))
 
 (global-set-key (kbd "M-<up>") 'move-region-up)
 (global-set-key (kbd "M-<down>") 'move-region-down)
@@ -242,5 +244,15 @@
       (replace-regexp "\\([A-Z]\\)" "_\\1" nil
                       (1+ (car bounds)) (cdr bounds))
       (downcase-region (car bounds) (cdr bounds)))))
+
+(defun getbibtext (doi)
+  "Get bibtex of given DOI."
+  (interactive)
+  (request (concat "http://dx.doi.org/" doi)
+           :headers '(("Accept" . "text/bibliography; ; style=bibtex"))
+           :success (function* (lambda (&key data &allow-other-keys) data)))
+
+
+  )
 
 (provide 'funs)
