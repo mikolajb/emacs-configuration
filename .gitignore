@@ -11,3 +11,6 @@ url/*
 custom.el
 lisp/secret.el
 .mc-lists.el
+/var
+/request
+recentf

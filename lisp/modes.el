@@ -12,6 +12,7 @@
                                           yaml-mode
                                           yasnippet
                                           clojure-mode
+                                          dockerfile-mode
                                           dired+
                                           icicles
                                           auto-complete
@@ -23,6 +24,7 @@
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
+    (package-refresh-contents)
     (package-install p)))
 
 (unless (boundp 'latex-editor)
@@ -30,7 +32,8 @@
   (add-hook 'term-mode-hook
             (function
              (lambda ()
-               (setq term-prompt-regexp "^[^#$%>\n]*[#$%>ϱϑ] *")
+               (setq term-prompt-regexp
+                     "^[^#$%>🌚🌑🌒🌓🌔🌕🌝🌖🌗🌘\n]*[#$%>🌚🌑🌒🌓🌔🌕🌝🌖🌗🌘] *")
                (make-local-variable 'mouse-yank-at-point)
                (make-local-variable 'transient-mark-mode)
                (setq mouse-yank-at-point t)
@@ -114,11 +117,15 @@
   (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
 
   ;; Go lang mode (included in go language package)
-  (require 'go-mode-autoloads)
+  (require 'go-mode)
   (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
   (setq gofmt-command "/home/mikolaj/projects/go-workspace/bin/goimports")
   (add-hook 'before-save-hook 'gofmt-before-save)
   (setenv "GOPATH" "/home/mikolaj/projects/go-workspace")
+  (setq exec-path (append exec-path '("/home/mikolaj/projects/go-workspace/bin/")))
+  (require 'go-autocomplete)
+  (require 'auto-complete-config)
+  (ac-config-default)
 
   ;; midnight - clean-buffer-list
   (require 'midnight)
