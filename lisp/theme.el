@@ -1,7 +1,7 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/solarized-emacs/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/solarized-emacs/")
 
-(add-to-list 'load-path "~/.emacs.d/plugins/dracula-theme/emacs/")
+(add-to-list 'load-path "~/.emacs.d/plugins/dracula-theme/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/dracula-theme/emacs/")
 
 (add-to-list 'load-path "~/.emacs.d/plugins/emacs-material-theme/")
@@ -9,7 +9,7 @@
 
 (if (boundp 'latex-editor)
     (load-theme 'leuven)
-    (load-theme 'material))
+    (load-theme 'dracula))
 (blink-cursor-mode -1)
 
 (set-face-attribute 'default nil :height 125)
@@ -46,7 +46,7 @@
 (set-fontset-font t 'unicode "Segoe UI Symbol" nil 'prepend)
 
 (custom-set-faces
- '(variable-pitch ((t (:family "Roboto Slab")))))
+ '(variable-pitch ((t (:family "Museo")))))
 
 ;;; hack to make emoji be visible when running as a daemon
 (add-hook 'before-make-frame-hook
@@ -56,7 +56,9 @@
 (defun my-latex-mode-faces ()
   "Set a face for a buffer."
   (face-remap-set-base
-   'default '(:height 140)))
+   'default '(:height 160))
+  (face-remap-set-base
+   'default '(:family "TheSansMono")))
 (when (boundp 'latex-editor)
   (add-hook 'LaTeX-mode-hook 'my-latex-mode-faces))
 
