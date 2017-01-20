@@ -239,5 +239,6 @@
 
 ;; Drag stuff mode
 (drag-stuff-global-mode 1)
+(drag-stuff-define-keys)
 
 (provide 'modes)

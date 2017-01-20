@@ -63,7 +63,7 @@
     (let ((str (buffer-substring (region-beginning) (region-end))))
       (when commentfirst
         (comment-region (region-beginning) (region-end)))
-      (insert-string
+      (insert
        (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
       (forward-line -1)))
 

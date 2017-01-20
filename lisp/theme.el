@@ -2,7 +2,7 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/solarized-emacs/")
 
 (add-to-list 'load-path "~/.emacs.d/plugins/dracula-theme/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/dracula-theme/emacs/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/dracula-theme/")
 
 (add-to-list 'load-path "~/.emacs.d/plugins/emacs-material-theme/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/emacs-material-theme/")
