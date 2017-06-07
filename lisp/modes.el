@@ -16,6 +16,7 @@
                                           dired+
                                           icicles
                                           auto-complete
+                                          go-autocomplete
                                           jedi
                                           flycheck
                                           erlang
@@ -104,9 +105,6 @@
               (local-set-key (kbd "M-SPC") 'jedi:complete)
               (local-set-key (kbd "M-.") 'jedi:goto-definition)))
 
-  ;; MERCURIAL: http://www.emacswiki.org/emacs/MercurialMode (included in Mercurial package)
-  (require 'mercurial)
-
   ;; YAML: http://www.emacswiki.org/emacs/YamlMode (installed with ELPA)
   (require 'yaml-mode)
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
@@ -117,6 +115,8 @@
   (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
 
   ;; Go lang mode (included in go language package)
+  ;;
+  ;; install goimports
   (require 'go-mode)
   (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
   (setq gofmt-command "/home/mikolaj/projects/go-workspace/bin/goimports")
