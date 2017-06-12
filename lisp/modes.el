@@ -116,7 +116,11 @@
 
   ;; Go lang mode (included in go language package)
   ;;
-  ;; install goimports
+  ;; go get -u github.com/nsf/gocode
+  ;; go get -u golang.org/x/tools/cmd/goimports
+  ;; go get -u github.com/golang/lint/golint
+  ;; go get -u github.com/kisielk/errcheck
+  ;; go get -u github.com/rogpeppe/godef
   (require 'go-mode)
   (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
   (setq gofmt-command "/home/mikolaj/projects/go-workspace/bin/goimports")
