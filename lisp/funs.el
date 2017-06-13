@@ -250,9 +250,20 @@
   (interactive)
   (request (concat "http://dx.doi.org/" doi)
            :headers '(("Accept" . "text/bibliography; ; style=bibtex"))
-           :success (function* (lambda (&key data &allow-other-keys) data)))
+           :success (function* (lambda (&key data &allow-other-keys) data))))
 
-
+(defun region-insert-sapce-every-4 ()
+  ""
+  (interactive)
+  (save-restriction
+    (narrow-to-region (region-beginning) (region-end))
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward "\\([^ ]\\) *\\([^ ]\\) *\\([^ ]\\) *\\([^ ]\\) *" nil t)
+        (replace-match "\\1\\2\\3\\4 ")
+        )
+      )
+    )
   )
 
 (provide 'funs)
