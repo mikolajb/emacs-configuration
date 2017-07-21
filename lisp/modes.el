@@ -21,7 +21,9 @@
                                           flycheck
                                           erlang
                                           scratch
-                                          full-ack))))
+                                          full-ack
+                                          string-inflection
+                                          ))))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -123,10 +125,9 @@
   ;; go get -u github.com/rogpeppe/godef
   (require 'go-mode)
   (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
-  (setq gofmt-command "/home/mikolaj/projects/go-workspace/bin/goimports")
+  (setq gofmt-command (expand-file-name "bin/goimports" (getenv "GOPATH")))
   (add-hook 'before-save-hook 'gofmt-before-save)
-  (setenv "GOPATH" "/home/mikolaj/projects/go-workspace")
-  (setq exec-path (append exec-path '("/home/mikolaj/projects/go-workspace/bin/")))
+  (add-to-list 'exec-path (expand-file-name "bin/" (getenv "GOPATH")))
   (require 'go-autocomplete)
   (require 'auto-complete-config)
   (ac-config-default)
@@ -244,5 +245,12 @@
 ;; Drag stuff mode
 (drag-stuff-global-mode 1)
 (drag-stuff-define-keys)
+
+(defconst my-protobuf-style
+  '((c-basic-offset . 4)
+    (indent-tabs-mode . nil)))
+
+(add-hook 'protobuf-mode-hook
+          (lambda () (c-add-style "my-style" my-protobuf-style t)))
 
 (provide 'modes)
