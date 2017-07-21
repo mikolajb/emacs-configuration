@@ -152,4 +152,7 @@
 ;;; enable downcase-region command C-x C-l
 (put 'downcase-region 'disabled nil)
 
+;;; bookmarks
+(setq bookmark-save-flag 1)
+
 (provide 'global)
