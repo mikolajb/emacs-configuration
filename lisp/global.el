@@ -114,7 +114,7 @@
 (setq reb-re-syntax 'string)
 
 ;;; fly-spell in comments
-(add-hook ‘prog-mode-hook ‘flyspell-prog-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 ;;; midnight mode
 (require 'midnight)
