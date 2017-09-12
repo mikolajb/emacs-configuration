@@ -88,6 +88,7 @@
 (menu-bar-mode 0)
 ;; Don't insert instructions in the *scratch* buffer
 (setq initial-scratch-message nil)
+(setq initial-major-mode 'org-mode)
 
 ;;; move to trash instead of deleting
 (setq delete-by-moving-to-trash t)

@@ -23,6 +23,7 @@
                                           scratch
                                           full-ack
                                           string-inflection
+                                          persistent-scratch
                                           ))))
 
 (dolist (p my-packages)
@@ -123,6 +124,7 @@
   ;; go get -u github.com/golang/lint/golint
   ;; go get -u github.com/kisielk/errcheck
   ;; go get -u github.com/rogpeppe/godef
+  ;; https://johnsogg.github.io/emacs-golang
   (require 'go-mode)
   (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
   (setq gofmt-command (expand-file-name "bin/goimports" (getenv "GOPATH")))
@@ -252,5 +254,10 @@
 
 (add-hook 'protobuf-mode-hook
           (lambda () (c-add-style "my-style" my-protobuf-style t)))
+
+;; Persistent scratch
+;; https://github.com/Fanael/persistent-scratch
+(persistent-scratch-setup-default)
+(persistent-scratch-autosave-mode 1)
 
 (provide 'modes)
