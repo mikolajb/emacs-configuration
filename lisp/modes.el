@@ -165,11 +165,6 @@
   (require 'dired+)
   (toggle-diredp-find-file-reuse-dir 1)
 
-  ;; icicles
-  (require 'icicles)
-  (setq icicle-buffer-sort 'icicle-most-recent-first-p)
-  (icy-mode)
-
   ;; scratch-el
   (require 'scratch)
 
@@ -179,11 +174,17 @@
   (autoload 'ack-find-same-file "full-ack" nil t)
   (autoload 'ack-find-file "full-ack" nil t))
 
+;; icicles
+(require 'icicles)
+(setq icicle-buffer-sort 'icicle-most-recent-first-p)
+(icy-mode)
+
 ;; magit
 (require 'magit)
 (add-hook 'magit-log-edit-mode-hook 'flyspell-mode)
 (add-hook 'magit-log-edit-mode-hook 'auto-fill-mode)
 (global-set-key [f10] 'magit-status)
+(setq magit-diff-refine-hunk 'all)
 
 ;;; autopair
 (require 'autopair)
@@ -232,14 +233,7 @@
   (global-writeroom-mode)
   (custom-set-variables '(writeroom-major-modes '(latex-mode)))
   (custom-set-variables '(writeroom-extra-line-spacing 0.8))
-  (custom-set-variables '(writeroom-width 100))
-  ;; ido
-  (require 'ido)
-  (ido-mode t)
-  (require 'smex)
-  (smex-initialize)
-  (global-set-key (kbd "M-x") 'smex)
-  (global-set-key (kbd "M-X") 'smex-major-mode-commands))
+  (custom-set-variables '(writeroom-width 100)))
 
 ;;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)

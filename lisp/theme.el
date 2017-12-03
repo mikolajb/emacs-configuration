@@ -58,7 +58,7 @@
   (face-remap-set-base
    'default '(:height 160))
   (face-remap-set-base
-   'default '(:family "TheSansMono")))
+   'default '(:family "iA Writer Duospace")))
 (when (boundp 'latex-editor)
   (add-hook 'LaTeX-mode-hook 'my-latex-mode-faces))
 

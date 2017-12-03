@@ -138,8 +138,10 @@
 ;; use shift + arrow keys to switch between visible buffers
 (windmove-default-keybindings 'meta)
 ;; flyspell-mode does spell-checking on the fly as you type
-(setq ispell-program-name "aspell" ; use aspell instead of ispell
-      ispell-extra-args '("--sug-mode=ultra" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
+(setq ispell-program-name "aspell") ; use aspell instead of ispell
+(if (boundp 'latex-editor)
+  (setq ispell-extra-args '("--sug-mode=ultra"))
+  (setq ispell-extra-args '("--sug-mode=ultra" "--run-together" "--run-together-limit=3" "--run-together-min=2")))
 
 ;;; from technomacy/better-defaults
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
