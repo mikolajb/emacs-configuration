@@ -15,4 +15,8 @@
 (add-to-list 'auto-mode-alist '("\\.[eh]rl$" . erlang-mode))
 (add-to-list 'auto-mode-alist '("\\.yaws$" . erlang-mode))
 
+;;; protobuf
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/")
+(require 'protobuf-mode)
+
 (provide 'plugins)
