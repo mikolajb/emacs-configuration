@@ -266,4 +266,18 @@
     )
   )
 
+
+;;; Insert Random Number
+(defun xah-insert-random-number (NUM)
+  "Insert NUM random digits.
+NUM default to 5.
+Call `universal-argument' before for different count.
+URL `http://ergoemacs.org/emacs/elisp_insert_random_number_string.html'
+Version 2017-05-24"
+  (interactive "P")
+  (let (($charset "1234567890" )
+        ($baseCount 10))
+    (dotimes (_ (if (numberp NUM) (abs NUM) 5 ))
+      (insert (elt $charset (random $baseCount))))))
+
 (provide 'funs)

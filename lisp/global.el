@@ -158,4 +158,10 @@
 ;;; bookmarks
 (setq bookmark-save-flag 1)
 
+;;; Else, every emacs restart, the sequence of random will be the same:
+(random t) ; seed random number
+
+;;; auth-sources
+(setq auth-sources '("secrets:Login"))
+
 (provide 'global)
