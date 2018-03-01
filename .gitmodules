@@ -19,7 +19,7 @@
 	url = git@github.com:mikolajb/solarized-emacs.git
 [submodule "plugins/dracula-theme"]
 	path = plugins/dracula-theme
-	url = https://github.com/dracula/emacs.git
+    url = git@github.com:mikolajb/emacs-dracula-theme.git
 [submodule "plugins/emacs-material-theme"]
 	path = plugins/emacs-material-theme
 	url = git@github.com:mikolajb/emacs-material-theme.git
