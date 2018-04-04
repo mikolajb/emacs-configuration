@@ -19,11 +19,11 @@
                                           go-autocomplete
                                           jedi
                                           flycheck
-                                          erlang
                                           scratch
                                           full-ack
                                           string-inflection
                                           persistent-scratch
+                                          d-mode
                                           ))))
 
 (dolist (p my-packages)
@@ -42,7 +42,8 @@
                (make-local-variable 'transient-mark-mode)
                (setq mouse-yank-at-point t)
                ;; (auto-fill-mode -1)
-               (setq tab-width 8 )
+               (setq tab-width 8)
+               (setq bidi-paragraph-direction 'left-to-right)
                (yas-minor-mode -1))))
 
   ;; SHELL

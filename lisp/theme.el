@@ -7,6 +7,8 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/emacs-material-theme/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/emacs-material-theme/")
 
+(pixel-scroll-mode 1)
+
 (if (boundp 'latex-editor)
     (load-theme 'leuven)
     (load-theme 'dracula))
