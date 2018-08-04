@@ -24,6 +24,7 @@
                                           string-inflection
                                           persistent-scratch
                                           d-mode
+                                          go-playground
                                           ))))
 
 (dolist (p my-packages)
