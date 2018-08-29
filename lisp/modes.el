@@ -239,6 +239,9 @@
 
 ;;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
+(require 'flycheck-gometalinter)
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-gometalinter-setup))
 
 ;; Drag stuff mode
 (drag-stuff-global-mode 1)
