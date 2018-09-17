@@ -13,12 +13,11 @@
                                           yasnippet
                                           clojure-mode
                                           dockerfile-mode
-                                          dired+
-                                          icicles
                                           auto-complete
                                           go-autocomplete
                                           jedi
                                           flycheck
+                                          flycheck-gometalinter
                                           scratch
                                           full-ack
                                           string-inflection
@@ -163,10 +162,6 @@
   (setq dired-listing-switches "-alh --group-directories-first")
   (setq directory-free-space-args "-Ph")
 
-  ;; dired-plus
-  (require 'dired+)
-  (toggle-diredp-find-file-reuse-dir 1)
-
   ;; scratch-el
   (require 'scratch)
 
@@ -175,11 +170,6 @@
   (autoload 'ack "full-ack" nil t)
   (autoload 'ack-find-same-file "full-ack" nil t)
   (autoload 'ack-find-file "full-ack" nil t))
-
-;; icicles
-(require 'icicles)
-(setq icicle-buffer-sort 'icicle-most-recent-first-p)
-(icy-mode)
 
 ;; magit
 (require 'magit)

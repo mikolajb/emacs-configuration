@@ -1,3 +1,14 @@
+;;; icicles
+(add-to-list 'load-path "~/.emacs.d/plugins/icicles")
+(require 'icicles)
+(setq icicle-buffer-sort 'icicle-most-recent-first-p)
+(icy-mode)
+
+;;; dired-plus
+(load-file "~/.emacs.d/plugins/dired+.el")
+(require 'dired+)
+(toggle-diredp-find-file-reuse-dir 1)
+
 ;;; Sawzall
 (load-file "~/.emacs.d/plugins/sawzall.el")
 (load "~/.emacs.d/plugins/polish-holidays/polish-holidays.el")

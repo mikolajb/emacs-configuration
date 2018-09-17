@@ -23,3 +23,6 @@
 [submodule "plugins/emacs-material-theme"]
 	path = plugins/emacs-material-theme
 	url = git@github.com:mikolajb/emacs-material-theme.git
+[submodule "plugins/icicles"]
+	path = plugins/icicles
+	url = https://github.com/emacsmirror/icicles.git
