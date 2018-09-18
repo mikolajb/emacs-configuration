@@ -26,6 +26,10 @@
                                           go-playground
                                           protobuf-mode
                                           git-gutter
+                                          projectile
+                                          helm-projectile
+                                          helm-rg
+                                          helm-ag
                                           ))))
 
 (dolist (p my-packages)
