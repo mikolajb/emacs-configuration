@@ -24,6 +24,7 @@
                                           persistent-scratch
                                           d-mode
                                           go-playground
+                                          protobuf-mode
                                           ))))
 
 (dolist (p my-packages)
