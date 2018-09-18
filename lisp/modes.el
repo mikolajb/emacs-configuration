@@ -25,6 +25,7 @@
                                           d-mode
                                           go-playground
                                           protobuf-mode
+                                          git-gutter
                                           ))))
 
 (dolist (p my-packages)
@@ -264,5 +265,15 @@
        (format "SQL history will not be saved because %s is nil"
                (symbol-name rval))))))
 (add-hook 'sql-interactive-mode-hook 'my-sql-save-history-hook)
+
+;;; git gutter
+(custom-set-variables
+ '(git-gutter:modified-sign " ")
+ '(git-gutter:added-sign " ")
+ '(git-gutter:deleted-sign " "))
+(set-face-background 'git-gutter:modified "yellow")
+(set-face-background 'git-gutter:added "green")
+(set-face-background 'git-gutter:deleted "red")
+(global-git-gutter-mode +1)
 
 (provide 'modes)
