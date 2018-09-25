@@ -30,6 +30,7 @@
                                           helm-projectile
                                           helm-rg
                                           helm-ag
+                                          helm-ls-git
                                           ))))
 
 (dolist (p my-packages)
@@ -271,6 +272,7 @@
 (add-hook 'sql-interactive-mode-hook 'my-sql-save-history-hook)
 
 ;;; git gutter
+(require 'git-gutter)
 (custom-set-variables
  '(git-gutter:modified-sign " ")
  '(git-gutter:added-sign " ")
@@ -279,5 +281,14 @@
 (set-face-background 'git-gutter:added "green")
 (set-face-background 'git-gutter:deleted "red")
 (global-git-gutter-mode +1)
+
+;;; helm
+(require 'helm-config)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-l") 'helm-browse-project)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(require 'helm-ls-git)
+
 
 (provide 'modes)

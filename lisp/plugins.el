@@ -1,9 +1,3 @@
-;;; icicles
-(add-to-list 'load-path "~/.emacs.d/plugins/icicles")
-(require 'icicles)
-(setq icicle-buffer-sort 'icicle-most-recent-first-p)
-(icy-mode)
-
 ;;; dired-plus
 (load-file "~/.emacs.d/plugins/dired+.el")
 (require 'dired+)

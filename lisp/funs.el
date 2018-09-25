@@ -95,25 +95,23 @@
         (switch-to-buffer (completing-read "select terminal: " terms nil t nil nil (car terms)))
       (princ "no terminal buffers")))
 
-  (require 'icicles-mac)
-  (icicle-define-command icicle-switch-to-term-buffer
-                         "Switch to ansi term buffer."         ; Doc string
-                         switch-to-buffer                      ; Action function
-                         "Switch to terminal: "                ; `completing-read' args
-                         terms nil t nil nil (car terms) nil
-                         ((terms                               ; Bindings
-                           (delq nil (mapcar (lambda (buffer)
-                                               (if
-                                                   (member
-                                                    (with-current-buffer buffer major-mode)
-                                                    '(eshell-mode shell-mode term-mode))
-                                                   (buffer-name buffer)
-                                                 nil))
-                                             (delq (current-buffer) (buffer-list))))))
-                         (unless terms (signal 'quit '("No terminal buffers")))  ; First code
-                         nil                                   ; Undo code
-                         nil                                   ; Last code
-                         )
+(defun helm-source-shell-buffers-list ()
+  (helm-make-source "Shell Buffers" 'helm-source-buffers
+    :buffer-list
+    (lambda ()
+      (mapcar #'buffer-name
+              (cl-remove-if-not
+               (lambda (buf)
+                 (with-current-buffer buf
+                   (eq major-mode 'term-mode)))
+               (buffer-list))))))
+
+(defun helm-shell-buffers-list ()
+  (interactive)
+  (helm :sources (helm-source-shell-buffers-list)
+        :buffer "*shells*"
+        :keymap helm-buffer-map
+        :truncate-lines helm-buffers-truncate-lines))
 
   (defun run-ansi-term ()
     "Runs ansi term."
@@ -125,7 +123,7 @@
     (interactive)
     (shell (generate-new-buffer-name "*shell*")))
 
-  (global-set-key (kbd "C-c t") 'icicle-switch-to-term-buffer)
+  (global-set-key (kbd "C-c t") 'helm-shell-buffers-list)
   (global-set-key (kbd "C-c T") 'run-ansi-term)
   (global-set-key (kbd "C-c S") 'run-shell)
 
