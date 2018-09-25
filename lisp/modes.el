@@ -5,6 +5,7 @@
                       drag-stuff
                       figlet
                       go-mode
+                      markdown-mode
                       smex))
 
 (unless (boundp 'latex-editor)
@@ -141,6 +142,7 @@
   (require 'go-autocomplete)
   (require 'auto-complete-config)
   (ac-config-default)
+  (setq go-test-verbose t)
 
   ;; midnight - clean-buffer-list
   (require 'midnight)
@@ -245,7 +247,7 @@
 (drag-stuff-define-keys)
 
 (defconst my-protobuf-style
-  '((c-basic-offset . 4)
+  '((c-basic-offset . 2)
     (indent-tabs-mode . nil)))
 
 (add-hook 'protobuf-mode-hook
@@ -288,6 +290,7 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-l") 'helm-browse-project)
 (global-set-key (kbd "M-x") 'helm-M-x)
+(setq helm-split-window-default-side 'same)
 (require 'helm-ls-git)
 
 
