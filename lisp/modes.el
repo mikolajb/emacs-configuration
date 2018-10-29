@@ -18,13 +18,14 @@
                                           go-autocomplete
                                           jedi
                                           flycheck
-                                          flycheck-gometalinter
+                                          flycheck-golangci-lint
                                           scratch
                                           full-ack
                                           string-inflection
                                           persistent-scratch
                                           d-mode
                                           go-playground
+                                          godoctor
                                           protobuf-mode
                                           git-gutter
                                           projectile
@@ -32,6 +33,7 @@
                                           helm-rg
                                           helm-ag
                                           helm-ls-git
+                                          wgrep
                                           ))))
 
 (dolist (p my-packages)
@@ -240,7 +242,7 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (require 'flycheck-gometalinter)
 (eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-gometalinter-setup))
+  '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
 
 ;; Drag stuff mode
 (drag-stuff-global-mode 1)
