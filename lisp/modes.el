@@ -34,6 +34,7 @@
                                           helm-ag
                                           helm-ls-git
                                           wgrep
+                                          rg
                                           ))))
 
 (dolist (p my-packages)
@@ -240,7 +241,6 @@
 
 ;;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
-(require 'flycheck-gometalinter)
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
 
