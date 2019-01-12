@@ -13,6 +13,7 @@
 (unless (boundp 'latex-editor)
   (setq my-packages (append my-packages
                             '(
+                              all-ext
                               auto-complete
                               beacon
                               clojure-mode
@@ -307,5 +308,8 @@
 
 ;;; beacon
 (beacon-mode 1)
+
+;;; all-ext
+(require 'all-ext)
 
 (provide 'modes)
