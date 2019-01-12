@@ -23,7 +23,9 @@
           (set-face-attribute 'default nil :height 125))
     (toggle-frame-fullscreen)
     (if (not (equal 'fullboth current-value))
-          (set-face-attribute 'default nil :height 140))))
+        (if (boundp 'latex-editor)
+            (set-face-attribute 'default nil :height 200)
+            (set-face-attribute 'default nil :height 140)))))
 
 (global-set-key [f11] 'toggle-fullscreen)
 

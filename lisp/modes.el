@@ -1,41 +1,48 @@
-(defvar my-packages '(magit
-                      autopair
-                      writeroom-mode
-                      multiple-cursors
-                      drag-stuff
-                      figlet
-                      go-mode
-                      markdown-mode
-                      smex))
+(defvar my-packages
+  '(magit
+    autopair
+    drag-stuff
+    figlet
+    go-mode
+    markdown-mode
+    multiple-cursors
+    smex
+    writeroom-mode
+    ))
 
 (unless (boundp 'latex-editor)
-  (setq my-packages (append my-packages '(haml-mode
-                                          yaml-mode
-                                          yasnippet
-                                          clojure-mode
-                                          dockerfile-mode
-                                          auto-complete
-                                          go-autocomplete
-                                          jedi
-                                          flycheck
-                                          flycheck-golangci-lint
-                                          scratch
-                                          full-ack
-                                          string-inflection
-                                          persistent-scratch
-                                          d-mode
-                                          go-playground
-                                          godoctor
-                                          protobuf-mode
-                                          git-gutter
-                                          projectile
-                                          helm-projectile
-                                          helm-rg
-                                          helm-ag
-                                          helm-ls-git
-                                          wgrep
-                                          rg
-                                          ))))
+  (setq my-packages (append my-packages
+                            '(
+                              auto-complete
+                              beacon
+                              clojure-mode
+                              d-mode
+                              dockerfile-mode
+                              flycheck
+                              flycheck-golangci-lint
+                              full-ack
+                              git-gutter
+                              go-autocomplete
+                              go-playground
+                              godoctor
+                              haml-mode
+                              helm-ag
+                              helm-descbinds
+                              helm-ls-git
+                              helm-projectile
+                              helm-rg
+                              helm-swoop
+                              jedi
+                              persistent-scratch
+                              projectile
+                              protobuf-mode
+                              rg
+                              scratch
+                              string-inflection
+                              wgrep
+                              yaml-mode
+                              yasnippet
+                              ))))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -243,6 +250,7 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
+(setq flycheck-golangci-lint-fast t)
 
 ;; Drag stuff mode
 (drag-stuff-global-mode 1)
@@ -294,6 +302,10 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (setq helm-split-window-default-side 'same)
 (require 'helm-ls-git)
+(require 'helm-descbinds)
+(helm-descbinds-mode)
 
+;;; beacon
+(beacon-mode 1)
 
 (provide 'modes)
