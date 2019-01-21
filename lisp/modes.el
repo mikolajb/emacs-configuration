@@ -30,6 +30,7 @@
                               helm-ag
                               helm-descbinds
                               helm-ls-git
+                              helm-pass
                               helm-projectile
                               helm-rg
                               helm-swoop
@@ -57,11 +58,16 @@
              (lambda ()
                (setq term-prompt-regexp
                      "^[^#$%>🌚🌑🌒🌓🌔🌕🌝🌖🌗🌘\n]*[#$%>🌚🌑🌒🌓🌔🌕🌝🌖🌗🌘] *")
+               ;; so it copies what mouse selects
                (make-local-variable 'mouse-yank-at-point)
-               (make-local-variable 'transient-mark-mode)
                (setq mouse-yank-at-point t)
+               ;; so it pastes into term
+               (local-set-key (kbd "C-c C-y") 'term-paste)
+               (make-local-variable 'transient-mark-mode)
                ;; (auto-fill-mode -1)
                (setq tab-width 8)
+               ;; let's make the font a bit smaller
+               (buffer-face-set '(:height 100))
                (setq bidi-paragraph-direction 'left-to-right)
                (yas-minor-mode -1))))
 
