@@ -66,11 +66,9 @@
               ;; let's make the font a bit smaller
               (buffer-face-set '(:height 100))
               (setq bidi-paragraph-direction 'left-to-right)
+              (define-key term-raw-map (kbd "M-x") #'execute-extended-command)
+              (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
               (yas-minor-mode -1)))
-  ;; so it pastes into term
-  (eval-after-load 'term
-    '(local-set-key (kbd "C-c C-y") 'term-paste))
-
   ;; SHELL
   (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
 
@@ -209,6 +207,12 @@
 (add-hook 'magit-log-edit-mode-hook 'auto-fill-mode)
 (global-set-key [f10] 'magit-status)
 (setq magit-diff-refine-hunk 'all)
+(setq magit-section-initial-visibility-alist
+      '((stashes . show)
+       (untracked . show)
+       (unstaged . show)
+       (unpushed . show)
+       (unpulled . show)))
 
 ;;; autopair
 (require 'autopair)
