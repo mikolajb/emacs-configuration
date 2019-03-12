@@ -149,7 +149,7 @@
   ;; go get -u github.com/golang/lint/golint
   ;; go get -u github.com/kisielk/errcheck
   ;; go get -u github.com/rogpeppe/godef
-  ;; go get -u github.com/golangci/golangci-lint
+  ;; go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
   ;; https://johnsogg.github.io/emacs-golang
   (require 'go-mode)
   ;; pkg go installation
