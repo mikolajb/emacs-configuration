@@ -13,17 +13,20 @@
 (unless (boundp 'latex-editor)
   (setq my-packages (append my-packages
                             '(
+                              ace-window
                               all-ext
                               auto-complete
                               beacon
                               clojure-mode
+                              company-lsp
                               d-mode
+                              dired-du
                               dockerfile-mode
                               flycheck
                               flycheck-golangci-lint
                               full-ack
                               git-gutter
-                              go-autocomplete
+                              go-guru
                               go-playground
                               godoctor
                               haml-mode
@@ -35,6 +38,8 @@
                               helm-rg
                               helm-swoop
                               jedi
+                              lsp-mode
+                              lsp-ui
                               persistent-scratch
                               projectile
                               protobuf-mode
@@ -160,10 +165,16 @@
   (setq gofmt-command (expand-file-name "bin/goimports" (getenv "GOPATH")))
   (add-hook 'before-save-hook 'gofmt-before-save)
   (add-to-list 'exec-path (expand-file-name "bin/" (getenv "GOPATH")))
-  (require 'go-autocomplete)
-  (require 'auto-complete-config)
-  (ac-config-default)
-  (setq go-test-verbose t)
+  (defun go-additional-arguments (suite-name test-name)
+    "-count=1 ")
+  (setq go-test-verbose t
+        go-test-additional-arguments-function 'go-additional-arguments)
+  ;; go get -u golang.org/x/tools/cmd/guru
+  (require 'go-guru)
+  (add-hook 'go-mode-hook #'go-guru-hl-identifier-mode)
+  ;; go get -u golang.org/x/tools/cmd/gopls
+  (add-hook 'go-mode-hook #'lsp)
+  (require 'lsp-mode)
 
   ;; midnight - clean-buffer-list
   (require 'midnight)
@@ -213,6 +224,7 @@
        (unstaged . show)
        (unpushed . show)
        (unpulled . show)))
+(setq magit-refs-margin (quote (t age magit-log-margin-width t 18)))
 
 ;;; autopair
 (require 'autopair)

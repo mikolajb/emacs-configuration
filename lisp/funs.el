@@ -297,3 +297,15 @@ Version 2017-05-24"
             (setq answer (+ (expt 10 field-width) answer)))
           (replace-match (format (concat "%0" (int-to-string field-width) "d")
                                  answer)))))))
+
+(defun copy-file-name ()
+  "Put the current file name on the clipboard"
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (with-temp-buffer
+        (insert filename)
+        (clipboard-kill-region (point-min) (point-max)))
+      (message filename))))
