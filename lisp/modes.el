@@ -21,6 +21,7 @@
                               company-lsp
                               d-mode
                               dired-du
+                              direnv
                               dockerfile-mode
                               flycheck
                               flycheck-golangci-lint
@@ -33,12 +34,14 @@
                               helm-ag
                               helm-descbinds
                               helm-ls-git
+                              helm-lsp
                               helm-pass
                               helm-projectile
                               helm-rg
                               helm-swoop
                               jedi
                               lsp-mode
+                              lsp-treemacs
                               lsp-ui
                               persistent-scratch
                               projectile
@@ -174,7 +177,13 @@
   (add-hook 'go-mode-hook #'go-guru-hl-identifier-mode)
   ;; go get -u golang.org/x/tools/cmd/gopls
   (add-hook 'go-mode-hook #'lsp)
+  (setq lsp-ui-flycheck-live-reporting nil
+        lsp-ui-sideline-enable nil
+        lsp-ui-sideline-show-diagnostics nil
+        lsp-ui-doc-enable nil)
+
   (require 'lsp-mode)
+  (setq lsp-enable-xref t)
 
   ;; midnight - clean-buffer-list
   (require 'midnight)
@@ -339,5 +348,8 @@
 
 ;;; all-ext
 (require 'all-ext)
+
+;;; direnv
+(require 'direnv)
 
 (provide 'modes)
