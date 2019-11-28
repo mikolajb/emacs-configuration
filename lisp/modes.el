@@ -81,8 +81,25 @@
   (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
 
   ;; ESHELL
+  (require 'eshell)
   (setq eshell-prefer-lisp-functions t)
   ;; (add-to-list 'eshell-modules-list 'em-tramp)
+  (require 'em-smart)
+  (setq eshell-where-to-jump 'begin)
+  (setq eshell-review-quick-commands nil)
+  (setq eshell-smart-space-goes-to-end t)
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (eshell-cmpl-initialize)
+              (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
+              (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)
+              (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)))
+  (defun pcomplete/sudo ()
+    (let ((prec (pcomplete-arg 'last -1)))
+      (cond ((string= "sudo" prec)
+             (while (pcomplete-here*
+                     (funcall pcomplete-command-completion-function)
+                     (pcomplete-arg 'last) t))))))
 
   ;; TRAMP
   (setq tramp-default-method "ssh")
@@ -153,10 +170,8 @@
   ;; Go lang mode (included in go language package)
   ;;
   ;; go get -u github.com/mdempsky/gocode
-  ;; go get -u golang.org/x/tools/cmd/goimports
   ;; go get -u github.com/golang/lint/golint
   ;; go get -u github.com/kisielk/errcheck
-  ;; go get -u github.com/rogpeppe/godef
   ;; go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
   ;; https://johnsogg.github.io/emacs-golang
   (require 'go-mode)
@@ -165,11 +180,10 @@
   (setenv "PATH" (concat "/usr/local/go/bin:" (getenv "PATH")))
 
   (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
-  (setq gofmt-command (expand-file-name "bin/goimports" (getenv "GOPATH")))
-  (add-hook 'before-save-hook 'gofmt-before-save)
+  (add-hook 'before-save-hook 'lsp-organize-imports)
   (add-to-list 'exec-path (expand-file-name "bin/" (getenv "GOPATH")))
   (defun go-additional-arguments (suite-name test-name)
-    "-count=1 ")
+    "-count=1")
   (setq go-test-verbose t
         go-test-additional-arguments-function 'go-additional-arguments)
   ;; go get -u golang.org/x/tools/cmd/guru
@@ -177,6 +191,8 @@
   (add-hook 'go-mode-hook #'go-guru-hl-identifier-mode)
   ;; go get -u golang.org/x/tools/cmd/gopls
   (add-hook 'go-mode-hook #'lsp)
+  (add-hook 'go-mode-hook #'lsp-deferred)
+
   (setq lsp-ui-flycheck-live-reporting nil
         lsp-ui-sideline-enable nil
         lsp-ui-sideline-show-diagnostics nil
