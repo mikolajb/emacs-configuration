@@ -16,6 +16,7 @@
                               ace-window
                               all-ext
                               auto-complete
+                              bazel-mode
                               beacon
                               clojure-mode
                               company-lsp
@@ -178,9 +179,17 @@
   ;; pkg go installation
   (setq exec-path (append '("/usr/local/go/bin") exec-path))
   (setenv "PATH" (concat "/usr/local/go/bin:" (getenv "PATH")))
+  (setenv "GO111MODULE" "on")
+  (setenv "USE_SYSTEM_GO" "yes")
+  (setenv "GOFLAGS" "-mod=vendor")
 
   (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
-  (add-hook 'before-save-hook 'lsp-organize-imports)
+
+  (defun go-mode-before-save-hook ()
+    (when (eq major-mode 'go-mode)
+      (lsp-organize-imports)
+      (lsp-format-buffer)))
+  (add-hook 'before-save-hook 'go-mode-before-save-hook)
   (add-to-list 'exec-path (expand-file-name "bin/" (getenv "GOPATH")))
   (defun go-additional-arguments (suite-name test-name)
     "-count=1")
@@ -196,7 +205,8 @@
   (setq lsp-ui-flycheck-live-reporting nil
         lsp-ui-sideline-enable nil
         lsp-ui-sideline-show-diagnostics nil
-        lsp-ui-doc-enable nil)
+        lsp-ui-doc-enable nil
+        lsp-log-io t)
 
   (require 'lsp-mode)
   (setq lsp-enable-xref t)
@@ -249,6 +259,8 @@
        (unstaged . show)
        (unpushed . show)
        (unpulled . show)))
+(setq magit-pull-or-fetch t)
+(magit-wip-mode 1)
 (setq magit-refs-margin (quote (t age magit-log-margin-width t 18)))
 
 ;;; autopair
@@ -364,8 +376,5 @@
 
 ;;; all-ext
 (require 'all-ext)
-
-;;; direnv
-(require 'direnv)
 
 (provide 'modes)
