@@ -8,6 +8,7 @@
 ;; open a list of a recently opened files in a initial buffer
 (recentf-mode 1)
 (setq initial-buffer-choice 'recentf-open-files)
+(add-to-list 'recentf-exclude (format "%s/\\.emacs\\.d/.*" (getenv "HOME")))
 (add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Frame title : set to buffer name

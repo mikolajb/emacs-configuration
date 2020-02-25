@@ -26,6 +26,7 @@
                               dockerfile-mode
                               flycheck
                               flycheck-golangci-lint
+                              forge
                               full-ack
                               git-gutter
                               go-guru
@@ -44,6 +45,7 @@
                               lsp-mode
                               lsp-treemacs
                               lsp-ui
+                              magit-todos
                               persistent-scratch
                               projectile
                               protobuf-mode
@@ -62,6 +64,7 @@
 
 (unless (boundp 'latex-editor)
   ;; TERM
+  (setq comint-prompt-read-only t)
   (add-hook 'term-mode-hook
             (lambda ()
               (setq term-prompt-regexp
@@ -75,6 +78,7 @@
               ;; let's make the font a bit smaller
               (buffer-face-set '(:height 100))
               (setq bidi-paragraph-direction 'left-to-right)
+              (setq bidi-inhibit-bpa t)
               (define-key term-raw-map (kbd "M-x") #'execute-extended-command)
               (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
               (yas-minor-mode -1)))
@@ -241,6 +245,10 @@
   ;; scratch-el
   (require 'scratch)
 
+  ;; rust
+  (add-hook 'rust-mode-hook #'lsp)
+  (add-hook 'rust-mode-hook #'lsp-deferred)
+
   ;; full-ack
   (autoload 'ack-same "full-ack" nil t)
   (autoload 'ack "full-ack" nil t)
@@ -261,6 +269,11 @@
        (unpulled . show)))
 (setq magit-pull-or-fetch t)
 (magit-wip-mode 1)
+(setq magit-status-goto-file-position t)
+(setq magit-revision-show-gravatars t)
+(setq magit-display-buffer-function #'display-buffer)
+(setq magit-commit-extend-override-date nil)
+(setq magit-commit-reword-override-date nil)
 (setq magit-refs-margin (quote (t age magit-log-margin-width t 18)))
 
 ;;; autopair
@@ -370,6 +383,7 @@
 (require 'helm-ls-git)
 (require 'helm-descbinds)
 (helm-descbinds-mode)
+(helm-mode 1)
 
 ;;; beacon
 (beacon-mode 1)

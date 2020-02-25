@@ -95,23 +95,23 @@
         (switch-to-buffer (completing-read "select terminal: " terms nil t nil nil (car terms)))
       (princ "no terminal buffers")))
 
-(defun helm-source-shell-buffers-list ()
-  (helm-make-source "Shell Buffers" 'helm-source-buffers
-    :buffer-list
-    (lambda ()
-      (mapcar #'buffer-name
-              (cl-remove-if-not
-               (lambda (buf)
-                 (with-current-buffer buf
-                   (eq major-mode 'term-mode)))
-               (buffer-list))))))
+  (defun helm-source-shell-buffers-list ()
+    (helm-make-source "Shell Buffers" 'helm-source-buffers
+      :buffer-list
+      (lambda ()
+        (mapcar #'buffer-name
+                (cl-remove-if-not
+                 (lambda (buf)
+                   (with-current-buffer buf
+                     (eq major-mode 'term-mode)))
+                 (buffer-list))))))
 
-(defun helm-shell-buffers-list ()
-  (interactive)
-  (helm :sources (helm-source-shell-buffers-list)
-        :buffer "*shells*"
-        :keymap helm-buffer-map
-        :truncate-lines helm-buffers-truncate-lines))
+  (defun helm-shell-buffers-list ()
+    (interactive)
+    (helm :sources (helm-source-shell-buffers-list)
+          :buffer "*shells*"
+          :keymap helm-buffer-map
+          :truncate-lines helm-buffers-truncate-lines))
 
   (defun run-ansi-term ()
     "Runs ansi term."
@@ -165,6 +165,7 @@
 
   (add-hook 'term-mode-hook
             (lambda ()
+              (define-key term-raw-map (kbd "C-c t") 'helm-shell-buffers-list)
               (define-key term-raw-map (kbd "C-c n") 'rename-term-buffer)
               (define-key term-mode-map (kbd "C-c n") 'rename-term-buffer)))
 
@@ -229,7 +230,7 @@
   "Insert current date."
   (interactive)
   (let ((system-time-locale "en_US"))
-  (insert (format-time-string "%e-%b-%Y"))))
+    (insert (format-time-string "%e-%b-%Y"))))
 
 (global-set-key (kbd "M-<up>") 'move-region-up)
 (global-set-key (kbd "M-<down>") 'move-region-down)
