@@ -162,6 +162,28 @@
             '(lambda ()
                (inf-ruby-keys))))
 
+(use-package python
+  :mode "^wscript$"
+  :interpreter ("python" . python-mode)
+  :config
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (jedi:setup)
+              (jedi:ac-setup)
+              (local-set-key "\C-cd" 'jedi:show-doc)
+              (local-set-key (kbd "M-SPC") 'jedi:complete)
+              (local-set-key (kbd "M-.") 'jedi:goto-definition))))
+
+(use-package jedi
+  :ensure t)
+
+(use-package auto-complete
+  :custom
+  (ac-auto-start 2)
+  (ac-override-local-map nil)
+  (ac-use-menu-map t)
+  (ac-candidate-limit 20))
+
 (unless (boundp 'latex-editor)
   ;; TERM
 
@@ -185,27 +207,6 @@
              (while (pcomplete-here*
                      (funcall pcomplete-command-completion-function)
                      (pcomplete-arg 'last) t))))))
-
-  ;; PYTHON: included in Emacs
-  (setq auto-mode-alist (append '(("^wscript$" . python-mode)) auto-mode-alist))
-
-  ;; Jedi
-  (require 'jedi)
-
-  ;; auto-complete mode extra settings
-  (setq
-   ac-auto-start 2
-   ac-override-local-map nil
-   ac-use-menu-map t
-   ac-candidate-limit 20)
-
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (jedi:setup)
-              (jedi:ac-setup)
-              (local-set-key "\C-cd" 'jedi:show-doc)
-              (local-set-key (kbd "M-SPC") 'jedi:complete)
-              (local-set-key (kbd "M-.") 'jedi:goto-definition)))
 
   ;; calendar
   (require 'calendar)
