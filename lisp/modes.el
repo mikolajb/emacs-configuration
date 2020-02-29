@@ -279,13 +279,16 @@
   (add-hook 'magit-log-edit-mode-hook #'flyspell-mode)
   (add-hook 'magit-log-edit-mode-hook #'auto-fill-mode))
 
-;;; autopair
-(require 'autopair)
-(autopair-global-mode)
-(add-hook 'term-mode-hook
-	  #'(lambda () (autopair-mode -1)))
-(setq autopair-autowrap t)
-(setq autopair-blink-delay 0.05)
+(use-package autopair
+  :ensure t
+  :custom
+  (autopair-autowrap t)
+  (autopair-blink-delay 0.05)
+  :config
+  (autopair-global-mode)
+  :init
+  (add-hook 'term-mode-hook
+	        #'(lambda () (autopair-mode -1))))
 
 ;;; Multiple cursors
 (require 'multiple-cursors)
