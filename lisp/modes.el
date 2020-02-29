@@ -307,22 +307,6 @@
   '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
 (setq flycheck-golangci-lint-fast t)
 
-;; Drag stuff mode
-(drag-stuff-global-mode 1)
-(drag-stuff-define-keys)
-
-(defconst my-protobuf-style
-  '((c-basic-offset . 2)
-    (indent-tabs-mode . nil)))
-
-(add-hook 'protobuf-mode-hook
-          (lambda () (c-add-style "my-style" my-protobuf-style t)))
-
-;; Persistent scratch
-;; https://github.com/Fanael/persistent-scratch
-(persistent-scratch-setup-default)
-(persistent-scratch-autosave-mode 1)
-
 ;; Save SQL history
 (defun my-sql-save-history-hook ()
   (let ((lval 'sql-input-ring-file-name)
@@ -337,6 +321,21 @@
        (format "SQL history will not be saved because %s is nil"
                (symbol-name rval))))))
 (add-hook 'sql-interactive-mode-hook 'my-sql-save-history-hook)
+
+(use-package drag-stuff
+  :ensure t
+  :config
+  (drag-stuff-global-mode 1)
+  (drag-stuff-define-keys))
+
+(use-package protobuf-mode
+  :ensure t
+  :config
+  (defconst my-protobuf-style
+    '((c-basic-offset . 2)
+      (indent-tabs-mode . nil)))
+  (add-hook 'protobuf-mode-hook
+            (lambda () (c-add-style "my-style" my-protobuf-style t))))
 
 (use-package git-gutter
   :ensure t
@@ -411,5 +410,11 @@
   (setq holiday-other-holidays swieta-panstwowe-pozostałe-święta)
   (append holiday-other-holidays ustawowo-wolne-od-pracy)
   (append holiday-other-holidays swieta-katolickie))
+
+(use-package persistent-scratch
+  :ensure t
+  :config
+  (persistent-scratch-setup-default)
+  (persistent-scratch-autosave-mode 1))
 
 (provide 'modes)
