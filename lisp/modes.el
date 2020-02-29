@@ -1,3 +1,13 @@
+(use-package auto-package-update
+  :custom
+  (auto-package-update-delete-old-versions t)
+  (auto-package-update-hide-results t)
+  (auto-package-update-interval 1)
+  (auto-package-update-at-time "16:00")
+  (auto-package-update-prompt-before-update t)
+  :config
+  (auto-package-update-maybe))
+
 (use-package tramp
   :custom
   (tramp-default-method "ssh")
@@ -6,7 +16,10 @@
 
 (use-package comint
   :custom
-  (comint-prompt-read-only t))
+  (comint-prompt-read-only t)
+  :config
+  ;; comint env to work with node.js
+  (setenv "NODE_NO_READLINE" "1"))
 
 (use-package shell-mode
   :hook (shell-mode-hook . compilation-shell-minor-mode)
@@ -208,6 +221,9 @@
 (use-package projectile
   :ensure t)
 
+(use-package vdiff-magit
+  :ensure t)
+
 (use-package autopair
   :ensure t
   :custom
@@ -395,6 +411,7 @@
   (persistent-scratch-autosave-mode 1))
 
 (use-package string-inflection
+  ;; Reformat strings, replaces my own hand-writter functions
   :ensure t)
 
 (use-package bazel-mode
@@ -414,5 +431,17 @@
 (use-package yasnippet
   :config
   (yas-global-mode 1))
+
+(use-package saveplace
+  :custom
+  (save-place t)
+  :init
+  (if (boundp 'latex-editor)
+      (setq save-place-file "~/.emacs-latex.d/saveplace")
+    (setq save-place-file "~/.emacs.d/saveplace")))
+
+(use-package uniquify
+  :custom
+  (uniquify-buffer-name-style 'post-forward-angle-brackets))
 
 (provide 'modes)

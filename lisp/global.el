@@ -96,19 +96,6 @@
 ;;; move to trash instead of deleting
 (setq delete-by-moving-to-trash t)
 
-(require 'saveplace)
-(if (boundp 'latex-editor)
-    (setq save-place-file "~/.emacs-latex.d/saveplace")
-    (setq save-place-file "~/.emacs.d/saveplace"))
-(setq-default save-place t)
-
-;;; uniquify
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
-
-;;; comint env to work with node.js
-(setenv "NODE_NO_READLINE" "1")
-
 ;;; enable narrowing
 (put 'narrow-to-defun  'disabled nil)
 (put 'narrow-to-page   'disabled nil)
@@ -119,10 +106,6 @@
 
 ;;; fly-spell in comments
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-
-;;; midnight mode
-(require 'midnight)
-(setq midnight-period 3600)
 
 ;;; from prelude
 (size-indication-mode t)

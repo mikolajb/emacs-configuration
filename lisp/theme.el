@@ -12,12 +12,10 @@
   (interactive)
   (let ((current-value (frame-parameter nil 'fullscreen)))
     (if (equal 'fullboth current-value)
-          (set-face-attribute 'default nil :height 125))
+        (set-face-attribute 'default nil :height 105))
     (toggle-frame-fullscreen)
     (if (not (equal 'fullboth current-value))
-        (if (boundp 'latex-editor)
-            (set-face-attribute 'default nil :height 200)
-            (set-face-attribute 'default nil :height 140)))))
+        (set-face-attribute 'default nil :height 120))))
 
 (global-set-key [f11] 'toggle-fullscreen)
 
