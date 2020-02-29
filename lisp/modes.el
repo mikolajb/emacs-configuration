@@ -368,16 +368,18 @@
                (symbol-name rval))))))
 (add-hook 'sql-interactive-mode-hook 'my-sql-save-history-hook)
 
-;;; git gutter
-(require 'git-gutter)
-(custom-set-variables
- '(git-gutter:modified-sign " ")
- '(git-gutter:added-sign " ")
- '(git-gutter:deleted-sign " "))
-(set-face-background 'git-gutter:modified "yellow")
-(set-face-background 'git-gutter:added "green")
-(set-face-background 'git-gutter:deleted "red")
-(global-git-gutter-mode +1)
+(use-package git-gutter
+  :ensure t
+  :custom
+  (git-gutter:modified-sign " ")
+  (git-gutter:added-sign " ")
+  (git-gutter:deleted-sign " ")
+  :custom-face
+  (git-gutter:modified ((t (:background "yellow"))))
+  (git-gutter:added ((t (:background "green"))))
+  (git-gutter:deleted ((t (:background "red"))))
+  :config
+  (global-git-gutter-mode +1))
 
 ;;; helm
 (require 'helm-config)
