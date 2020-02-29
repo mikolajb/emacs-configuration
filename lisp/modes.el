@@ -1,67 +1,3 @@
-(defvar my-packages
-  '(magit
-    autopair
-    drag-stuff
-    figlet
-    go-mode
-    markdown-mode
-    multiple-cursors
-    smex
-    writeroom-mode
-    ))
-
-(unless (boundp 'latex-editor)
-  (setq my-packages (append my-packages
-                            '(
-                              ace-window
-                              all-ext
-                              auto-complete
-                              bazel-mode
-                              beacon
-                              clojure-mode
-                              company-lsp
-                              d-mode
-                              dired-du
-                              direnv
-                              dockerfile-mode
-                              flycheck
-                              flycheck-golangci-lint
-                              forge
-                              full-ack
-                              git-gutter
-                              go-guru
-                              go-playground
-                              godoctor
-                              haml-mode
-                              helm-ag
-                              helm-descbinds
-                              helm-ls-git
-                              helm-lsp
-                              helm-pass
-                              helm-projectile
-                              helm-rg
-                              helm-swoop
-                              jedi
-                              lsp-mode
-                              lsp-treemacs
-                              lsp-ui
-                              magit-todos
-                              persistent-scratch
-                              projectile
-                              protobuf-mode
-                              rg
-                              scratch
-                              string-inflection
-                              wgrep
-                              yaml-mode
-                              yasnippet
-                              ))))
-
-(dolist (p my-packages)
-  (when (not (package-installed-p p))
-    (package-refresh-contents)
-    (package-install p)))
-
 (use-package tramp
   :custom
   (tramp-default-method "ssh")
@@ -151,7 +87,21 @@
     (setenv "USE_SYSTEM_GO" "yes")
     (setenv "GOFLAGS" "-mod=vendor")))
 
-(use-package go-guru)
+(use-package go-guru
+  :ensure t)
+
+(use-package go-playground
+  :ensure t)
+
+(use-package dockerfile-mode
+  :ensure t)
+
+(use-package direnv
+  :ensure t)
+
+(use-package flycheck-golangci-lint
+  :ensure t
+  :requires flycheck)
 
 (use-package ruby-mode
   :mode ("\\.rb$" "\\.ru$" "Rakefile$" "rakefile$" "Rakefile.rb$" "rakefile.rb$" "\\.rake$" "capfile$" "Capfile$" "Gemfile$")
@@ -225,7 +175,11 @@
   :ensure t)
 
 (use-package rg
+  :ensure t
   :ensure-system-package rg)
+
+(use-package wgrep
+  :ensure t)
 
 (use-package magit
   :ensure t
@@ -250,6 +204,9 @@
   :init
   (add-hook 'magit-log-edit-mode-hook #'flyspell-mode)
   (add-hook 'magit-log-edit-mode-hook #'auto-fill-mode))
+
+(use-package projectile
+  :ensure t)
 
 (use-package autopair
   :ensure t
@@ -299,11 +256,12 @@
     (custom-set-variables '(writeroom-extra-line-spacing 0.8))
     (custom-set-variables '(writeroom-width 100))))
 
-;;; Flycheck
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
-(setq flycheck-golangci-lint-fast t)
+(use-package flyckeck
+  :init
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  :no-require
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
 
 ;; Save SQL history
 (defun my-sql-save-history-hook ()
@@ -371,6 +329,26 @@
   :config
   (helm-descbinds-mode))
 
+(use-package helm-swoop
+  :ensure t
+  :requires helm)
+
+(use-package helm-rg
+  :ensure t
+  :requires (helm rg))
+
+(use-package helm-projectile
+  :ensure t
+  :requires (helm projectile))
+
+(use-package helm-pass
+  :ensure t
+  :requires helm)
+
+(use-package helm-lsp
+  :ensure t
+  :requires (helm lsp))
+
 (use-package beacon
   :ensure t
   :config
@@ -414,5 +392,22 @@
   :config
   (persistent-scratch-setup-default)
   (persistent-scratch-autosave-mode 1))
+
+(use-package string-inflection
+  :ensure t)
+
+(use-package bazel-mode
+  :if (eq (system-name) "utopiec")
+  :ensure t)
+
+(use-package figlet
+  :ensure t)
+
+(use-package markdown-mode
+  :ensure t)
+
+(when (boundp 'latex-editor)
+  (use-package writeroom-mode
+    :ensure t))
 
 (provide 'modes)
