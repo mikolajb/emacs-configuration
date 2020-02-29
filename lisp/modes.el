@@ -115,10 +115,43 @@
   (lsp-ui-sideline-show-diagnostics nil)
   (lsp-ui-doc-enable nil))
 
+(use-package use-package-ensure-system-package
+  :ensure t)
+
 (use-package rust-mode
   :ensure t
-  :hook (rust-mode . lsp)
-  :hook (rust-mode . lsp-deferred))
+  :ensure-system-package rls
+  :hook ((rust-mode . lsp)
+         (rust-mode . lsp-deferred)
+         (rust-mode . lsp-toggle-symbol-highlight)))
+
+(use-package go-mode
+  :ensure t
+  :ensure-system-package gopls
+  :mode "\\.go$"
+  :hook ((go-mode . lsp)
+         (go-mode . lsp-deferred)
+         (go-mode . lsp-toggle-symbol-highlight))
+  :custom
+  (exec-path (append '("/usr/local/go/bin") exec-path))
+  (go-test-verbose t)
+  (go-test-additional-arguments-function #'go-additional-arguments)
+  :init
+  (defun go-additional-arguments (suite-name test-name)
+    "-count=1")
+  (defun go-mode-before-save-hook ()
+    (when (eq major-mode 'go-mode)
+      (lsp-organize-imports)
+      (lsp-format-buffer)))
+  (add-hook 'before-save-hook #'go-mode-before-save-hook)
+  (add-to-list 'exec-path (expand-file-name "bin/" (getenv "GOPATH")))
+  (setenv "PATH" (concat "/usr/local/go/bin:" (getenv "PATH")))
+  (setenv "GO111MODULE" "on")
+  (when (string= (system-name) "utopiec")
+    (setenv "USE_SYSTEM_GO" "yes")
+    (setenv "GOFLAGS" "-mod=vendor")))
+
+(use-package go-guru)
 
 (unless (boundp 'latex-editor)
   ;; TERM
@@ -195,40 +228,6 @@
               (local-set-key "\C-cd" 'jedi:show-doc)
               (local-set-key (kbd "M-SPC") 'jedi:complete)
               (local-set-key (kbd "M-.") 'jedi:goto-definition)))
-
-  ;; Go lang mode (included in go language package)
-  ;;
-  ;; go get -u github.com/mdempsky/gocode
-  ;; go get -u github.com/golang/lint/golint
-  ;; go get -u github.com/kisielk/errcheck
-  ;; go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
-  ;; https://johnsogg.github.io/emacs-golang
-  (require 'go-mode)
-  ;; pkg go installation
-  (setq exec-path (append '("/usr/local/go/bin") exec-path))
-  (setenv "PATH" (concat "/usr/local/go/bin:" (getenv "PATH")))
-  (setenv "GO111MODULE" "on")
-  (setenv "USE_SYSTEM_GO" "yes")
-  (setenv "GOFLAGS" "-mod=vendor")
-
-  (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
-
-  (defun go-mode-before-save-hook ()
-    (when (eq major-mode 'go-mode)
-      (lsp-organize-imports)
-      (lsp-format-buffer)))
-  (add-hook 'before-save-hook 'go-mode-before-save-hook)
-  (add-to-list 'exec-path (expand-file-name "bin/" (getenv "GOPATH")))
-  (defun go-additional-arguments (suite-name test-name)
-    "-count=1")
-  (setq go-test-verbose t
-        go-test-additional-arguments-function 'go-additional-arguments)
-  ;; go get -u golang.org/x/tools/cmd/guru
-  (require 'go-guru)
-  (add-hook 'go-mode-hook #'go-guru-hl-identifier-mode)
-  ;; go get -u golang.org/x/tools/cmd/gopls
-  (add-hook 'go-mode-hook #'lsp)
-  (add-hook 'go-mode-hook #'lsp-deferred)
 
   ;; calendar
   (require 'calendar)
