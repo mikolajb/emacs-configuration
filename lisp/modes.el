@@ -255,26 +255,29 @@
   (autoload 'ack-find-same-file "full-ack" nil t)
   (autoload 'ack-find-file "full-ack" nil t))
 
-;; magit
-(require 'magit)
-(add-hook 'magit-log-edit-mode-hook 'flyspell-mode)
-(add-hook 'magit-log-edit-mode-hook 'auto-fill-mode)
-(global-set-key [f10] 'magit-status)
-(setq magit-diff-refine-hunk 'all)
-(setq magit-section-initial-visibility-alist
-      '((stashes . show)
-       (untracked . show)
-       (unstaged . show)
-       (unpushed . show)
-       (unpulled . show)))
-(setq magit-pull-or-fetch t)
-(magit-wip-mode 1)
-(setq magit-status-goto-file-position t)
-(setq magit-revision-show-gravatars t)
-(setq magit-display-buffer-function #'display-buffer)
-(setq magit-commit-extend-override-date nil)
-(setq magit-commit-reword-override-date nil)
-(setq magit-refs-margin (quote (t age magit-log-margin-width t 18)))
+(use-package magit
+  :ensure t
+  :bind (([f10] . magit-status))
+  :custom
+  (magit-diff-refine-hunk 'all)
+  (magit-section-initial-visibility-alist
+   '((stashes . show)
+     (untracked . show)
+     (unstaged . show)
+     (unpushed . show)
+     (unpulled . show)))
+  (magit-pull-or-fetch t)
+  (magit-status-goto-file-position t)
+  (magit-revision-show-gravatars t)
+  (magit-display-buffer-function #'display-buffer)
+  (magit-commit-extend-override-date nil)
+  (magit-commit-reword-override-date nil)
+  (magit-refs-margin (quote (t age magit-log-margin-width t 18)))
+  :config
+  (magit-wip-mode 1)
+  :init
+  (add-hook 'magit-log-edit-mode-hook #'flyspell-mode)
+  (add-hook 'magit-log-edit-mode-hook #'auto-fill-mode))
 
 ;;; autopair
 (require 'autopair)
