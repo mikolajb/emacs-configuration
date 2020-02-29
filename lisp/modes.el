@@ -286,6 +286,7 @@
 
 (use-package protobuf-mode
   :ensure t
+  :mode "\\.proto$"
   :config
   (defconst my-protobuf-style
     '((c-basic-offset . 2)
@@ -409,5 +410,9 @@
 (when (boundp 'latex-editor)
   (use-package writeroom-mode
     :ensure t))
+
+(use-package yasnippet
+  :config
+  (yas-global-mode 1))
 
 (provide 'modes)

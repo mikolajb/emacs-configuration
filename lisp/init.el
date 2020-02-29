@@ -7,8 +7,6 @@
 
 (require 'theme)
 (require 'modes)
-(require 'snippets)
-(require 'plugins)
 (require 'funs)
 (require 'orgmode-settings)
 
