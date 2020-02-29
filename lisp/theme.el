@@ -1,17 +1,9 @@
-(add-to-list 'load-path "~/.emacs.d/plugins/solarized-emacs/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/solarized-emacs/")
-
-(add-to-list 'load-path "~/.emacs.d/plugins/dracula-theme/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/dracula-theme/")
-
-(add-to-list 'load-path "~/.emacs.d/plugins/emacs-material-theme/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/emacs-material-theme/")
+(use-package dracula-theme
+  :init
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/dracula-theme/")
+  (load-theme 'dracula t))
 
 (pixel-scroll-mode 1)
-
-(if (boundp 'latex-editor)
-    (load-theme 'leuven)
-    (load-theme 'dracula))
 (blink-cursor-mode -1)
 
 (set-face-attribute 'default nil :height 125)
@@ -41,10 +33,6 @@
    (t
     (set-cursor-color "dodger blue"))))
 ;; (add-hook 'post-command-hook 'select-cursor-color-according-to-mode)
-
-;;; terminal colors
-;; (setq ansi-color-for-comint-mode t)
-;; (setq ansi-color-for-comint-mode-on t)
 
 ;; font for all unicode characters
 (set-fontset-font t 'unicode "Segoe UI Symbol" nil 'prepend)

@@ -14,15 +14,6 @@
 	path = plugins/zenburn-emacs
 	url = https://github.com/bbatsov/zenburn-emacs.git
 	branch = master
-[submodule "plugins/solarized-emacs"]
-	path = plugins/solarized-emacs
-	url = git@github.com:mikolajb/solarized-emacs.git
 [submodule "plugins/dracula-theme"]
 	path = plugins/dracula-theme
     url = git@github.com:mikolajb/emacs-dracula-theme.git
-[submodule "plugins/emacs-material-theme"]
-	path = plugins/emacs-material-theme
-	url = git@github.com:mikolajb/emacs-material-theme.git
-[submodule "plugins/icicles"]
-	path = plugins/icicles
-	url = https://github.com/emacsmirror/icicles.git
