@@ -207,24 +207,6 @@
              (while (pcomplete-here*
                      (funcall pcomplete-command-completion-function)
                      (pcomplete-arg 'last) t))))))
-
-  ;; calendar
-  (require 'calendar)
-  (require 'holidays)
-  (calendar-set-date-style 'european)
-  (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
-  (setq mark-holidays-in-calendar t)
-  (setq all-christian-calendar-holidays t)
-  (setq holiday-hebrew-holidays nil)
-  (setq holiday-islamic-holidays nil)
-  (setq holiday-oriental-holidays nil)
-  ;; hack - remove when calendar will be fixed
-  (setq calendar-holidays
-        (append holiday-general-holidays
-                holiday-other-holidays
-                holiday-christian-holidays
-                holiday-solar-holidays))
-
   ;; js2-mode
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
@@ -403,5 +385,31 @@
 (use-package yaml-mode
   :ensure t
   :mode "\\.ya?ml$")
+
+(use-package holidays
+  :custom
+  (holiday-general-holidays nil)
+  (holiday-hebrew-holidays nil)
+  (holiday-islamic-holidays nil)
+  (holiday-bahai-holidays nil)
+  (holiday-oriental-holidays nil))
+
+(use-package calendar
+  :hook (calendar-today-visible-hook . #'calendar-mark-today)
+  :custom
+  (mark-holidays-in-calendar t)
+  (calendar-day-name-array ["niedziela" "poniedziałek" "wtorek" "środa" "czwartek" "piątek" "sobota"])
+  (calendar-month-name-array ["styczeń" "luty" "marzec" "kwiecięń" "maj" "czerwiec" "lipiec" "sierpień" "wrzesień" "październik" "listopad" "grudzień"])
+  (calendar-week-start-day 1)
+  :config
+  (calendar-set-date-style 'european))
+
+(use-package polish-holidays
+  :requires holidays
+  :load-path "~/.emacs.d/plugins/polish-holidays/"
+  :config
+  (setq holiday-other-holidays swieta-panstwowe-pozostałe-święta)
+  (append holiday-other-holidays ustawowo-wolne-od-pracy)
+  (append holiday-other-holidays swieta-katolickie))
 
 (provide 'modes)
