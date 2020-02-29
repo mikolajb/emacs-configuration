@@ -1,8 +1,3 @@
-;;; dired-plus
-(load-file "~/.emacs.d/plugins/dired+.el")
-(require 'dired+)
-(toggle-diredp-find-file-reuse-dir 1)
-
 ;;; Sawzall
 (load-file "~/.emacs.d/plugins/sawzall.el")
 (load "~/.emacs.d/plugins/polish-holidays/polish-holidays.el")

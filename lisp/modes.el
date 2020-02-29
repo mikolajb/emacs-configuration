@@ -247,20 +247,24 @@
                 holiday-solar-holidays))
 
   ;; js2-mode
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
-  ;; dired customizations
-  (setq dired-listing-switches "-alh --group-directories-first")
-  (setq directory-free-space-args "-Ph")
+(use-package dired
+  :custom
+  (dired-listing-switches "-alh --group-directories-first")
+  (directory-free-space-args "-Ph"))
 
-  ;; scratch-el
-  (require 'scratch)
+(use-package dired+
+  :load-path "~/.emacs.d/plugins/"
+  :requires dired
+  :config
+  (toggle-diredp-find-file-reuse-dir 1))
 
-  ;; full-ack
-  (autoload 'ack-same "full-ack" nil t)
-  (autoload 'ack "full-ack" nil t)
-  (autoload 'ack-find-same-file "full-ack" nil t)
-  (autoload 'ack-find-file "full-ack" nil t))
+(use-package scratch
+  :ensure t)
+
+(use-package rg
+  :ensure-system-package rg)
 
 (use-package magit
   :ensure t
