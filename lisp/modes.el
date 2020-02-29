@@ -62,6 +62,33 @@
     (package-refresh-contents)
     (package-install p)))
 
+(use-package tramp
+  :custom
+  (tramp-default-method "ssh")
+  (tramp-chunksize 500)
+  (tramp-backup-directory-alist backup-directory-alist))
+
+(use-package lsp-mode
+  :ensure t
+  :commands lsp
+  :requires lsp-ui
+  :custom
+  (lsp-enable-xref t)
+  (lsp-log-io t))
+
+(use-package lsp-ui
+  :ensure t
+  :custom
+  (lsp-ui-flycheck-live-reporting nil)
+  (lsp-ui-sideline-enable nil)
+  (lsp-ui-sideline-show-diagnostics nil)
+  (lsp-ui-doc-enable nil))
+
+(use-package rust-mode
+  :ensure t
+  :hook (rust-mode . lsp)
+  :hook (rust-mode . lsp-deferred))
+
 (unless (boundp 'latex-editor)
   ;; TERM
   (setq comint-prompt-read-only t)
@@ -105,11 +132,6 @@
              (while (pcomplete-here*
                      (funcall pcomplete-command-completion-function)
                      (pcomplete-arg 'last) t))))))
-
-  ;; TRAMP
-  (setq tramp-default-method "ssh")
-  (setq tramp-chunksize 500)
-  (setq tramp-backup-directory-alist backup-directory-alist)
 
   ;; RUBY: included in Emacs 23, Ruby package, also in ELPA
   ;; Based on http://infolab.stanford.edu/~manku/dotemacs.html
@@ -163,15 +185,6 @@
               (local-set-key (kbd "M-SPC") 'jedi:complete)
               (local-set-key (kbd "M-.") 'jedi:goto-definition)))
 
-  ;; YAML: http://www.emacswiki.org/emacs/YamlMode (installed with ELPA)
-  (require 'yaml-mode)
-  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-  (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
-
-  ;; HAML mode (installed with ELPA)
-  (require 'haml-mode)
-  (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
-
   ;; Go lang mode (included in go language package)
   ;;
   ;; go get -u github.com/mdempsky/gocode
@@ -206,18 +219,6 @@
   (add-hook 'go-mode-hook #'lsp)
   (add-hook 'go-mode-hook #'lsp-deferred)
 
-  (setq lsp-ui-flycheck-live-reporting nil
-        lsp-ui-sideline-enable nil
-        lsp-ui-sideline-show-diagnostics nil
-        lsp-ui-doc-enable nil
-        lsp-log-io t)
-
-  (require 'lsp-mode)
-  (setq lsp-enable-xref t)
-
-  ;; midnight - clean-buffer-list
-  (require 'midnight)
-
   ;; calendar
   (require 'calendar)
   (require 'holidays)
@@ -244,10 +245,6 @@
 
   ;; scratch-el
   (require 'scratch)
-
-  ;; rust
-  (add-hook 'rust-mode-hook #'lsp)
-  (add-hook 'rust-mode-hook #'lsp-deferred)
 
   ;; full-ack
   (autoload 'ack-same "full-ack" nil t)
@@ -402,10 +399,16 @@
   :config
   (helm-descbinds-mode))
 
-;;; beacon
-(beacon-mode 1)
+(use-package beacon
+  :ensure t
+  :config
+  (beacon-mode 1))
 
-;;; all-ext
-(require 'all-ext)
+(use-package all-ext
+  :ensure t)
+
+(use-package yaml-mode
+  :ensure t
+  :mode "\\.ya?ml$")
 
 (provide 'modes)
