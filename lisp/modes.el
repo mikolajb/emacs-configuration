@@ -379,17 +379,28 @@
   :config
   (global-git-gutter-mode +1))
 
-;;; helm
-(require 'helm-config)
-(global-set-key (kbd "C-x b") 'helm-mini)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x C-l") 'helm-browse-project)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(setq helm-split-window-default-side 'same)
-(require 'helm-ls-git)
-(require 'helm-descbinds)
-(helm-descbinds-mode)
-(helm-mode 1)
+(use-package helm
+  :ensure t
+  :bind (("C-x b" . helm-mini)
+         ("C-x C-f" . helm-find-files)
+         ("C-x C-l" . helm-browse-project)
+         ("M-x" . helm-M-x)))
+
+(use-package helm-config
+  :custom
+  (helm-split-window-default-side 'same)
+  :config
+  (helm-mode 1))
+
+(use-package helm-ls-git
+  :ensure t
+  :requires helm)
+
+(use-package helm-descbinds
+  :ensure t
+  :requires helm
+  :config
+  (helm-descbinds-mode))
 
 ;;; beacon
 (beacon-mode 1)
