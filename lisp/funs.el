@@ -163,16 +163,6 @@
                             "*")))
     )
 
-  (add-hook 'term-mode-hook
-            (lambda ()
-              (define-key term-raw-map (kbd "C-c t") 'helm-shell-buffers-list)
-              (define-key term-raw-map (kbd "C-c n") 'rename-term-buffer)
-              (define-key term-mode-map (kbd "C-c n") 'rename-term-buffer)))
-
-  (add-hook 'shell-mode-hook
-            (lambda ()
-              (define-key shell-mode-map (kbd "C-c n") 'rename-term-buffer)))
-
   (defun set-encoding-in-comment ()
     "Sets coding"
     (interactive)

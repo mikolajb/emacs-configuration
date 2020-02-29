@@ -68,6 +68,37 @@
   (tramp-chunksize 500)
   (tramp-backup-directory-alist backup-directory-alist))
 
+(use-package comint
+  :custom
+  (comint-prompt-read-only t))
+
+(use-package shell-mode
+  :hook (shell-mode-hook . compilation-shell-minor-mode)
+  :bind (:map shell-mode-map
+              ("C-c n" . #'rename-term-buffer)))
+
+(use-package term
+  :bind (
+         :map term-raw-map
+              ("M-x" . #'helm-M-x)
+              ("C-c C-y" . #'term-paste)
+              ("C-c t" . #'helm-shell-buffers-list)
+              ("C-c n" . #'rename-term-buffer)
+              :map term-mode-map
+              ("C-c n" . #'rename-term-buffer))
+  :init
+  (add-hook 'term-mode-hook
+            (lambda ()
+              (setq term-prompt-regexp " *[0-9a-zA-Z🅼]+ *[#$%>🌚🌑🌒🌓🌔🌕🌝🌖🌗🌘] *")
+              (make-local-variable 'mouse-yank-at-point)
+              (setq mouse-yank-at-point t)
+              (make-local-variable 'transient-mark-mode)
+              (setq tab-width 8)
+              (buffer-face-set '(:height 95))
+              (setq bidi-paragraph-direction 'left-to-right)
+              (setq bidi-inhibit-bpa t)
+              (yas-minor-mode -1))))
+
 (use-package lsp-mode
   :ensure t
   :commands lsp
@@ -91,26 +122,6 @@
 
 (unless (boundp 'latex-editor)
   ;; TERM
-  (setq comint-prompt-read-only t)
-  (add-hook 'term-mode-hook
-            (lambda ()
-              (setq term-prompt-regexp
-                    "^[^#$%>🌚🌑🌒🌓🌔🌕🌝🌖🌗🌘\n]*[#$%>🌚🌑🌒🌓🌔🌕🌝🌖🌗🌘] *")
-              ;; so it copies what mouse selects
-              (make-local-variable 'mouse-yank-at-point)
-              (setq mouse-yank-at-point t)
-              (make-local-variable 'transient-mark-mode)
-              ;; (auto-fill-mode -1)
-              (setq tab-width 8)
-              ;; let's make the font a bit smaller
-              (buffer-face-set '(:height 100))
-              (setq bidi-paragraph-direction 'left-to-right)
-              (setq bidi-inhibit-bpa t)
-              (define-key term-raw-map (kbd "M-x") #'execute-extended-command)
-              (define-key term-raw-map (kbd "C-c C-y") 'term-paste)
-              (yas-minor-mode -1)))
-  ;; SHELL
-  (add-hook 'shell-mode-hook 'compilation-shell-minor-mode)
 
   ;; ESHELL
   (require 'eshell)
