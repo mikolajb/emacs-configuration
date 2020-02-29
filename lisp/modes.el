@@ -290,18 +290,16 @@
   (add-hook 'term-mode-hook
 	        #'(lambda () (autopair-mode -1))))
 
-;;; Multiple cursors
-(require 'multiple-cursors)
-(when (boundp 'latex-editor)
-  (setq mc/list-file "~/.emacs-latex.d/.mc-lists.el"))
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-S-c C-S-c" . mc/edit-lines)
+         ("C->" . 'mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C-<". 'mc/mark-all-like-this)))
 
 ;;; AUCTEX: http://www.gnu.org/software/auctex (pacman -S auctex)
-(load "auctex.el" nil t t)
-(load "preview-latex.el" nil t t)
+;; (load "auctex.el" nil t t)
+;; (load "preview-latex.el" nil t t)
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq reftex-plug-into-AUCTeX t) ; reftex
