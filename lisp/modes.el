@@ -269,37 +269,35 @@
          ("C-<" . mc/mark-previous-like-this)
          ("C-c C-<". 'mc/mark-all-like-this)))
 
-;;; AUCTEX: http://www.gnu.org/software/auctex (pacman -S auctex)
-;; (load "auctex.el" nil t t)
-;; (load "preview-latex.el" nil t t)
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq reftex-plug-into-AUCTeX t) ; reftex
-(add-hook 'LaTeX-mode-hook 'visual-line-mode)
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
-(add-hook 'LaTeX-mode-hook 'abbrev-mode)
-(setq-default TeX-master nil) ; query for master file
-(eval-after-load "tex"
-  '(progn
-     (add-to-list 'TeX-expand-list
-                  '("%(RubberPDF)"
-                    (lambda ()
-                      (if
-                          (not TeX-PDF-mode)
-                          ""
-                        "--pdf"))))
-     (add-to-list 'TeX-command-list
-                  '("Rubber" "rubber %(RubberPDF) %t" TeX-run-shell nil t) t)))
-
-(when (boundp 'latex-editor)
-  ;; Write room
-  (global-writeroom-mode)
-  (custom-set-variables '(writeroom-major-modes '(latex-mode)))
-  (custom-set-variables '(writeroom-extra-line-spacing 0.8))
-  (custom-set-variables '(writeroom-width 100)))
+(use-package tex-mode
+  :custom
+  (TeX-auto-save t)
+  (TeX-parse-self t)
+  (reftex-plug-into-AUCTeX t)
+  ; (TeX-master nil "query for master file")
+  :hook ((LaTeX-mode-hook . visual-line-mode)
+         (LaTeX-mode-hook . flyspell-mode)
+         (LaTeX-mode-hook . LaTeX-math-mode)
+         (LaTeX-mode-hook . turn-on-reftex)
+         (LaTeX-mode-hook . turn-on-auto-fill)
+         (LaTeX-mode-hook . abbrev-mode))
+  :no-require
+  :config
+  (add-to-list 'TeX-expand-list
+               '("%(RubberPDF)"
+                 (lambda ()
+                   (if
+                       (not TeX-PDF-mode)
+                       ""
+                     "--pdf"))))
+  (add-to-list 'TeX-command-list
+               '("Rubber" "rubber %(RubberPDF) %t" TeX-run-shell nil t) t)
+  (when (boundp 'latex-editor)
+    ;; Write room
+    (global-writeroom-mode)
+    (custom-set-variables '(writeroom-major-modes '(latex-mode)))
+    (custom-set-variables '(writeroom-extra-line-spacing 0.8))
+    (custom-set-variables '(writeroom-width 100))))
 
 ;;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
