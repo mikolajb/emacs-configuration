@@ -153,6 +153,15 @@
 
 (use-package go-guru)
 
+(use-package ruby-mode
+  :mode ("\\.rb$" "\\.ru$" "Rakefile$" "rakefile$" "Rakefile.rb$" "rakefile.rb$" "\\.rake$" "capfile$" "Capfile$" "Gemfile$")
+  :interpreter "ruby"
+  :functions inf-ruby-keys
+  :config
+  (add-hook 'ruby-mode-hook
+            '(lambda ()
+               (inf-ruby-keys))))
+
 (unless (boundp 'latex-editor)
   ;; TERM
 
@@ -176,37 +185,6 @@
              (while (pcomplete-here*
                      (funcall pcomplete-command-completion-function)
                      (pcomplete-arg 'last) t))))))
-
-  ;; RUBY: included in Emacs 23, Ruby package, also in ELPA
-  ;; Based on http://infolab.stanford.edu/~manku/dotemacs.html
-  (autoload 'ruby-mode "ruby-mode"
-    "Mode for editing ruby source files")
-  (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("rakefile$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Rakefile.rb$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("rakefile.rb$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("capfile$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Capfile$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
-  (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
-  (autoload 'run-ruby "inf-ruby"
-    "Run an inferior Ruby process")
-  (autoload 'inf-ruby-keys "inf-ruby"
-    "Set local key defs for inf-ruby in ruby-mode")
-  (add-hook 'ruby-mode-hook
-            '(lambda ()
-               (inf-ruby-keys)))
-  ;; removes hook which add 'coding ***' at the beggining of ruby files
-  ;; (add-hook 'ruby-mode-hook
-  ;; 	  '(lambda ()
-  ;; 	     (remove-hook 'before-save-hook 'ruby-mode-set-encoding)))
-  ;; If you have Emacs 19.2x or older, use rubydb2x
-  (autoload 'rubydb "rubydb3x" "Ruby debugger" t)
-  ;; uncomment the next line if you want syntax highlighting
-  (add-hook 'ruby-mode-hook 'turn-on-font-lock)
 
   ;; PYTHON: included in Emacs
   (setq auto-mode-alist (append '(("^wscript$" . python-mode)) auto-mode-alist))
