@@ -9,6 +9,9 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(require 'use-package)
+(setq use-package-compute-statistics t)
+
 (require 'theme)
 (require 'modes)
 (require 'funs)

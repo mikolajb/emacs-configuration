@@ -1,4 +1,5 @@
 (use-package auto-package-update
+  :ensure t
   :custom
   (auto-package-update-delete-old-versions t)
   (auto-package-update-hide-results t)
@@ -21,7 +22,7 @@
   ;; comint env to work with node.js
   (setenv "NODE_NO_READLINE" "1"))
 
-(use-package shell-mode
+(use-package shell
   :hook (shell-mode-hook . compilation-shell-minor-mode)
   :bind (:map shell-mode-map
               ("C-c n" . #'rename-term-buffer)))
@@ -50,14 +51,18 @@
 
 (use-package lsp-mode
   :ensure t
-  :commands lsp
-  :requires lsp-ui
+  :hook ((rust-mode . lsp-deferred)
+         (go-mode . lsp-deferred)
+         (lsp-mode . lsp-toggle-symbol-highlight))
+  :commands (lsp lsp-deferred)
   :custom
   (lsp-enable-xref t)
-  (lsp-log-io t))
+  (lsp-log-io t)
+  (lsp-file-watch-threshold 10000))
 
 (use-package lsp-ui
   :ensure t
+  :commands lsp-ui-mode
   :custom
   (lsp-ui-flycheck-live-reporting nil)
   (lsp-ui-sideline-enable nil)
@@ -70,17 +75,12 @@
 (use-package rust-mode
   :ensure t
   :ensure-system-package rls
-  :hook ((rust-mode . lsp)
-         (rust-mode . lsp-deferred)
-         (rust-mode . lsp-toggle-symbol-highlight)))
+  :mode "\\.rs$")
 
 (use-package go-mode
   :ensure t
   :ensure-system-package gopls
   :mode "\\.go$"
-  :hook ((go-mode . lsp)
-         (go-mode . lsp-deferred)
-         (go-mode . lsp-toggle-symbol-highlight))
   :custom
   (exec-path (append '("/usr/local/go/bin") exec-path))
   (go-test-verbose t)
@@ -93,6 +93,7 @@
       (lsp-organize-imports)
       (lsp-format-buffer)))
   (add-hook 'before-save-hook #'go-mode-before-save-hook)
+  (setenv "GOPATH" (expand-file-name "go" (getenv "HOME")))
   (add-to-list 'exec-path (expand-file-name "bin/" (getenv "GOPATH")))
   (setenv "PATH" (concat "/usr/local/go/bin:" (getenv "PATH")))
   (setenv "GO111MODULE" "on")
@@ -147,31 +148,37 @@
   (ac-use-menu-map t)
   (ac-candidate-limit 20))
 
-(unless (boundp 'latex-editor)
-  ;; TERM
-
-  ;; ESHELL
-  (require 'eshell)
-  (setq eshell-prefer-lisp-functions t)
-  ;; (add-to-list 'eshell-modules-list 'em-tramp)
-  (require 'em-smart)
-  (setq eshell-where-to-jump 'begin)
-  (setq eshell-review-quick-commands nil)
-  (setq eshell-smart-space-goes-to-end t)
-  (add-hook 'eshell-mode-hook
-            (lambda ()
-              (eshell-cmpl-initialize)
-              (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
-              (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)
-              (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)))
+(use-package eshell
+  :custom
+  (eshell-prefer-lisp-functions t)
+  :init
   (defun pcomplete/sudo ()
     (let ((prec (pcomplete-arg 'last -1)))
       (cond ((string= "sudo" prec)
              (while (pcomplete-here*
                      (funcall pcomplete-command-completion-function)
                      (pcomplete-arg 'last) t))))))
-  ;; js2-mode
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+  ;; :config
+  ;; (add-to-list 'eshell-modules-list 'em-tramp)
+  )
+
+(use-package em-smart
+  :requires eshell
+  :custom
+  (eshell-where-to-jump 'begin)
+  (eshell-review-quick-commands nil)
+  (eshell-smart-space-goes-to-end t)
+  :init
+  (add-hook 'eshell-mode-hook
+            #'(lambda ()
+                (eshell-cmpl-initialize)
+                (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
+                (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)
+                (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history))))
+
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js$")
 
 (use-package dired
   :custom
@@ -364,7 +371,7 @@
 
 (use-package helm-lsp
   :ensure t
-  :requires (helm lsp))
+  :requires (helm lsp-mode))
 
 (use-package beacon
   :ensure t
@@ -379,6 +386,7 @@
   :mode "\\.ya?ml$")
 
 (use-package holidays
+  :defer t
   :custom
   (holiday-general-holidays nil)
   (holiday-hebrew-holidays nil)
@@ -416,19 +424,23 @@
 
 (use-package bazel-mode
   :if (eq (system-name) "utopiec")
+  :mode "\\.bzl$"
   :ensure t)
 
 (use-package figlet
+  :defer t
   :ensure t)
 
 (use-package markdown-mode
-  :ensure t)
+  :ensure t
+  :mode "\\.md$")
 
 (when (boundp 'latex-editor)
   (use-package writeroom-mode
     :ensure t))
 
 (use-package yasnippet
+  :ensure t
   :config
   (yas-global-mode 1))
 
