@@ -1,3 +1,6 @@
+(use-package general
+  :ensure t)
+
 (use-package auto-package-update
   :ensure t
   :custom
@@ -24,18 +27,20 @@
 
 (use-package shell
   :hook (shell-mode-hook . compilation-shell-minor-mode)
-  :bind (:map shell-mode-map
-              ("C-c n" . #'rename-term-buffer)))
+  :general
+  (:keymaps 'shell-mode-map
+            "C-c n" 'rename-term-buffer))
 
 (use-package term
-  :bind (
-         :map term-raw-map
-              ("M-x" . #'helm-M-x)
-              ("C-c C-y" . #'term-paste)
-              ("C-c t" . #'helm-shell-buffers-list)
-              ("C-c n" . #'rename-term-buffer)
-              :map term-mode-map
-              ("C-c n" . #'rename-term-buffer))
+  :general
+  (:keymaps '(term-raw-map term-mode-map)
+            "M-x" 'helm-M-x)
+  (:keymaps '(term-raw-map term-mode-map)
+            :prefix "C-c"
+            "t" 'helm-shell-buffers-list
+            "n" 'rename-term-buffer)
+  (:keymaps 'term-raw-map
+            "C-c C-y" 'term-paste)
   :init
   (add-hook 'term-mode-hook
             (lambda ()
@@ -203,7 +208,8 @@
 
 (use-package magit
   :ensure t
-  :bind (([f10] . magit-status))
+  :general
+  ([f10] 'magit-status)
   :custom
   (magit-diff-refine-hunk 'all)
   (magit-section-initial-visibility-alist
@@ -244,10 +250,11 @@
 
 (use-package multiple-cursors
   :ensure t
-  :bind (("C-S-c C-S-c" . mc/edit-lines)
-         ("C->" . 'mc/mark-next-like-this)
-         ("C-<" . mc/mark-previous-like-this)
-         ("C-c C-<". 'mc/mark-all-like-this)))
+  :general
+  ("C-S-c C-S-c" 'mc/edit-lines)
+  ("C->" 'mc/mark-next-like-this)
+  ("C-<" 'mc/mark-previous-like-this)
+  ("C-c C-<" 'mc/mark-all-like-this))
 
 (use-package tex-mode
   :custom
@@ -332,10 +339,11 @@
 
 (use-package helm
   :ensure t
-  :bind (("C-x b" . helm-mini)
-         ("C-x C-f" . helm-find-files)
-         ("C-x C-l" . helm-browse-project)
-         ("M-x" . helm-M-x)))
+  :general
+  ("C-x b" 'helm-mini)
+  ("C-x C-f" 'helm-find-files)
+  ("C-x C-l" 'helm-browse-project)
+  ("M-x" 'helm-M-x))
 
 (use-package helm-config
   :custom
