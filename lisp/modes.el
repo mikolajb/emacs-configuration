@@ -74,6 +74,16 @@
   (lsp-ui-sideline-show-diagnostics nil)
   (lsp-ui-doc-enable nil))
 
+(use-package company
+  :ensure t
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1))
+
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp)
+
 (use-package use-package-ensure-system-package
   :ensure t)
 
@@ -226,7 +236,8 @@
   (magit-commit-reword-override-date nil)
   (magit-refs-margin (quote (t age magit-log-margin-width t 18)))
   :config
-  (magit-wip-mode 1)
+  (unless (string= (system-name) "utopiec")
+    (magit-wip-mode 1))
   :init
   (add-hook 'magit-log-edit-mode-hook #'flyspell-mode)
   (add-hook 'magit-log-edit-mode-hook #'auto-fill-mode))
