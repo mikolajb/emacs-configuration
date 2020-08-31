@@ -92,7 +92,7 @@
               (cl-remove-if-not
                (lambda (buf)
                  (with-current-buffer buf
-                   (eq major-mode 'term-mode)))
+                   (or (eq major-mode 'term-mode) (eq major-mode 'vterm-mode))))
                (buffer-list))))))
 
 (defun helm-shell-buffers-list ()
@@ -118,7 +118,7 @@
   "Puts last used shell on top and restores the previous window configuration."
   (interactive)
   (if (member (with-current-buffer (current-buffer) major-mode)
-              '(eshell-mode shell-mode term-mode))
+              '(eshell-mode shell-mode term-mode vterm-mode))
       (jump-to-register ?1)
 
     (window-configuration-to-register ?1)
@@ -126,27 +126,26 @@
           (car (delq nil (mapcar
                           (lambda (x)
                             (setq n (buffer-name x))
-                            (if (string-match "\\*terminal\\|ansi-term\\|e?shell\\*" n)
+                            (if (string-match "\\*terminal\\|ansi-term\\|vterm\\|e?shell\\*" n)
                                 n
                               nil))
                           (delq (current-buffer) (buffer-list))))))
-    (if term-buffer (switch-to-buffer term-buffer) (run-ansi-term))
+    (if term-buffer (switch-to-buffer term-buffer) (vterm))
     (delete-other-windows)))
 
 (defun rename-term-buffer ()
   "renames terminal buffer"
   (interactive)
-  (unless (member major-mode '(eshell-mode shell-mode term-mode))
+  (unless (member major-mode '(eshell-mode shell-mode term-mode vterm-mode))
     (signal 'quit '("Not a terminal buffer")))
-  (setq buffer_names '((eshell-mode . "eshell") (shell-mode . "shell") (term-mode . "ansi-term")))
+  (setq buffer_names '((eshell-mode . "eshell") (shell-mode . "shell") (term-mode . "ansi-term") (vterm-mode . "vterm")))
   (setq new_name_part (read-from-minibuffer "name> "))
   (rename-buffer (generate-new-buffer-name
                   (concat "*"
                           (cdr (assoc major-mode buffer_names))
                           "-"
                           new_name_part
-                          "*")))
-  )
+                          "*"))))
 
 (defun set-encoding-in-comment ()
   "Sets coding"
@@ -279,7 +278,7 @@ Version 2017-05-24"
 (global-set-key (kbd "C-c s") 'swap-windows)
 ;; (global-set-key (kbd "C-c r") 'rename-file-and-buffer)
 (global-set-key (kbd "C-c t") 'helm-shell-buffers-list)
-(global-set-key (kbd "C-c T") 'run-ansi-term)
+(global-set-key (kbd "C-c T") 'vterm)
 (global-set-key (kbd "C-c S") 'run-shell)
 (global-set-key [f12] 'shell-on-top)
 

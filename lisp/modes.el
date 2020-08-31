@@ -54,6 +54,18 @@
               (setq bidi-inhibit-bpa t)
               (yas-minor-mode -1))))
 
+(use-package vterm
+  :ensure t
+  :custom
+  (vterm-keymap-exceptions '("C-c" "C-x" "C-u" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y" "<f10>" "<f11>" "<f12>"))
+  :general
+  (:keymaps 'vterm-mode-map
+            "C-c n" 'rename-term-buffer)
+  :init
+  (add-hook 'vterm-mode-hook
+            (lambda ()
+              (buffer-face-set '(:height 95)))))
+
 (use-package lsp-mode
   :ensure t
   :hook ((rust-mode . lsp-deferred)
@@ -350,6 +362,8 @@
 
 (use-package helm
   :ensure t
+  :custom
+  (history-delete-duplicates t)
   :general
   ("C-x b" 'helm-mini)
   ("C-x C-f" 'helm-find-files)
