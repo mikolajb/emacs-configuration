@@ -1,3 +1,5 @@
+(defconst linux-kernel-version (substring (shell-command-to-string "uname -r") 0 -1))
+
 (require 'global)
 
 ;; And Melpa
@@ -16,5 +18,6 @@
 (require 'modes)
 (require 'funs)
 (require 'orgmode-settings)
+(require 'events)
 
 (provide 'init)

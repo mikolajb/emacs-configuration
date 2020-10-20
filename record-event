@@ -1,0 +1,12 @@
+#!/usr/bin/python
+
+import sys
+from json import loads, dumps
+import requests
+
+try:
+    data = loads(sys.argv[1])
+    print(data)
+except e:
+    print("cannot handle input data", e, sys.argv)
+    exit(1)
