@@ -57,12 +57,12 @@
 (use-package vterm
   :ensure t
   :custom
-  (vterm-keymap-exceptions '("C-c" "C-x" "C-u" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y" "C-m"))
+  (vterm-keymap-exceptions '("C-c" "C-x" "C-u" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y"))
   ;; (vterm-buffer-name-string "vterm %s")
   :general
   (:keymaps 'vterm-mode-map
             "C-c n" 'rename-term-buffer
-            "C-m" 'magit-status
+            "C-c C-m" 'magit-status
             "C-\\" 'shell-on-top)
   :init
   (add-hook 'vterm-mode-hook
@@ -235,7 +235,7 @@
 (use-package magit
   :ensure t
   :general
-  ("C-m" 'magit-status)
+  ("C-c C-m" 'magit-status)
   :custom
   (magit-diff-refine-hunk 'all)
   (magit-section-initial-visibility-alist
