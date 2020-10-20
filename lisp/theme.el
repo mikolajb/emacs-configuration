@@ -17,7 +17,7 @@
     (if (not (equal 'fullboth current-value))
         (set-face-attribute 'default nil :height 120))))
 
-(global-set-key [f11] 'toggle-fullscreen)
+(global-set-key (kbd "C-x <up>") 'toggle-fullscreen)
 
 (defun select-cursor-color-according-to-mode ()
   (blink-cursor-mode 0)
