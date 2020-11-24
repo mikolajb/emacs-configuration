@@ -62,7 +62,7 @@
   :general
   (:keymaps 'vterm-mode-map
             "C-c n" 'rename-term-buffer
-            "C-c C-m" 'magit-status
+            "C-x C-m" 'magit-status
             "C-\\" 'shell-on-top)
   :init
   (add-hook 'vterm-mode-hook
@@ -76,6 +76,7 @@
          (lsp-mode . lsp-toggle-symbol-highlight))
   :commands (lsp lsp-deferred)
   :custom
+  (lsp-keymap-prefix "C-x")
   (lsp-enable-xref t)
   (lsp-log-io t)
   (lsp-file-watch-threshold 10000))
@@ -235,7 +236,7 @@
 (use-package magit
   :ensure t
   :general
-  ("C-c C-m" 'magit-status)
+  ("C-x C-m" 'magit-status)
   :custom
   (magit-diff-refine-hunk 'all)
   (magit-section-initial-visibility-alist
