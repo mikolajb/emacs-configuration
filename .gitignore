@@ -19,3 +19,8 @@
 /.persistent-scratch
 /.python-environments
 /projectile-bookmarks.eld
+/.lsp-session-*
+/forge-database.sqlite
+/.last-package-update-day
+/projects
+/transient

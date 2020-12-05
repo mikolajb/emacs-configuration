@@ -73,6 +73,8 @@
   :ensure t
   :hook ((rust-mode . lsp-deferred)
          (go-mode . lsp-deferred)
+         (python-mode . lsp-deferred)
+         (sh-mode . lsp-deferred)
          (lsp-mode . lsp-toggle-symbol-highlight))
   :commands (lsp lsp-deferred)
   :custom
@@ -160,18 +162,8 @@
 
 (use-package python
   :mode "^wscript$"
-  :interpreter ("python" . python-mode)
-  :config
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (jedi:setup)
-              (jedi:ac-setup)
-              (local-set-key "\C-cd" 'jedi:show-doc)
-              (local-set-key (kbd "M-SPC") 'jedi:complete)
-              (local-set-key (kbd "M-.") 'jedi:goto-definition))))
-
-(use-package jedi
-  :ensure t)
+  :ensure-system-package pyls
+  :interpreter ("python" . python-mode))
 
 (use-package auto-complete
   :custom
@@ -413,6 +405,11 @@
 
 (use-package beacon
   :ensure t
+  :custom
+  (beacon-blink-delay 0)
+  (beacon-blink-duration 0.6)
+  (beacon-color "#ffb86c")
+  (beacon-blink-when-point-moves-vertically 10)
   :config
   (beacon-mode 1))
 
@@ -496,10 +493,22 @@
 
 (use-package deft
   :ensure t
-  :bind ("<f8>" . deft)
+  :general
+  ("C-c C-d" 'deft)
   :commands (deft)
   :config (setq deft-directory "~/notes"
+                deft-use-filename-as-title t
                 deft-extensions '("md" "org" "gpg" "rst")))
+
+(use-package xref
+  :custom
+  (xref-search-program 'ripgrep))
+
+(use-package time
+  :custom
+  (world-clock-list '(("Europe/Berlin" "Berlin")
+                      ("America/New_York" "New York")
+                      ("America/Los_Angeles" "San Francisco"))))
 
 ;;; https://github.com/microsoft/cascadia-code/issues/153
 (use-package composite

@@ -58,7 +58,7 @@
 ;; )
 
 ; delete trailing whitespace before save
-(setq whitespace-style '(trailing empty))
+(setq whitespace-style '(trailing empty missing-newline-at-eof))
 (add-hook 'before-save-hook 'whitespace-cleanup)
 ;; make all "yes or no" prompts show "y or n" instead
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -149,5 +149,8 @@
 
 ;;; auth-sources
 (setq auth-sources '("secrets:Login"))
+
+;;; show battery status
+(display-battery-mode t)
 
 (provide 'global)

@@ -17,7 +17,7 @@
     (cons 'package_manager (symbol-name system-packages-package-manager))
     (cons 'kernel_version linux-kernel-version)
     (cons 'timestamp (string-to-number (format-time-string "%s%N"))))))
-    (when (boundp 'git-remote-url)
+    (when (bound-and-true-p git-remote-url)
       (setq result (append (list (cons 'git_remote_url git-remote-url)) result)))
     (shell-command (format "curl --data '%s' localhost:13591" (json-serialize result)))))
 
