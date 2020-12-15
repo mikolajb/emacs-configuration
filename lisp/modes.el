@@ -18,6 +18,10 @@
   (tramp-chunksize 500)
   (tramp-backup-directory-alist backup-directory-alist))
 
+(use-package vc-hooks
+  :custom
+  (vc-follow-symlinks t))
+
 (use-package comint
   :custom
   (comint-prompt-read-only t)
@@ -402,6 +406,15 @@
 (use-package helm-lsp
   :ensure t
   :requires (helm lsp-mode))
+
+(use-package flyspell-correct
+  :after flyspell
+  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
+
+(use-package flyspell-correct-helm
+  :ensure t
+  :after flyspell-correct
+  :requires (helm lsp))
 
 (use-package beacon
   :ensure t
