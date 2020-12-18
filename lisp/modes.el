@@ -85,7 +85,12 @@
   (lsp-keymap-prefix "C-x")
   (lsp-enable-xref t)
   (lsp-log-io t)
-  (lsp-file-watch-threshold 10000))
+  (lsp-file-watch-threshold 10000)
+  :config
+  (lsp-register-custom-settings
+   '(("gopls.completeUnimported" t t)
+     ("gopls.staticcheck" t t)
+     ("gopls.test" t t))))
 
 (use-package lsp-ui
   :ensure t
@@ -120,20 +125,15 @@
   :ensure-system-package gopls
   :mode "\\.go$"
   :custom
-  (exec-path (append '("/usr/local/go/bin") exec-path))
+  (exec-path (append '("/usr/local/go/bin" "/home/mikolaj/go/bin") exec-path))
   :init
   (defun go-mode-before-save-hook ()
     (when (eq major-mode 'go-mode)
       (lsp-organize-imports)
       (lsp-format-buffer)))
   (add-hook 'before-save-hook #'go-mode-before-save-hook)
-  (setenv "GOPATH" (expand-file-name "go" (getenv "HOME")))
-  (add-to-list 'exec-path (expand-file-name "bin/" (getenv "GOPATH")))
-  (setenv "PATH" (concat "/usr/local/go/bin:" (getenv "PATH")))
-  (setenv "GO111MODULE" "on")
-  (when (string= (system-name) "utopiec")
-    (setenv "USE_SYSTEM_GO" "yes")
-    (setenv "GOFLAGS" "-mod=vendor")))
+  (setenv "PATH" (concat "/usr/local/go/bin:$HOME/go/bin" (getenv "PATH")))
+  (setenv "GO111MODULE" "on"))
 
 (use-package gotest
   :ensure t
@@ -502,8 +502,9 @@
 
 (use-package yasnippet
   :ensure t
-  :config
-  (yas-global-mode 1))
+  :commands yas-minor-mode
+  :hook
+  (go-mode . yas-minor-mode))
 
 (use-package saveplace
   :custom
