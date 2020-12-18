@@ -166,13 +166,6 @@
   :ensure-system-package pyls
   :interpreter ("python" . python-mode))
 
-(use-package auto-complete
-  :custom
-  (ac-auto-start 2)
-  (ac-override-local-map nil)
-  (ac-use-menu-map t)
-  (ac-candidate-limit 20))
-
 (use-package eshell
   :custom
   (eshell-prefer-lisp-functions t)
@@ -316,9 +309,9 @@
     (custom-set-variables '(writeroom-width 100))))
 
 (use-package flyckeck
+  :ensure t
   :init
-  (add-hook 'after-init-hook #'global-flycheck-mode)
-  :no-require)
+  (global-flycheck-mode))
 
 ;; Save SQL history
 (defun my-sql-save-history-hook ()
@@ -497,8 +490,8 @@
   (go-mode . yas-minor-mode))
 
 (use-package saveplace
-  :custom
-  (save-place t)
+  :config
+  (save-place-mode 1)
   :init
   (if (boundp 'latex-editor)
       (setq save-place-file "~/.emacs-latex.d/saveplace")
