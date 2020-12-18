@@ -19,6 +19,6 @@
     (cons 'timestamp (string-to-number (format-time-string "%s%N"))))))
     (when (bound-and-true-p git-remote-url)
       (setq result (append (list (cons 'git_remote_url git-remote-url)) result)))
-    (shell-command (format "curl --data '%s' localhost:13591" (json-serialize result)))))
+    (shell-command (format "curl --silent --show-error --data '%s' localhost:13591" (json-serialize result)))))
 
 (provide 'events)

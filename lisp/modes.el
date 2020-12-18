@@ -121,11 +121,7 @@
   :mode "\\.go$"
   :custom
   (exec-path (append '("/usr/local/go/bin") exec-path))
-  (go-test-verbose t)
-  (go-test-additional-arguments-function #'go-additional-arguments)
   :init
-  (defun go-additional-arguments (suite-name test-name)
-    "-count=1")
   (defun go-mode-before-save-hook ()
     (when (eq major-mode 'go-mode)
       (lsp-organize-imports)
@@ -138,6 +134,15 @@
   (when (string= (system-name) "utopiec")
     (setenv "USE_SYSTEM_GO" "yes")
     (setenv "GOFLAGS" "-mod=vendor")))
+
+(use-package gotest
+  :ensure t
+  :custom
+  (go-test-verbose t)
+  (go-test-additional-arguments-function #'go-additional-arguments)
+  :init
+  (defun go-additional-arguments (suite-name test-name)
+    "-count=1"))
 
 (use-package go-guru
   :ensure t)
@@ -254,6 +259,14 @@
   :init
   (add-hook 'magit-log-edit-mode-hook #'flyspell-mode)
   (add-hook 'magit-log-edit-mode-hook #'auto-fill-mode))
+
+(use-package forge
+  :ensure t
+  :after closql)
+
+(use-package closql
+  :ensure t
+  :defer t)
 
 (use-package projectile
   :ensure t)

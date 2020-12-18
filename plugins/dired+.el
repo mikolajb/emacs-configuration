@@ -2286,7 +2286,7 @@ If DISTINGUISH-ONE-MARKED is non-nil, then return (t FILENAME) instead
           (newarg             ,arg)
           multi-C-u case-fold-search found results)
       (when (and (consp newarg)  (> (prefix-numeric-value newarg) 4))
-        (setq newarg     (case (prefix-numeric-value newarg)
+        (setq newarg     (cl-case (prefix-numeric-value newarg)
                            (16   'all-files-no-dirs) ; `C-u C-u'
                            (64   'all-files-no-dots) ; `C-u C-u C-u'
                            (256  'all-files) ; `C-u C-u C-u C-u'
@@ -4350,7 +4350,7 @@ for which it returns non-nil."
                                                               prompt
                                                             (concat "Please answer y or n.  " prompt)))))))
                              (setq answer  (lookup-key query-replace-map (vector key) t))
-                             (case answer
+                             (cl-case answer
                                ((skip  act)              nil)
                                (recenter                 (recenter) t)
                                (show                     (diredp-list-files files nil list-buf predicate)
@@ -4954,7 +4954,7 @@ Dired buffer and all subdirs, recursively."
                     (message "Thumb could not be created for file %s" curr-file)
                   (image-dired-insert-thumbnail thumb-name curr-file dired-buf)))
               files))
-      (case image-dired-line-up-method
+      (cl-case image-dired-line-up-method
         (dynamic      (image-dired-line-up-dynamic))
         (fixed        (image-dired-line-up))
         (interactive  (image-dired-line-up-interactive))

@@ -211,7 +211,7 @@
   (interactive)
   (request (concat "http://dx.doi.org/" doi)
            :headers '(("Accept" . "text/bibliography; ; style=bibtex"))
-           :success (function* (lambda (&key data &allow-other-keys) data))))
+           :success (cl-function (lambda (&key data &allow-other-keys) data))))
 
 (defun region-insert-sapce-every-4 ()
   ""
