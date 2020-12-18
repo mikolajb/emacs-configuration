@@ -107,10 +107,6 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
 
-(use-package company-lsp
-  :ensure t
-  :commands company-lsp)
-
 (use-package use-package-ensure-system-package
   :ensure t)
 
@@ -155,10 +151,6 @@
 
 (use-package direnv
   :ensure t)
-
-(use-package flycheck-golangci-lint
-  :ensure t
-  :requires flycheck)
 
 (use-package ruby-mode
   :mode ("\\.rb$" "\\.ru$" "Rakefile$" "rakefile$" "Rakefile.rb$" "rakefile.rb$" "\\.rake$" "capfile$" "Capfile$" "Gemfile$")
@@ -326,9 +318,7 @@
 (use-package flyckeck
   :init
   (add-hook 'after-init-hook #'global-flycheck-mode)
-  :no-require
-  :config
-  (add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
+  :no-require)
 
 ;; Save SQL history
 (defun my-sql-save-history-hook ()
