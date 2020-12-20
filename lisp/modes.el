@@ -308,7 +308,7 @@
     (custom-set-variables '(writeroom-extra-line-spacing 0.8))
     (custom-set-variables '(writeroom-width 100))))
 
-(use-package flyckeck
+(use-package flycheck
   :ensure t
   :init
   (global-flycheck-mode))
@@ -519,6 +519,17 @@
   (world-clock-list '(("Europe/Berlin" "Berlin")
                       ("America/New_York" "New York")
                       ("America/Los_Angeles" "San Francisco"))))
+
+(use-package auto-compile
+  :ensure t
+  :config
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode)
+  (setq auto-compile-display-buffer nil)
+  (setq auto-compile-mode-line-counter t)
+  (setq auto-compile-source-recreate-deletes-dest t)
+  (setq auto-compile-toggle-deletes-nonlib-dest t)
+  (setq auto-compile-update-autoloads t))
 
 ;;; https://github.com/microsoft/cascadia-code/issues/153
 (use-package composite

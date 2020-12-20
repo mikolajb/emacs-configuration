@@ -153,4 +153,7 @@
 ;;; show battery status
 (display-battery-mode t)
 
+;;; make sure old byte code won't be loaded
+(setq load-prefer-newer t)
+
 (provide 'global)
