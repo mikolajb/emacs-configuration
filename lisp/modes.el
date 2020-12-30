@@ -79,6 +79,7 @@
          (go-mode . lsp-deferred)
          (python-mode . lsp-deferred)
          (sh-mode . lsp-deferred)
+         (latex-mode . lsp-deferred)
          (lsp-mode . lsp-toggle-symbol-highlight))
   :commands (lsp lsp-deferred)
   :custom
@@ -165,6 +166,11 @@
   :mode "^wscript$"
   :ensure-system-package pyls
   :interpreter ("python" . python-mode))
+
+(use-package pinentry
+  :ensure t
+  :config
+  (pinentry-start))
 
 (use-package eshell
   :custom
@@ -417,7 +423,7 @@
   :custom
   (beacon-blink-delay 0)
   (beacon-blink-duration 0.6)
-  (beacon-color "#ffb86c")
+  (beacon-color "#e2e2dc")
   (beacon-blink-when-point-moves-vertically 10)
   :config
   (beacon-mode 1))
@@ -530,6 +536,22 @@
   (setq auto-compile-source-recreate-deletes-dest t)
   (setq auto-compile-toggle-deletes-nonlib-dest t)
   (setq auto-compile-update-autoloads t))
+
+(use-package auth-source
+  :custom
+  (auth-source-save-behavior nil)
+  :config
+  (add-to-list 'auth-source-protocols
+               '(sudo "sudo" "")))
+
+(use-package hl-line
+  :init
+  (add-hook 'term-mode-hook
+	        #'(lambda () (global-hl-line-mode nil)))
+  (add-hook 'vterm-mode-hook
+	        #'(lambda () (global-hl-line-mode nil)))
+  :config
+  (global-hl-line-mode t))
 
 ;;; https://github.com/microsoft/cascadia-code/issues/153
 (use-package composite
