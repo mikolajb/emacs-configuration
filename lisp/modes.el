@@ -1,17 +1,6 @@
 (use-package general
   :ensure t)
 
-(use-package auto-package-update
-  :ensure t
-  :custom
-  (auto-package-update-delete-old-versions t)
-  (auto-package-update-hide-results t)
-  (auto-package-update-interval 1)
-  (auto-package-update-at-time "16:00")
-  (auto-package-update-prompt-before-update t)
-  :config
-  (auto-package-update-maybe))
-
 (use-package tramp
   :custom
   (tramp-default-method "ssh")
@@ -87,6 +76,7 @@
   (lsp-enable-xref t)
   (lsp-log-io t)
   (lsp-file-watch-threshold 10000)
+  (lsp-ui-doc-delay 0)
   :config
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t)
@@ -552,6 +542,10 @@
 	        #'(lambda () (global-hl-line-mode nil)))
   :config
   (global-hl-line-mode t))
+
+(use-package pkgbuild-mode
+  :ensure t
+  :mode ("/PKGBUILD$"))
 
 ;;; https://github.com/microsoft/cascadia-code/issues/153
 (use-package composite

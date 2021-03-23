@@ -270,6 +270,22 @@ Version 2017-05-24"
         (clipboard-kill-region (point-min) (point-max)))
       (message filename))))
 
+;; https://stackoverflow.com/questions/611831/how-to-url-decode-a-string-in-emacs-lisp
+(defun func-region (start end func)
+  "run a function over the region between START and END in current buffer."
+  (save-excursion
+    (let ((text (delete-and-extract-region start end)))
+      (insert (funcall func text)))))
+
+(defun hex-region (start end)
+  "urlencode the region between START and END in current buffer."
+  (interactive "r")
+  (func-region start end #'url-hexify-string))
+
+(defun unhex-region (start end)
+  "de-urlencode the region between START and END in current buffer."
+  (interactive "r")
+  (func-region start end #'url-unhex-string))
 
 ;; duplicate a line
 (global-set-key (kbd "C-c D") 'duplicate-line)

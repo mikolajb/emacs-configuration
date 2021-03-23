@@ -10794,7 +10794,7 @@ windows there, then delete its window (toggle : show/hide the file)."
 ;; works for newer Emacs too.
 (when (fboundp 'defvaralias)            ; Emacs 22+
   (defvaralias 'diredp-menu-bar-immediate-menu 'diredp-menu-bar-single-menu))
-(make-obsolete-variable 'diredp-menu-bar-immediate-menu 'diredp-menu-bar-single-menu) ; 2017-04-09
+(make-obsolete-variable 'diredp-menu-bar-immediate-menu 'diredp-menu-bar-single-menu "2017-04-09")
 
 (if (fboundp 'diredp-describe-file)
     (define-key diredp-menu-bar-single-menu [diredp-describe-file]
@@ -11107,7 +11107,7 @@ If no one is selected, symmetric encryption will be performed.  "
 ;; works for newer Emacs too.
 (when (fboundp 'defvaralias)            ; Emacs 22+
   (defvaralias 'diredp-menu-bar-operate-menu 'diredp-menu-bar-multiple-menu))
-(make-obsolete-variable 'diredp-menu-bar-operate-menu 'diredp-menu-bar-multiple-menu) ; 2017-04-09
+(make-obsolete-variable 'diredp-menu-bar-operate-menu 'diredp-menu-bar-multiple-menu "2017-04-09")
 
 (define-key diredp-menu-bar-multiple-menu [diredp-describe-marked-autofiles]
   '(menu-item "Describe Marked Autofiles" diredp-describe-marked-autofiles
@@ -11301,7 +11301,7 @@ If no one is selected, symmetric encryption will be performed.  "
 ;; works for newer Emacs too.
 (when (fboundp 'defvaralias)            ; Emacs 22+
   (defvaralias 'diredp-menu-bar-images-menu 'diredp-multiple-images-menu))
-(make-obsolete-variable 'diredp-menu-bar-images-menu 'diredp-multiple-images-menu) ; 2017-04-09
+(make-obsolete-variable 'diredp-menu-bar-images-menu 'diredp-multiple-images-menu "2017-04-09")
 
 ;; Remove the items from `Multiple' menu.
 (define-key diredp-menu-bar-multiple-menu [image-dired-delete-tag] nil)
@@ -11338,11 +11338,11 @@ If no one is selected, symmetric encryption will be performed.  "
   ;; works for newer Emacs too.
   (when (fboundp 'defvaralias)          ; Emacs 22+
     (defvaralias 'diredp-menu-bar-encryption-menu 'diredp-multiple-encryption-menu))
-  (make-obsolete-variable 'diredp-menu-bar-encryption-menu 'diredp-multiple-encryption-menu) ; 2017-04-09
+  (make-obsolete-variable 'diredp-menu-bar-encryption-menu 'diredp-multiple-encryption-menu "2017-04-09")
 
   (when (boundp 'diredp-menu-bar-encryption-menu)
     (defalias 'diredp-menu-bar-encryption-menu diredp-menu-bar-encryption-menu))
-  (make-obsolete 'diredp-menu-bar-encryption-menu 'diredp-multiple-encryption-menu) ; 2017-04-09
+  (make-obsolete 'diredp-menu-bar-encryption-menu 'diredp-multiple-encryption-menu "2017-04-09")
 
   ;; Remove the items from `Multiple' menu.
   (define-key diredp-menu-bar-multiple-menu [epa-dired-do-decrypt] nil)
@@ -11371,7 +11371,7 @@ If no one is selected, symmetric encryption will be performed.  "
 ;; works for newer Emacs too.
 (when (fboundp 'defvaralias)            ; Emacs 22+
   (defvaralias 'diredp-menu-bar-operate-search-menu 'diredp-multiple-search-menu))
-(make-obsolete-variable 'diredp-menu-bar-operate-search-menu 'diredp-multiple-search-menu) ; 2017-04-09
+(make-obsolete-variable 'diredp-menu-bar-operate-search-menu 'diredp-multiple-search-menu "2017-04-09")
 
 (when (fboundp 'dired-do-isearch-regexp) ; Emacs 23+
   (define-key diredp-multiple-search-menu [isearch-regexp]
@@ -11409,7 +11409,7 @@ If no one is selected, symmetric encryption will be performed.  "
 ;; works for newer Emacs too.
 (when (fboundp 'defvaralias)            ; Emacs 22+
   (defvaralias 'diredp-menu-bar-operate-bookmarks-menu 'diredp-multiple-bookmarks-menu))
-(make-obsolete-variable 'diredp-menu-bar-operate-bookmarks-menu 'diredp-multiple-bookmarks-menu) ; 2017-04-09
+(make-obsolete-variable 'diredp-menu-bar-operate-bookmarks-menu 'diredp-multiple-bookmarks-menu "2017-04-09")
 
 (when (require 'bookmark+ nil t)
   (define-key diredp-multiple-bookmarks-menu [diredp-do-set-tag-value]
@@ -11470,7 +11470,7 @@ If no one is selected, symmetric encryption will be performed.  "
 ;; works for newer Emacs too.
 (when (fboundp 'defvaralias)            ; Emacs 22+
   (defvaralias 'diredp-menu-bar-operate-recursive-menu 'diredp-multiple-recursive-menu))
-(make-obsolete-variable 'diredp-menu-bar-operate-recursive-menu 'diredp-multiple-recursive-menu) ; 2017-04-09
+(make-obsolete-variable 'diredp-menu-bar-operate-recursive-menu 'diredp-multiple-recursive-menu "2017-04-09")
 
 (when (fboundp 'diredp-do-chown-recursive)
   (define-key diredp-multiple-recursive-menu [chown]
@@ -11594,11 +11594,11 @@ If no one is selected, symmetric encryption will be performed.  "
 ;; works for newer Emacs too.
 (when (fboundp 'defvaralias)            ; Emacs 22+
   (defvaralias 'diredp-menu-bar-images-recursive-menu 'diredp-images-recursive-menu))
-(make-obsolete-variable 'diredp-menu-bar-images-recursive-menu 'diredp-images-recursive-menu) ; 2017-04-09
+(make-obsolete-variable 'diredp-menu-bar-images-recursive-menu 'diredp-images-recursive-menu "2017-04-09")
 
 (when (boundp 'diredp-menu-bar-images-recursive-menu)
   (defalias 'diredp-menu-bar-images-recursive-menu diredp-menu-bar-images-recursive-menu))
-(make-obsolete 'diredp-menu-bar-images-recursive-menu 'diredp-images-recursive-menu) ; 2017-04-09
+(make-obsolete 'diredp-menu-bar-images-recursive-menu 'diredp-images-recursive-menu "2017-04-09")
 
 (define-key diredp-multiple-recursive-menu [images]
   '(menu-item "Images" diredp-images-recursive-menu
@@ -11737,11 +11737,11 @@ If no one is selected, symmetric encryption will be performed.  "
 ;; works for newer Emacs too.
 (when (fboundp 'defvaralias)            ; Emacs 22+
   (defvaralias 'diredp-menu-bar-regexp-recursive-menu 'diredp-regexp-recursive-menu))
-(make-obsolete-variable 'diredp-menu-bar-regexp-recursive-menu 'diredp-regexp-recursive-menu) ; 2017-04-09
+(make-obsolete-variable 'diredp-menu-bar-regexp-recursive-menu 'diredp-regexp-recursive-menu "2017-04-09")
 
 (when (boundp 'diredp-menu-bar-regexp-recursive-menu)
   (defalias 'diredp-menu-bar-regexp-recursive-menu diredp-menu-bar-regexp-recursive-menu))
-(make-obsolete 'diredp-menu-bar-regexp-recursive-menu 'diredp-regexp-recursive-menu) ; 2017-04-09
+(make-obsolete 'diredp-menu-bar-regexp-recursive-menu 'diredp-regexp-recursive-menu "2017-04-09")
 
 
 ;; "Marks" menu.
@@ -11755,7 +11755,7 @@ If no one is selected, symmetric encryption will be performed.  "
 ;; works for newer Emacs too.
 (when (fboundp 'defvaralias)            ; Emacs 22+
   (defvaralias 'diredp-menu-bar-mark-menu 'diredp-menu-bar-marks-menu))
-(make-obsolete-variable 'diredp-menu-bar-mark-menu 'diredp-menu-bar-marks-menu) ; 2017-04-09
+(make-obsolete-variable 'diredp-menu-bar-mark-menu 'diredp-menu-bar-marks-menu "2017-04-09")
 
 (define-key diredp-menu-bar-marks-menu [prev]
   '(menu-item "Previous Marked" dired-prev-marked-file :help "Move to previous marked file"))
@@ -11989,11 +11989,11 @@ If no one is selected, symmetric encryption will be performed.  "
 ;; works for newer Emacs too.
 (when (fboundp 'defvaralias)            ; Emacs 22+
   (defvaralias 'diredp-menu-bar-subdir-menu 'diredp-dir-menu))
-(make-obsolete-variable 'diredp-menu-bar-subdir-menu 'diredp-dir-menu) ; 2017-04-09
+(make-obsolete-variable 'diredp-menu-bar-subdir-menu 'diredp-dir-menu "2017-04-09")
 
 (when (boundp 'diredp-menu-bar-subdir-menu)
   (defalias 'diredp-menu-bar-subdir-menu diredp-menu-bar-subdir-menu))
-(make-obsolete 'diredp-menu-bar-subdir-menu 'diredp-dir-menu) ; 2017-04-09
+(make-obsolete 'diredp-menu-bar-subdir-menu 'diredp-dir-menu "2017-04-09")
 
 
 ;; `Dir' > `Hide/Show' menu.
