@@ -23,4 +23,5 @@
 /forge-database.sqlite
 /.last-package-update-day
 /projects
-/transient
+/.cache
+/transient/history.el

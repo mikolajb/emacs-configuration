@@ -104,7 +104,7 @@
 (use-package rust-mode
   :ensure t
   :ensure-system-package rls
-  :hook (rust-mode-hook . lsp-format-buffer)
+  :hook (rust-mode . lsp-format-buffer)
   :mode "\\.rs$")
 
 (use-package go-mode
