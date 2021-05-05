@@ -156,4 +156,7 @@
 ;;; make sure old byte code won't be loaded
 (setq load-prefer-newer t)
 
+;;; parentheses pairing mode
+(electric-pair-mode t)
+
 (provide 'global)

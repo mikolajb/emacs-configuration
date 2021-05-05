@@ -259,17 +259,6 @@
 (use-package vdiff-magit
   :ensure t)
 
-(use-package autopair
-  :ensure t
-  :custom
-  (autopair-autowrap t)
-  (autopair-blink-delay 0.05)
-  :config
-  (autopair-global-mode)
-  :init
-  (add-hook 'term-mode-hook
-	        #'(lambda () (autopair-mode -1))))
-
 (use-package multiple-cursors
   :ensure t
   :general
