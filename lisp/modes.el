@@ -104,8 +104,12 @@
 (use-package rust-mode
   :ensure t
   :ensure-system-package rls
-  :hook (rust-mode . lsp-format-buffer)
-  :mode "\\.rs$")
+  :mode "\\.rs$"
+  :init
+  (defun rust-mode-before-save-hook ()
+    (when (eq major-mode 'rust-mode)
+      (lsp-format-buffer)))
+  (add-hook 'before-save-hook #'rust-mode-before-save-hook))
 
 (use-package go-mode
   :ensure t

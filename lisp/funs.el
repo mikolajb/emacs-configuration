@@ -295,7 +295,7 @@ Version 2017-05-24"
 ;; (global-set-key (kbd "C-c r") 'rename-file-and-buffer)
 (global-set-key (kbd "C-c t") 'helm-shell-buffers-list)
 ;; (global-set-key (kbd "C-c T") 'vterm)
-(global-set-key (kbd "C-c T") (lambda()(interactive)(vterm 1)))
+(global-set-key (kbd "C-c T") (lambda()(interactive)(vterm t)))
 (global-set-key (kbd "C-c S") 'run-shell)
 (global-set-key (kbd "C-\\") 'shell-on-top)
 
