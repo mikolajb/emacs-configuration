@@ -116,7 +116,7 @@
   :ensure-system-package gopls
   :mode "\\.go$"
   :custom
-  (exec-path (append '("/usr/local/go/bin" "/home/mikolaj/go/bin") exec-path))
+  (exec-path (append (list "/usr/local/go/bin" (concat (getenv "HOME") "/go/bin")) exec-path))
   :init
   (defun go-mode-before-save-hook ()
     (when (eq major-mode 'go-mode)
@@ -350,6 +350,7 @@
   :ensure t
   :custom
   (history-delete-duplicates t)
+  (helm-buffer-max-length nil)
   :general
   ("C-x b" 'helm-mini)
   ("C-x C-f" 'helm-find-files)
