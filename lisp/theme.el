@@ -33,7 +33,9 @@
 ;; (add-hook 'post-command-hook 'select-cursor-color-according-to-mode)
 
 ;; font for all unicode characters
-(set-fontset-font t 'unicode "Segoe UI Symbol" nil 'prepend)
+(set-fontset-font t 'unicode "Noto Color Emoji" nil 'prepend)
+(set-fontset-font t 'unicode "Noto Sans Symbols" nil 'prepend)
+(set-fontset-font t 'unicode "Noto Sans Display" nil 'prepend)
 
 (custom-set-faces
  '(variable-pitch ((t (:family "Museo")))))
