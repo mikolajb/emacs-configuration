@@ -36,6 +36,7 @@
 (set-fontset-font t 'unicode "Noto Color Emoji" nil 'prepend)
 (set-fontset-font t 'unicode "Noto Sans Symbols" nil 'prepend)
 (set-fontset-font t 'unicode "Noto Sans Display" nil 'prepend)
+(set-fontset-font t 'unicode "Nerd Font Symbols" nil 'prepend)
 
 (custom-set-faces
  '(variable-pitch ((t (:family "Museo")))))
