@@ -238,6 +238,10 @@
   (magit-commit-extend-override-date nil)
   (magit-commit-reword-override-date nil)
   (magit-refs-margin (quote (t age magit-log-margin-width t 18)))
+  (magit-repository-directories `(("~/projects" . 2)
+                                  ("~/.password-store" . 1)
+                                  ("~/notes" . 1)
+                                  ("~/.emacs.d" . 1)))
   :config
   (unless (string= (system-name) "utopiec")
     (magit-wip-mode 1))
