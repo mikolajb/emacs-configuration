@@ -57,8 +57,9 @@
 (setq x-select-enable-clipboard t)
 ;; )
 
-; delete trailing whitespace before save
-(setq whitespace-style '(trailing empty missing-newline-at-eof))
+;; delete trailing whitespace before save
+(global-whitespace-mode 1)
+(setq whitespace-style '(trailing empty missing-newline-at-eof face tabs))
 (add-hook 'before-save-hook 'whitespace-cleanup)
 ;; make all "yes or no" prompts show "y or n" instead
 (fset 'yes-or-no-p 'y-or-n-p)
