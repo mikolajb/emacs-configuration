@@ -117,6 +117,9 @@
   :mode "\\.go$"
   :custom
   (exec-path (append (list "/usr/local/go/bin" (concat (getenv "HOME") "/go/bin")) exec-path))
+  :config
+  (add-hook 'go-mode-hook
+            '(lambda () (setq whitespace-style '(trailing empty missing-newline-at-eof face))))
   :init
   (defun go-mode-before-save-hook ()
     (when (eq major-mode 'go-mode)
@@ -535,15 +538,19 @@
 (use-package hl-line
   :init
   (add-hook 'term-mode-hook
-	        #'(lambda () (global-hl-line-mode nil)))
+            #'(lambda () (global-hl-line-mode nil)))
   (add-hook 'vterm-mode-hook
-	        #'(lambda () (global-hl-line-mode nil)))
+            #'(lambda () (global-hl-line-mode nil)))
   :config
   (global-hl-line-mode t))
 
 (use-package pkgbuild-mode
   :ensure t
   :mode ("/PKGBUILD$"))
+
+(use-package shell-script-mode
+  :custom
+  (sh-indentation 2))
 
 ;;; https://github.com/microsoft/cascadia-code/issues/153
 (use-package composite

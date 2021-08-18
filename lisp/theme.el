@@ -1,7 +1,15 @@
 (use-package dracula-theme
   :init
   (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins/dracula-theme/")
-  (load-theme 'dracula t))
+  ;; (load-theme 'dracula t)
+  )
+
+(use-package solarized-theme
+  :ensure t
+  :custom
+  (solarized-use-variable-pitch nil)
+  (solarized-use-more-italic t)
+  (solarized-scale-markdown-headlines t))
 
 (pixel-scroll-mode 1)
 (blink-cursor-mode -1)
@@ -43,7 +51,7 @@
 
 ;;; hack to make emoji be visible when running as a daemon
 (add-hook 'before-make-frame-hook
-	  '(lambda ()
+          '(lambda ()
              (set-fontset-font t 'unicode "Segoe UI Symbol" nil 'prepend)))
 
 (defun my-latex-mode-faces ()
@@ -54,5 +62,18 @@
    'default '(:family "iA Writer Duospace")))
 (when (boundp 'latex-editor)
   (add-hook 'LaTeX-mode-hook 'my-latex-mode-faces))
+
+(defun handle-theme-change (where what content)
+  "Handle gnome theme changes."
+  (message "Received an event %s %s %s" where what content)
+  (if (and (string= where "org.gnome.desktop.interface") (string= what "gtk-theme"))
+      (let ((theme (car content)))
+        (message "Detected theme change to %s" theme)
+        (cond ((string= theme "Adwaita") (load-theme 'solarized-gruvbox-light))
+              ((string= theme "Adwaita-dark") (load-theme 'solarized-gruvbox-dark))))))
+
+(require 'dbus)
+(dbus-register-signal
+ :session nil "/org/freedesktop/portal/desktop" "org.freedesktop.portal.Settings" "SettingChanged" #'handle-theme-change)
 
 (provide 'theme)
