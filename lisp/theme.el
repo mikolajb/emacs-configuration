@@ -1,7 +1,13 @@
-(defun theme-gnome-solarized-mapping (gnome-theme)
+(defun load-theme-basing-on-gnome-setup (gnome-theme)
   "Return right theme basing on given gnome theme name."
-  (cond ((string= gnome-theme "Adwaita") 'solarized-gruvbox-light)
-        ((string= gnome-theme "Adwaita-dark") 'solarized-gruvbox-dark)))
+  (let ((dark 'dracula)
+        (light 'doom-acario-light))
+    (cond ((string= gnome-theme "Adwaita")
+           (load-theme light)
+           (disable-theme dark))
+          ((string= gnome-theme "Adwaita-dark")
+           (load-theme dark)
+           (disable-theme light)))))
 
 (defun handle-theme-change (where what content)
   "Handle gnome theme changes."
@@ -9,7 +15,10 @@
   (if (and (string= where "org.gnome.desktop.interface") (string= what "gtk-theme"))
       (let ((theme (car content)))
         (message "Detected theme change to %s" theme)
-        (load-theme (theme-gnome-solarized-mapping theme)))))
+        (load-theme-basing-on-gnome-setup theme))))
+
+(defun load-appropriate-theme ()
+  (load-theme-basing-on-gnome-setup (substring (string-trim (shell-command-to-string "gsettings get org.gnome.desktop.interface gtk-theme")) 1 -1)))
 
 (require 'dbus)
 (dbus-register-signal
@@ -18,17 +27,13 @@
 (use-package dracula-theme
   :quelpa (dracula-theme :fetcher github-ssh :repo "mikolajb/emacs-dracula-theme"))
 
-(use-package solarized-theme
-  :ensure t
-  :custom
-  (x-underline-at-descent-line t)
-  (solarized-high-contrast-mode-line t)
-  (solarized-emphasize-indicators nil)
-  (solarized-use-variable-pitch nil)
-  (solarized-use-more-italic t)
-  (solarized-scale-markdown-headlines t)
-  :init
-  (load-theme (theme-gnome-solarized-mapping (substring (string-trim (shell-command-to-string "gsettings get org.gnome.desktop.interface gtk-theme")) 1 -1))))
+(use-package doom-themes
+  :quelpa (doom-themes :fetcher github-ssh :repo "mikolajb/emacs-doom-themes" :files (:defaults "themes"))
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+
+(load-appropriate-theme)
 
 (pixel-scroll-mode 1)
 (blink-cursor-mode -1)
@@ -70,8 +75,8 @@
 
 ;;; hack to make emoji be visible when running as a daemon
 (add-hook 'before-make-frame-hook
-          '(lambda ()
-             (set-fontset-font t 'unicode "Segoe UI Symbol" nil 'prepend)))
+          #'(lambda ()
+              (set-fontset-font t 'unicode "Segoe UI Symbol" nil 'prepend)))
 
 (defun my-latex-mode-faces ()
   "Set a face for a buffer."

@@ -114,9 +114,6 @@
   :mode "\\.go$"
   :custom
   (exec-path (append (list "/usr/local/go/bin" (concat (getenv "HOME") "/go/bin")) exec-path))
-  :config
-  (add-hook 'go-mode-hook
-            '(lambda () (setq whitespace-style '(trailing empty missing-newline-at-eof face))))
   :init
   (defun go-mode-before-save-hook ()
     (when (eq major-mode 'go-mode)
