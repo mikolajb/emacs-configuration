@@ -98,12 +98,9 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
 
-(use-package use-package-ensure-system-package
-  :ensure t)
-
+;; install rls
 (use-package rust-mode
   :ensure t
-  :ensure-system-package rls
   :mode "\\.rs$"
   :init
   (defun rust-mode-before-save-hook ()
@@ -111,9 +108,9 @@
       (lsp-format-buffer)))
   (add-hook 'before-save-hook #'rust-mode-before-save-hook))
 
+;; install gopls
 (use-package go-mode
   :ensure t
-  :ensure-system-package gopls
   :mode "\\.go$"
   :custom
   (exec-path (append (list "/usr/local/go/bin" (concat (getenv "HOME") "/go/bin")) exec-path))
@@ -159,9 +156,9 @@
             '(lambda ()
                (inf-ruby-keys))))
 
+;; install pyls
 (use-package python
   :mode "^wscript$"
-  :ensure-system-package pyls
   :interpreter ("python" . python-mode))
 
 (use-package pinentry
@@ -215,9 +212,9 @@
 (use-package scratch
   :ensure t)
 
+;; install rg
 (use-package rg
-  :ensure t
-  :ensure-system-package rg)
+  :ensure t)
 
 (use-package wgrep
   :ensure t)
@@ -447,7 +444,7 @@
 
 (use-package polish-holidays
   :requires holidays
-  :load-path "~/.emacs.d/plugins/polish-holidays/"
+  :quelpa (polish-holidays :fetcher github-ssh :repo "mikolajb/emacs-polish-holidays")
   :config
   (setq holiday-other-holidays swieta-panstwowe-pozostałe-święta)
   (append holiday-other-holidays ustawowo-wolne-od-pracy)
@@ -461,11 +458,6 @@
 
 (use-package string-inflection
   ;; Reformat strings, replaces my own hand-writter functions
-  :ensure t)
-
-(use-package bazel-mode
-  :if (eq (system-name) "utopiec")
-  :mode "\\.bzl$"
   :ensure t)
 
 (use-package figlet
@@ -551,6 +543,9 @@
 (use-package shell-script-mode
   :custom
   (sh-indentation 2))
+
+(use-package magit-filenotify
+  :ensure t)
 
 ;;; https://github.com/microsoft/cascadia-code/issues/153
 (use-package composite

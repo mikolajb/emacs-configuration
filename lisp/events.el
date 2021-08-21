@@ -15,7 +15,7 @@
                  (cons 'editor_mode (symbol-name major-mode))
                  (cons 'timezone (car (cdr (current-time-zone))))
                  (cons 'system_type (symbol-name system-type))
-                 (cons 'package_manager (symbol-name system-packages-package-manager))
+                 (cons 'package_manager "pacman")
                  (cons 'kernel_version linux-kernel-version)
                  (cons 'timestamp (string-to-number (format-time-string "%s%N"))))))
     (when (bound-and-true-p git-remote-url)
