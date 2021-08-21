@@ -1,11 +1,3 @@
-[submodule "plugins/polish-holidays"]
-	path = plugins/polish-holidays
-	url = https://github.com/mikolajb/emacs-polish-holidays.git
-        branch = master
-[submodule "snippets/text-mode/latex-mode"]
-	path = snippets/text-mode/latex-mode
-	url = https://github.com/madsdk/yasnippets-latex.git
-        branch = master
 [submodule "plugins/dutch-holidays"]
 	path = plugins/dutch-holidays
 	url = git://github.com/mikolajb/emacs-dutch-holidays.git
@@ -14,6 +6,3 @@
 	path = plugins/zenburn-emacs
 	url = https://github.com/bbatsov/zenburn-emacs.git
 	branch = master
-[submodule "plugins/dracula-theme"]
-	path = plugins/dracula-theme
-    url = git@github.com:mikolajb/emacs-dracula-theme.git
