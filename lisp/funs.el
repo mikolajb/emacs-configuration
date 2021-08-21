@@ -227,6 +227,17 @@
     )
   )
 
+(defun sha256-string (arg)
+  "Return sha256 hash of a given string."
+  (secure-hash 'sha256 arg))
+
+(defun sha256-region (start end &optional limit)
+  "Replace region with sha256 hash. reduce its lenght to `limit'"
+  (interactive "r\np")
+  (func-region start end '(lambda (s)
+                            (if (eq limit 0)
+                                (sha256-string s)
+                              (string-limit (sha256-string s) limit)))))
 
 ;;; Insert Random Number
 (defun xah-insert-random-number (NUM)
