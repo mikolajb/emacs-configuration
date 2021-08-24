@@ -1,7 +1,7 @@
 (defun load-theme-basing-on-gnome-setup (gnome-theme)
   "Return right theme basing on given gnome theme name."
   (let ((dark 'dracula)
-        (light 'doom-acario-light))
+        (light 'doom-one-light))
     (cond ((string= gnome-theme "Adwaita")
            (load-theme light)
            (disable-theme dark))
