@@ -25,10 +25,10 @@
  :session nil "/org/freedesktop/portal/desktop" "org.freedesktop.portal.Settings" "SettingChanged" #'handle-theme-change)
 
 (use-package dracula-theme
-  :quelpa (dracula-theme :fetcher github-ssh :repo "mikolajb/emacs-dracula-theme"))
+  :straight (dracula-theme :type git :host github :repo "mikolajb/emacs-dracula-theme"))
 
 (use-package doom-themes
-  :quelpa (doom-themes :fetcher github-ssh :repo "mikolajb/emacs-doom-themes" :files (:defaults "themes"))
+  :straight (doom-themes :type git :host github :repo "mikolajb/emacs-doom-themes" :files (:defaults "themes"))
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))

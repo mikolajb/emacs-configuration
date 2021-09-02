@@ -1,17 +1,19 @@
-(use-package general
-  :ensure t)
+(use-package general)
 
 (use-package tramp
+  :straight nil
   :custom
   (tramp-default-method "ssh")
   (tramp-chunksize 500)
   (tramp-backup-directory-alist backup-directory-alist))
 
 (use-package vc-hooks
+  :straight nil
   :custom
   (vc-follow-symlinks t))
 
 (use-package comint
+  :straight nil
   :custom
   (comint-prompt-read-only t)
   :config
@@ -19,12 +21,14 @@
   (setenv "NODE_NO_READLINE" "1"))
 
 (use-package shell
+  :straight nil
   :hook (shell-mode-hook . compilation-shell-minor-mode)
   :general
   (:keymaps 'shell-mode-map
             "C-c n" 'rename-term-buffer))
 
 (use-package term
+  :straight nil
   :general
   (:keymaps '(term-raw-map term-mode-map)
             "M-x" 'helm-M-x)
@@ -48,7 +52,6 @@
               (yas-minor-mode -1))))
 
 (use-package vterm
-  :ensure t
   :custom
   (vterm-keymap-exceptions '("C-c" "C-x" "C-u" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y"))
   ;; (vterm-buffer-name-string "vterm %s")
@@ -63,7 +66,6 @@
               (buffer-face-set '(:height 95)))))
 
 (use-package lsp-mode
-  :ensure t
   :hook ((rust-mode . lsp-deferred)
          (go-mode . lsp-deferred)
          (python-mode . lsp-deferred)
@@ -84,7 +86,6 @@
      ("gopls.test" t t))))
 
 (use-package lsp-ui
-  :ensure t
   :commands lsp-ui-mode
   :custom
   (lsp-ui-flycheck-live-reporting nil)
@@ -93,14 +94,12 @@
   (lsp-ui-doc-enable nil))
 
 (use-package company
-  :ensure t
   :config
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
 
 ;; install rls
 (use-package rust-mode
-  :ensure t
   :mode "\\.rs$"
   :init
   (defun rust-mode-before-save-hook ()
@@ -110,7 +109,6 @@
 
 ;; install gopls
 (use-package go-mode
-  :ensure t
   :mode "\\.go$"
   :custom
   (exec-path (append (list "/usr/local/go/bin" (concat (getenv "HOME") "/go/bin")) exec-path))
@@ -124,7 +122,6 @@
   (setenv "GO111MODULE" "on"))
 
 (use-package gotest
-  :ensure t
   :custom
   (go-test-verbose t)
   (go-test-additional-arguments-function #'go-additional-arguments)
@@ -132,19 +129,15 @@
   (defun go-additional-arguments (suite-name test-name)
     "-count=1"))
 
-(use-package go-guru
-  :ensure t)
+(use-package go-guru)
+(use-package go-playground)
 
-(use-package go-playground
-  :ensure t)
+(use-package dockerfile-mode)
 
-(use-package dockerfile-mode
-  :ensure t)
-
-(use-package direnv
-  :ensure t)
+(use-package direnv)
 
 (use-package ruby-mode
+  :straight nil
   :mode ("\\.rb$" "\\.ru$" "Rakefile$" "rakefile$" "Rakefile.rb$" "rakefile.rb$" "\\.rake$" "capfile$" "Capfile$" "Gemfile$")
   :interpreter "ruby"
   :functions inf-ruby-keys
@@ -155,15 +148,16 @@
 
 ;; install pyls
 (use-package python
+  :straight nil
   :mode "^wscript$"
   :interpreter ("python" . python-mode))
 
 (use-package pinentry
-  :ensure t
   :config
   (pinentry-start))
 
 (use-package eshell
+  :straight nil
   :custom
   (eshell-prefer-lisp-functions t)
   :init
@@ -178,6 +172,7 @@
   )
 
 (use-package em-smart
+  :straight nil
   :requires eshell
   :custom
   (eshell-where-to-jump 'begin)
@@ -192,32 +187,29 @@
                 (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history))))
 
 (use-package js2-mode
-  :ensure t
   :mode "\\.js$")
 
 (use-package dired
+  :straight nil
   :custom
   (dired-listing-switches "-alh --group-directories-first")
   (directory-free-space-args "-Ph"))
 
 (use-package dired+
+  :straight nil
   :load-path "~/.emacs.d/plugins/"
   :requires dired
   :config
   (toggle-diredp-find-file-reuse-dir 1))
 
-(use-package scratch
-  :ensure t)
+(use-package scratch)
 
 ;; install rg
-(use-package rg
-  :ensure t)
+(use-package rg)
 
-(use-package wgrep
-  :ensure t)
+(use-package wgrep)
 
 (use-package magit
-  :ensure t
   :general
   ("C-x C-m" 'magit-status)
   :custom
@@ -247,21 +239,16 @@
   (add-hook 'magit-log-edit-mode-hook #'auto-fill-mode))
 
 (use-package forge
-  :ensure t
   :after closql)
 
 (use-package closql
-  :ensure t
   :defer t)
 
-(use-package projectile
-  :ensure t)
+(use-package projectile)
 
-(use-package vdiff-magit
-  :ensure t)
+(use-package vdiff-magit)
 
 (use-package multiple-cursors
-  :ensure t
   :general
   ("C-S-c C-S-c" 'mc/edit-lines)
   ("C->" 'mc/mark-next-like-this)
@@ -269,6 +256,7 @@
   ("C-c C-<" 'mc/mark-all-like-this))
 
 (use-package tex-mode
+  :straight nil
   :custom
   (TeX-auto-save t)
   (TeX-parse-self t)
@@ -299,7 +287,6 @@
     (custom-set-variables '(writeroom-width 100))))
 
 (use-package flycheck
-  :ensure t
   :init
   (global-flycheck-mode))
 
@@ -319,13 +306,11 @@
 (add-hook 'sql-interactive-mode-hook 'my-sql-save-history-hook)
 
 (use-package drag-stuff
-  :ensure t
   :config
   (drag-stuff-global-mode 1)
   (drag-stuff-define-keys))
 
 (use-package protobuf-mode
-  :ensure t
   :mode "\\.proto$"
   :config
   (defconst my-protobuf-style
@@ -335,7 +320,6 @@
             (lambda () (c-add-style "my-style" my-protobuf-style t))))
 
 (use-package git-gutter
-  :ensure t
   :custom
   (git-gutter:modified-sign " ")
   (git-gutter:added-sign " ")
@@ -348,7 +332,6 @@
   (global-git-gutter-mode +1))
 
 (use-package helm
-  :ensure t
   :custom
   (history-delete-duplicates t)
   (helm-buffer-max-length nil)
@@ -359,39 +342,33 @@
   ("M-x" 'helm-M-x))
 
 (use-package helm-config
+  :straight nil
   :custom
   (helm-split-window-default-side 'same)
   :config
   (helm-mode 1))
 
 (use-package helm-ls-git
-  :ensure t
   :requires helm)
 
 (use-package helm-descbinds
-  :ensure t
   :requires helm
   :config
   (helm-descbinds-mode))
 
 (use-package helm-swoop
-  :ensure t
   :requires helm)
 
 (use-package helm-rg
-  :ensure t
   :requires (helm rg))
 
 (use-package helm-projectile
-  :ensure t
   :requires (helm projectile))
 
 (use-package helm-pass
-  :ensure t
   :requires helm)
 
 (use-package helm-lsp
-  :ensure t
   :requires (helm lsp-mode))
 
 (use-package flyspell-correct
@@ -399,12 +376,10 @@
   :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
 
 (use-package flyspell-correct-helm
-  :ensure t
   :after flyspell-correct
   :requires (helm lsp))
 
 (use-package beacon
-  :ensure t
   :custom
   (beacon-blink-delay 0)
   (beacon-blink-duration 0.6)
@@ -413,14 +388,12 @@
   :config
   (beacon-mode 1))
 
-(use-package all-ext
-  :ensure t)
-
+(use-package all-ext)
 (use-package yaml-mode
-  :ensure t
   :mode "\\.ya?ml$")
 
 (use-package holidays
+  :straight nil
   :defer t
   :custom
   (holiday-general-holidays nil)
@@ -430,6 +403,7 @@
   (holiday-oriental-holidays nil))
 
 (use-package calendar
+  :straight nil
   :hook (calendar-today-visible-hook . #'calendar-mark-today)
   :custom
   (mark-holidays-in-calendar t)
@@ -441,41 +415,36 @@
 
 (use-package polish-holidays
   :requires holidays
-  :quelpa (polish-holidays :fetcher github-ssh :repo "mikolajb/emacs-polish-holidays")
+  :straight (polish-holidays :type git :host github :repo "mikolajb/emacs-polish-holidays")
   :config
   (setq holiday-other-holidays swieta-panstwowe-pozostałe-święta)
   (append holiday-other-holidays ustawowo-wolne-od-pracy)
   (append holiday-other-holidays swieta-katolickie))
 
 (use-package persistent-scratch
-  :ensure t
   :config
   (persistent-scratch-setup-default)
   (persistent-scratch-autosave-mode 1))
 
-(use-package string-inflection
-  ;; Reformat strings, replaces my own hand-writter functions
-  :ensure t)
+;; Reformat strings, replaces my own hand-writter functions
+(use-package string-inflection)
 
 (use-package figlet
-  :defer t
-  :ensure t)
+  :defer t)
 
 (use-package markdown-mode
-  :ensure t
   :mode "\\.md$")
 
 (when (boundp 'latex-editor)
-  (use-package writeroom-mode
-    :ensure t))
+  (use-package writeroom-mode))
 
 (use-package yasnippet
-  :ensure t
   :commands yas-minor-mode
   :hook
   (go-mode . yas-minor-mode))
 
 (use-package saveplace
+  :straight nil
   :config
   (save-place-mode 1)
   :init
@@ -484,11 +453,11 @@
     (setq save-place-file "~/.emacs.d/saveplace")))
 
 (use-package uniquify
+  :straight nil
   :custom
   (uniquify-buffer-name-style 'post-forward-angle-brackets))
 
 (use-package deft
-  :ensure t
   :general
   ("C-c C-d" 'deft)
   :commands (deft)
@@ -497,17 +466,18 @@
                 deft-extensions '("md" "org" "gpg" "rst")))
 
 (use-package xref
+  :straight nil
   :custom
   (xref-search-program 'ripgrep))
 
 (use-package time
+  :straight nil
   :custom
   (world-clock-list '(("Europe/Berlin" "Berlin")
                       ("America/New_York" "New York")
                       ("America/Los_Angeles" "San Francisco"))))
 
 (use-package auto-compile
-  :ensure t
   :config
   (auto-compile-on-load-mode)
   (auto-compile-on-save-mode)
@@ -518,6 +488,7 @@
   (setq auto-compile-update-autoloads t))
 
 (use-package auth-source
+  :straight nil
   :custom
   (auth-source-save-behavior nil)
   :config
@@ -525,6 +496,7 @@
                '(sudo "sudo" "")))
 
 (use-package hl-line
+  :straight nil
   :init
   (add-hook 'term-mode-hook
             #'(lambda () (global-hl-line-mode nil)))
@@ -534,18 +506,32 @@
   (global-hl-line-mode t))
 
 (use-package pkgbuild-mode
-  :ensure t
   :mode ("/PKGBUILD$"))
 
-(use-package shell-script-mode
+(use-package sh-script
+  :straight nil
   :custom
   (sh-indentation 2))
 
-(use-package magit-filenotify
-  :ensure t)
+(use-package magit-filenotify)
+
+(use-package dired-atool
+  :requires dired
+  :init
+  (dired-atool-setup))
+
+;; (use-package bufler
+;;   :quelpa (bufler :fetcher github :repo "alphapapa/bufler.el"
+;;                   :files (:defaults (:exclude "helm-bufler.el")))
+;;   :general
+;;   ("C-x C-b" 'bufler))
+
+;; (use-package helm-bufler
+;;   :quelpa (helm-bufler :fetcher github :repo "alphapapa/bufler.el"
+;;                        :files ("helm-bufler.el")))
 
 (use-package ligature
-  :quelpa (ligature :fetcher github :repo "mickeynp/ligature.el")
+  :straight (ligature :type git :host github :repo "mickeynp/ligature.el")
   :load-path "path-to-ligature-repo"
   :config
   ;; Enable the "www" ligature in every possible major mode
@@ -572,7 +558,6 @@
   (global-ligature-mode t))
 
 (use-package unicode-fonts
-  :ensure t
   :config
   (unicode-fonts-setup))
 
