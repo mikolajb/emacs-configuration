@@ -244,7 +244,11 @@
 (use-package closql
   :defer t)
 
-(use-package projectile)
+(use-package projectile
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("C-c p" . projectile-command-map)))
 
 (use-package vdiff-magit)
 
@@ -363,7 +367,10 @@
   :requires (helm rg))
 
 (use-package helm-projectile
-  :requires (helm projectile))
+  :requires (helm projectile)
+  :bind (("C-<return>" . helm-projectile-rg))
+  :config
+  (helm-projectile-on))
 
 (use-package helm-pass
   :requires helm)
