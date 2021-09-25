@@ -568,4 +568,8 @@
   :config
   (unicode-fonts-setup))
 
+(use-package ctrlf
+  :config
+  (ctrlf-mode +1))
+
 (provide 'modes)
