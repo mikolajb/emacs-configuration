@@ -572,4 +572,13 @@
   :config
   (ctrlf-mode +1))
 
+(use-package get-link
+  :straight (ligature :type git :host github :repo "sshaw/git-link"))
+
+(use-package helpful
+  :general
+  ("C-h f" 'helpful-callable)
+  ("C-h v" 'helpful-variable)
+  ("C-h k" 'helpful-key))
+
 (provide 'modes)
