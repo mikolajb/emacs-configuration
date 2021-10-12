@@ -62,7 +62,7 @@
             "C-\\" 'shell-on-top)
   :init
   (add-hook 'vterm-mode-hook
-            (lambda ()
+            #'(lambda ()
               (buffer-face-set '(:height 95)))))
 
 (use-package lsp-mode
@@ -143,7 +143,7 @@
   :functions inf-ruby-keys
   :config
   (add-hook 'ruby-mode-hook
-            '(lambda ()
+            #'(lambda ()
                (inf-ruby-keys))))
 
 ;; install pyls
@@ -321,7 +321,7 @@
     '((c-basic-offset . 2)
       (indent-tabs-mode . nil)))
   (add-hook 'protobuf-mode-hook
-            (lambda () (c-add-style "my-style" my-protobuf-style t))))
+            #'(lambda () (c-add-style "my-style" my-protobuf-style t))))
 
 (use-package git-gutter
   :custom
@@ -572,13 +572,15 @@
   :config
   (ctrlf-mode +1))
 
-(use-package get-link
-  :straight (ligature :type git :host github :repo "sshaw/git-link"))
+(use-package git-link
+  :straight (git-link :type git :host github :repo "sshaw/git-link"))
 
 (use-package helpful
   :general
   ("C-h f" 'helpful-callable)
   ("C-h v" 'helpful-variable)
   ("C-h k" 'helpful-key))
+
+(use-package git-timemachine)
 
 (provide 'modes)

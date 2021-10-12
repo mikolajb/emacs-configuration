@@ -7,14 +7,20 @@
 
 ;; open a list of a recently opened files in a initial buffer
 (recentf-mode 1)
-(setq initial-buffer-choice 'recentf-open-files)
+(setq initial-buffer-choice
+      (let (defaultval)
+        (condition-case ex
+            (setq defaultval (recentf-open-files))
+          ('error
+           (setq defaultval nil)))
+        defaultval))
 (add-to-list 'recentf-exclude (format "%s/\\.emacs\\.d/.*" (getenv "HOME")))
 (add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Frame title : set to buffer name
 (setq frame-title-format '("" invocation-name ": "(:eval (if (buffer-file-name)
-							     (abbreviate-file-name (buffer-file-name))
-							   "%b"))))
+                                                             (abbreviate-file-name (buffer-file-name))
+                                                           "%b"))))
 
 ;; when minimized
 (setq icon-title-format '("" invocation-name ": %b"))

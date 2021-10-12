@@ -1,4 +1,5 @@
-(add-hook 'after-save-hook '(lambda () (princ (event-json))))
+(add-hook 'after-save-hook
+          #'(lambda () (princ (event-json))))
 (add-hook 'find-file-hook
           #'(lambda ()
               (setq-local git-remote-url (car (split-string (shell-command-to-string "git config --get remote.origin.url"))))))
