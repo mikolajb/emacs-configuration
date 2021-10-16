@@ -10,9 +10,9 @@
 (setq initial-buffer-choice
       (let (defaultval)
         (condition-case ex
-            (setq defaultval (recentf-open-files))
+            (setq defaultval 'recentf-open-files)
           ('error
-           (setq defaultval nil)))
+           (setq defaultval t)))
         defaultval))
 (add-to-list 'recentf-exclude (format "%s/\\.emacs\\.d/.*" (getenv "HOME")))
 (add-hook 'text-mode-hook 'flyspell-mode)
@@ -119,6 +119,7 @@
 ;; Death to the tabs!
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(setq tab-always-indent 'complete)
 ;; delete the selection with a keypress
 (delete-selection-mode t)
 (if (boundp 'latex-editor)

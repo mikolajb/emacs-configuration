@@ -581,6 +581,9 @@
   ("C-h v" 'helpful-variable)
   ("C-h k" 'helpful-key))
 
-(use-package git-timemachine)
+(use-package git-timemachine
+  :straight (git-timemachine :type git :host github :repo "emacsmirror/git-timemachine"))
+
+(use-package systemd)
 
 (provide 'modes)
