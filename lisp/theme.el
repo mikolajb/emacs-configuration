@@ -22,6 +22,8 @@
 
 (require 'dbus)
 (dbus-register-signal
+ :session nil "/org/freedesktop/portal/desktop" "org.freedesktop.impl.portal.Settings" "SettingChanged" #'handle-theme-change)
+(dbus-register-signal
  :session nil "/org/freedesktop/portal/desktop" "org.freedesktop.portal.Settings" "SettingChanged" #'handle-theme-change)
 
 (use-package dracula-theme
