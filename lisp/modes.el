@@ -209,6 +209,9 @@
 
 (use-package wgrep)
 
+(use-package deadgrep
+  :straight (deadgrep :type git :host github :repo "Wilfred/deadgrep"))
+
 (use-package magit
   :general
   ("C-x C-m" 'magit-status)
