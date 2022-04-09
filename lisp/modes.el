@@ -331,10 +331,6 @@
   (git-gutter:modified-sign " ")
   (git-gutter:added-sign " ")
   (git-gutter:deleted-sign " ")
-  :custom-face
-  (git-gutter:modified ((t (:background "yellow"))))
-  (git-gutter:added ((t (:background "green"))))
-  (git-gutter:deleted ((t (:background "red"))))
   :config
   (global-git-gutter-mode +1))
 
@@ -542,7 +538,6 @@
 
 (use-package ligature
   :straight (ligature :type git :host github :repo "mickeynp/ligature.el")
-  :load-path "path-to-ligature-repo"
   :config
   ;; Enable the "www" ligature in every possible major mode
   (ligature-set-ligatures 't '("www"))

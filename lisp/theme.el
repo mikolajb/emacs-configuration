@@ -2,27 +2,25 @@
   "Return right theme basing on given gnome theme name."
   (let ((dark 'dracula)
         (light 'doom-one-light))
-    (cond ((string= gnome-theme "Adwaita")
+    (cond ((or (string= gnome-theme "default") (string= gnome-theme "prefer-light"))
            (load-theme light)
            (disable-theme dark))
-          ((string= gnome-theme "Adwaita-dark")
+          ((string= gnome-theme "prefer-dark")
            (load-theme dark)
            (disable-theme light)))))
 
 (defun handle-theme-change (where what content)
   "Handle gnome theme changes."
   (message "Received an event %s %s %s" where what content)
-  (if (and (string= where "org.gnome.desktop.interface") (string= what "gtk-theme"))
+  (if (and (string= where "org.gnome.desktop.interface") (string= what "color-scheme"))
       (let ((theme (car content)))
         (message "Detected theme change to %s" theme)
         (load-theme-basing-on-gnome-setup theme))))
 
 (defun load-appropriate-theme ()
-  (load-theme-basing-on-gnome-setup (substring (string-trim (shell-command-to-string "gsettings get org.gnome.desktop.interface gtk-theme")) 1 -1)))
+  (load-theme-basing-on-gnome-setup (substring (string-trim (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme")) 1 -1)))
 
 (require 'dbus)
-(dbus-register-signal
- :session nil "/org/freedesktop/portal/desktop" "org.freedesktop.impl.portal.Settings" "SettingChanged" #'handle-theme-change)
 (dbus-register-signal
  :session nil "/org/freedesktop/portal/desktop" "org.freedesktop.portal.Settings" "SettingChanged" #'handle-theme-change)
 
