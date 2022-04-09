@@ -64,19 +64,8 @@
     (set-cursor-color "dodger blue"))))
 ;; (add-hook 'post-command-hook 'select-cursor-color-according-to-mode)
 
-;; font for all unicode characters
-(set-fontset-font t 'unicode "Noto Color Emoji" nil 'prepend)
-(set-fontset-font t 'unicode "Noto Sans Symbols" nil 'prepend)
-(set-fontset-font t 'unicode "Noto Sans Display" nil 'prepend)
-(set-fontset-font t 'unicode "Symbols Nerd Font" nil 'prepend)
-
 (custom-set-faces
  '(variable-pitch ((t (:family "Museo")))))
-
-;;; hack to make emoji be visible when running as a daemon
-(add-hook 'before-make-frame-hook
-          #'(lambda ()
-              (set-fontset-font t 'unicode "Segoe UI Symbol" nil 'prepend)))
 
 (defun my-latex-mode-faces ()
   "Set a face for a buffer."
