@@ -102,6 +102,24 @@
         :keymap helm-buffer-map
         :truncate-lines helm-buffers-truncate-lines))
 
+(defun helm-source-magit-buffers-list ()
+  (helm-make-source "Magit Buffers" 'helm-source-buffers
+    :buffer-list
+    (lambda ()
+      (mapcar #'buffer-name
+              (cl-remove-if-not
+               (lambda (buf)
+                 (with-current-buffer buf
+                   (eq major-mode 'magit-status-mode)))
+               (buffer-list))))))
+
+(defun helm-magit-buffers-list ()
+  (interactive)
+  (helm :sources (helm-source-magit-buffers-list)
+        :buffer "*magits*"
+        :keymap helm-buffer-map
+        :truncate-lines helm-buffers-truncate-lines))
+
 (defun run-ansi-term ()
   "Runs ansi term."
   (interactive)
@@ -305,6 +323,7 @@ Version 2017-05-24"
 (global-set-key (kbd "C-c s") 'swap-windows)
 ;; (global-set-key (kbd "C-c r") 'rename-file-and-buffer)
 (global-set-key (kbd "C-c t") 'helm-shell-buffers-list)
+(global-set-key (kbd "C-c m") 'helm-magit-buffers-list)
 (global-set-key (kbd "C-c T") (lambda()(interactive)(vterm t)))
 (global-set-key (kbd "C-c S") 'run-shell)
 (global-set-key (kbd "C-\\") 'shell-on-top)
