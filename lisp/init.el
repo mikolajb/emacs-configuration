@@ -17,6 +17,9 @@
 (setq straight-use-package-by-default t)
 (setq use-package-compute-statistics t)
 
+;; to avoid org mode version mismatch
+(straight-use-package 'org)
+
 (require 'global)
 (require 'theme)
 (require 'modes)

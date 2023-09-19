@@ -74,6 +74,7 @@
          (lsp-mode . lsp-toggle-symbol-highlight))
   :commands (lsp lsp-deferred)
   :custom
+  ;; install rust-analyzer: pacman -S rust-analyzer
   (lsp-keymap-prefix "C-x")
   (lsp-enable-xref t)
   (lsp-log-io t)
@@ -133,11 +134,7 @@
   :config
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t)
-     ("gopls.staticcheck" t t)
-     ("gopls.generate" t t)
-     ("gopls.run_govulncheck" t t)
-     ("gopls.tidy" t t)
-     ("gopls.upgrade_dependency" t t))))
+     ("gopls.staticcheck" t t))))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -152,7 +149,6 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
 
-;; install rls
 (use-package rust-mode
   :mode "\\.rs$"
   :init
