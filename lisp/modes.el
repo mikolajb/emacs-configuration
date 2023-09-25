@@ -168,7 +168,7 @@
       (lsp-organize-imports)
       (lsp-format-buffer)))
   (add-hook 'before-save-hook #'go-mode-before-save-hook)
-  (setenv "PATH" (concat "/usr/local/go/bin:$HOME/go/bin" (getenv "PATH")))
+  (setenv "PATH" (concat "/usr/local/go/bin:$HOME/go/bin:" (getenv "PATH")))
   (setenv "GO111MODULE" "on"))
 
 (use-package gotest
