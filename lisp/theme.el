@@ -20,9 +20,9 @@
 (defun load-appropriate-theme ()
   (load-theme-basing-on-gnome-setup (substring (string-trim (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme")) 1 -1)))
 
-(require 'dbus)
-(dbus-register-signal
- :session nil "/org/freedesktop/portal/desktop" "org.freedesktop.portal.Settings" "SettingChanged" #'handle-theme-change)
+;; (require 'dbus)
+;; (dbus-register-signal
+;;  :session nil "/org/freedesktop/portal/desktop" "org.freedesktop.portal.Settings" "SettingChanged" #'handle-theme-change)
 
 (use-package dracula-theme
   :straight (dracula-theme :type git :host github :repo "mikolajb/emacs-dracula-theme"))
@@ -33,7 +33,8 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
 
-(load-appropriate-theme)
+(load-theme 'dracula)
+(set-frame-font "Comic Code Ligatures-13" nil t)
 
 (pixel-scroll-mode 1)
 (blink-cursor-mode -1)

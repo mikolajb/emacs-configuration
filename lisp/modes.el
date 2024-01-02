@@ -168,7 +168,7 @@
       (lsp-organize-imports)
       (lsp-format-buffer)))
   (add-hook 'before-save-hook #'go-mode-before-save-hook)
-  (setenv "PATH" (concat "/usr/local/go/bin:$HOME/go/bin:" (getenv "PATH")))
+  (setenv "PATH" (concat "/Users/mikolaj.baranowski/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/:$HOME/go/bin:" (getenv "PATH")))
   (setenv "GO111MODULE" "on"))
 
 (use-package gotest
@@ -242,7 +242,7 @@
 (use-package dired
   :straight nil
   :custom
-  (dired-listing-switches "-alh --group-directories-first")
+  ;; (dired-listing-switches "-alh --group-directories-first")
   (directory-free-space-args "-Ph"))
 
 (use-package dired+
@@ -297,11 +297,11 @@
 (use-package closql
   :defer t)
 
-(use-package projectile
-  :init
-  (projectile-mode +1)
-  :bind (:map projectile-mode-map
-              ("C-c p" . projectile-command-map)))
+;; (use-package projectile
+;;   :init
+;;   (projectile-mode +1)
+;;   :bind (:map projectile-mode-map
+;;               ("C-c p" . projectile-command-map)))
 
 (use-package vdiff-magit)
 
@@ -444,9 +444,9 @@
   :config
   (beacon-mode 1))
 
-(use-package all-ext)
-(use-package yaml-mode
-  :mode "\\.ya?ml$")
+;; (use-package all-ext)
+;; (use-package yaml-mode
+;;   :mode "\\.ya?ml$")
 
 (use-package holidays
   :straight nil
@@ -533,15 +533,15 @@
                       ("America/New_York" "New York")
                       ("America/Los_Angeles" "San Francisco"))))
 
-(use-package auto-compile
-  :config
-  (auto-compile-on-load-mode)
-  (auto-compile-on-save-mode)
-  (setq auto-compile-display-buffer nil)
-  (setq auto-compile-mode-line-counter t)
-  (setq auto-compile-source-recreate-deletes-dest t)
-  (setq auto-compile-toggle-deletes-nonlib-dest t)
-  (setq auto-compile-update-autoloads t))
+;; (use-package auto-compile
+;;   :config
+;;   (auto-compile-on-load-mode)
+;;   (auto-compile-on-save-mode)
+;;   (setq auto-compile-display-buffer nil)
+;;   (setq auto-compile-mode-line-counter t)
+;;   (setq auto-compile-source-recreate-deletes-dest t)
+;;   (setq auto-compile-toggle-deletes-nonlib-dest t)
+;;   (setq auto-compile-update-autoloads t))
 
 (use-package auth-source
   :straight nil
@@ -632,6 +632,6 @@
 (use-package git-timemachine
   :straight (git-timemachine :type git :host github :repo "emacsmirror/git-timemachine"))
 
-(use-package systemd)
+;;; (use-package systemd)
 
 (provide 'modes)

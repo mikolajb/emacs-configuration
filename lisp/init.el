@@ -1,3 +1,4 @@
+(add-to-list 'exec-path "/Users/mikolaj.baranowski/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/")
 (defconst linux-kernel-version (substring (shell-command-to-string "uname -r") 0 -1))
 
 (defvar bootstrap-version)
@@ -15,7 +16,7 @@
 
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
-(setq use-package-compute-statistics t)
+;;; (setq use-package-compute-statistics t)
 
 ;; to avoid org mode version mismatch
 (straight-use-package 'org)
@@ -24,7 +25,7 @@
 (require 'theme)
 (require 'modes)
 (require 'funs)
-(require 'orgmode-settings)
-(require 'events)
+;;; (require 'orgmode-settings)
+;;; (require 'events)
 
 (provide 'init)

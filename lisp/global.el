@@ -1,3 +1,6 @@
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired nil))
+
 ;; Set encoding to UTF-8
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
@@ -122,13 +125,13 @@
 (setq tab-always-indent 'complete)
 ;; delete the selection with a keypress
 (delete-selection-mode t)
-(if (boundp 'latex-editor)
-    (setq temporary-file-directory "~/.emacs-latex.d/backups/")
-    (setq temporary-file-directory "~/.emacs.d/backups/"))
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+;; (if (boundp 'latex-editor)
+;;     (setq temporary-file-directory "~/.emacs-latex.d/backups/")
+;;     (setq temporary-file-directory "~/.emacs.d/backups/"))
+;; (setq backup-directory-alist
+;;       `((".*" . ,temporary-file-directory)))
+;; (setq auto-save-file-name-transforms
+;;       `((".*" ,temporary-file-directory t)))
 ;; use shift + arrow keys to switch between visible buffers
 (windmove-default-keybindings 'meta)
 ;; flyspell-mode does spell-checking on the fly as you type
