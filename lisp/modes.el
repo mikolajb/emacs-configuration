@@ -203,7 +203,9 @@
   :interpreter ("python" . python-mode))
 
 (use-package pinentry
-  :config
+  :ensure t
+  :init
+  (setq epa-pinentry-mode 'loopback)
   (pinentry-start))
 
 (use-package eshell
@@ -445,8 +447,8 @@
   (beacon-mode 1))
 
 ;; (use-package all-ext)
-;; (use-package yaml-mode
-;;   :mode "\\.ya?ml$")
+(use-package yaml-mode
+  :mode "\\.ya?ml$")
 
 (use-package holidays
   :straight nil
@@ -633,5 +635,16 @@
   :straight (git-timemachine :type git :host github :repo "emacsmirror/git-timemachine"))
 
 ;;; (use-package systemd)
+
+(use-package age
+  :ensure t
+  :demand t
+  :config
+  (age-file-enable)
+  (setopt age-default-identity  "~/.age/identity.txt"
+          age-default-recipient "~/.age/recipients.pub"
+          age-pinentry-mode 'ask
+          age-debug t
+          age-program (executable-find "rage")))
 
 (provide 'modes)

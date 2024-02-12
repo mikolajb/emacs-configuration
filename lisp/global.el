@@ -1,4 +1,5 @@
 (when (string= system-type "darwin")
+  (setenv "PINENTRY_PROGRAM" "pinentry-mac")
   (setq dired-use-ls-dired nil))
 
 ;; Set encoding to UTF-8
@@ -45,6 +46,8 @@
 
 ;;; auto revert modified files
 (global-auto-revert-mode t)
+(when (string= system-type "darwin")
+  (setq auto-revert-use-notify nil))
 
 ;;; savehist
 (savehist-mode 1)
@@ -84,6 +87,9 @@
 (put 'view-lossage 'isearch-scroll t)
 ;; kills whole line, including following newline
 (setq kill-whole-line t)
+
+;; C-n insert newlines if the point is at the end of the buffer
+(setq next-line-add-newlines t)
 
 ;;; Electric minibuffer!
 ;;; When selecting a file to visit, // will mean / and
