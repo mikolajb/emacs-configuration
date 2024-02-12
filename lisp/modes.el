@@ -168,7 +168,10 @@
       (lsp-organize-imports)
       (lsp-format-buffer)))
   (add-hook 'before-save-hook #'go-mode-before-save-hook)
-  (setenv "PATH" (concat "/usr/local/go/bin:$HOME/go/bin:" (getenv "PATH")))
+  (setenv "PATH" (concat
+                  "$HOME/go/bin:"
+                  (when (string= system-type "darwin") "~/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/:")
+                  (getenv "PATH")))
   (setenv "GO111MODULE" "on"))
 
 (use-package gotest
@@ -203,7 +206,9 @@
   :interpreter ("python" . python-ts-mode))
 
 (use-package pinentry
-  :config
+  :ensure t
+  :init
+  (setq epg-pinentry-mode 'loopback)
   (pinentry-start))
 
 (use-package eshell
@@ -243,7 +248,8 @@
 (use-package dired
   :straight nil
   :custom
-  (dired-listing-switches "-alh --group-directories-first")
+  (unless (string= system-type "darwin")
+    (dired-listing-switches "-alh --group-directories-first"))
   (directory-free-space-args "-Ph"))
 
 (use-package dired+
@@ -286,8 +292,7 @@
                                   ("~/notes" . 1)
                                   ("~/.emacs.d" . 1)))
   :config
-  (unless (string= (system-name) "utopiec")
-    (magit-wip-mode 1))
+  (magit-wip-mode 1)
   :init
   (add-hook 'magit-log-edit-mode-hook #'flyspell-mode)
   (add-hook 'magit-log-edit-mode-hook #'auto-fill-mode))
@@ -648,6 +653,18 @@
 (use-package git-timemachine
   :straight (git-timemachine :type git :host github :repo "emacsmirror/git-timemachine"))
 
-(use-package systemd)
+(use-package systemd
+  :if (string= system-type "gnu/linux"))
+
+(use-package age
+  :ensure t
+  :demand t
+  :config
+  (age-file-enable)
+  (setopt age-default-identity  "~/.age/identity.txt"
+          age-default-recipient "~/.age/recipients.pub"
+          age-pinentry-mode 'ask
+          age-debug t
+          age-program (executable-find "rage")))
 
 (provide 'modes)

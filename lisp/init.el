@@ -1,3 +1,5 @@
+(when (string= system-type "darwin")
+  (add-to-list 'exec-path "~/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/"))
 (defconst linux-kernel-version (substring (shell-command-to-string "uname -r") 0 -1))
 
 (defvar bootstrap-version)
@@ -56,6 +58,7 @@
 (require 'modes)
 (require 'funs)
 (require 'orgmode-settings)
-(require 'events)
+(unless (string= system-type "darwin")
+  (require 'events))
 
 (provide 'init)
