@@ -167,4 +167,6 @@
 ;;; parentheses pairing mode
 (electric-pair-mode t)
 
+(pixel-scroll-precision-mode t)
+
 (provide 'global)

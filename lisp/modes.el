@@ -66,9 +66,9 @@
               (buffer-face-set '(:height 95)))))
 
 (use-package lsp-mode
-  :hook ((rust-mode . lsp-deferred)
-         (go-mode . lsp-deferred)
-         (python-mode . lsp-deferred)
+  :hook ((rust-ts-mode . lsp-deferred)
+         (go-ts-mode . lsp-deferred)
+         (python-ts-mode . lsp-deferred)
          (sh-mode . lsp-deferred)
          (latex-mode . lsp-deferred)
          (lsp-mode . lsp-toggle-symbol-highlight))
@@ -149,22 +149,22 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
 
-(use-package rust-mode
+(use-package rust-ts-mode
   :mode "\\.rs$"
   :init
   (defun rust-mode-before-save-hook ()
-    (when (eq major-mode 'rust-mode)
+    (when (eq major-mode 'rust-ts-mode)
       (lsp-format-buffer)))
   (add-hook 'before-save-hook #'rust-mode-before-save-hook))
 
-;; install gopls
-(use-package go-mode
+;; install goplxos
+(use-package go-ts-mode
   :mode "\\.go$"
   :custom
   (exec-path (append (list "/usr/local/go/bin" (concat (getenv "HOME") "/go/bin")) exec-path))
   :init
   (defun go-mode-before-save-hook ()
-    (when (eq major-mode 'go-mode)
+    (when (eq major-mode 'go-ts-mode)
       (lsp-organize-imports)
       (lsp-format-buffer)))
   (add-hook 'before-save-hook #'go-mode-before-save-hook)
@@ -200,7 +200,7 @@
 (use-package python
   :straight nil
   :mode "^wscript$"
-  :interpreter ("python" . python-mode))
+  :interpreter ("python" . python-ts-mode))
 
 (use-package pinentry
   :config
@@ -236,7 +236,8 @@
                 (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)
                 (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history))))
 
-(use-package js2-mode
+(use-package js-ts-mode
+  :straight nil
   :mode "\\.js$")
 
 (use-package dired
@@ -444,8 +445,8 @@
   :config
   (beacon-mode 1))
 
-(use-package all-ext)
-(use-package yaml-mode
+;;; (use-package all-ext)
+(use-package yaml-ts-mode
   :mode "\\.ya?ml$")
 
 (use-package holidays
