@@ -54,6 +54,9 @@
 (use-package vterm
   :custom
   (vterm-keymap-exceptions '("C-c" "C-x" "C-u" "C-g" "C-h" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y"))
+  ;; for width missalignment
+  (vterm-timer-delay nil)
+  (vterm-enable-manipulate-selection-data-by-osc52 t)
   ;; (vterm-buffer-name-string "vterm %s")
   :general
   (:keymaps 'vterm-mode-map
@@ -169,8 +172,8 @@
       (lsp-format-buffer)))
   (add-hook 'before-save-hook #'go-mode-before-save-hook)
   (setenv "PATH" (concat
-                  "$HOME/go/bin:"
-                  (when (string= system-type "darwin") "~/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/:")
+                  (concat (getenv "HOME") "/go/bin:")
+                  (when (string= system-type "darwin") (concat (getenv "HOME") "/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/:"))
                   (getenv "PATH")))
   (setenv "GO111MODULE" "on"))
 
@@ -530,6 +533,7 @@
 (use-package xref
   :straight nil
   :custom
+  (add-to-list 'deadgrep-extra-arguments "--hidden")
   (xref-search-program 'ripgrep))
 
 (use-package time

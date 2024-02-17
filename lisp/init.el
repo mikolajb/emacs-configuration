@@ -61,4 +61,7 @@
 (unless (string= system-type "darwin")
   (require 'events))
 
+(when (string= system-type "darwin")
+  (server-start))
+
 (provide 'init)
