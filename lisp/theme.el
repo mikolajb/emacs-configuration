@@ -1,29 +1,33 @@
-(defun load-theme-basing-on-gnome-setup (gnome-theme)
-  "Return right theme basing on given gnome theme name."
-  (let ((dark 'dracula)
-        (light 'doom-one-light))
-    (cond ((or (string= gnome-theme "default") (string= gnome-theme "prefer-light"))
-           (load-theme light)
-           (disable-theme dark))
-          ((string= gnome-theme "prefer-dark")
-           (load-theme dark)
-           (disable-theme light)))))
+(setq my-theme-dark 'gruvbox-dark-hard) ;;doom-one-light
+(setq my-theme-light 'gruvbox-light-hard) ;;dracula
 
-(defun handle-theme-change (where what content)
+(defun load-my-theme (&optional dark)
+  "Return right theme basing on a given argument."
+  (if dark
+    (progn
+      (load-theme my-theme-dark)
+      (disable-theme my-theme-light))
+    (load-theme my-theme-light)
+    (disable-theme my-theme-dark)))
+
+(defun handle-theme-change-linux (where what content)
   "Handle gnome theme changes."
   (message "Received an event %s %s %s" where what content)
   (if (and (string= where "org.gnome.desktop.interface") (string= what "color-scheme"))
       (let ((theme (car content)))
         (message "Detected theme change to %s" theme)
-        (load-theme-basing-on-gnome-setup theme))))
+        (load-my-theme (string= theme "prefer-dark")))))
 
-(defun load-appropriate-theme ()
-  (load-theme-basing-on-gnome-setup (substring (string-trim (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme")) 1 -1)))
+(defun load-appropriate-theme-linux ()
+  (load-my-theme
+   (string=
+    (substring (string-trim (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme")) 1 -1)
+    "prefer-dark")))
 
 (unless (string= system-type "darwin")
   (require 'dbus)
   (dbus-register-signal
-   :session nil "/org/freedesktop/portal/desktop" "org.freedesktop.portal.Settings" "SettingChanged" #'handle-theme-change))
+   :session nil "/org/freedesktop/portal/desktop" "org.freedesktop.portal.Settings" "SettingChanged" #'handle-theme-change-linux))
 
 (use-package dracula-theme
   :straight (dracula-theme :type git :host github :repo "mikolajb/emacs-dracula-theme"))
@@ -34,16 +38,19 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
 
+(use-package gruvbox-theme
+  :config
+  (setq gruvbox-bold-constructs t))
+
 (if (string= system-type "darwin")
     (progn
-      (load-theme 'dracula)
+      (load-theme 'gruvbox-dark-hard)
       (set-frame-font "Comic Code Ligatures-13" nil t))
-    (load-appropriate-theme))
+    (load-appropriate-theme-linux)
+    (set-face-attribute 'default nil :height 125))
 
 (pixel-scroll-mode 1)
 (blink-cursor-mode -1)
-
-(set-face-attribute 'default nil :height 125)
 
 (defun toggle-fullscreen ()
   (interactive)
