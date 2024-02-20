@@ -256,8 +256,7 @@
   (directory-free-space-args "-Ph"))
 
 (use-package dired+
-  :straight nil
-  :load-path "~/.emacs.d/plugins/"
+  :straight (dired-plus :type git :host github :repo "emacsmirror/dired-plus")
   :requires dired
   :config
   (toggle-diredp-find-file-reuse-dir 1))
@@ -270,7 +269,9 @@
 (use-package wgrep)
 
 (use-package deadgrep
-  :straight (deadgrep :type git :host github :repo "Wilfred/deadgrep"))
+  :straight (deadgrep :type git :host github :repo "Wilfred/deadgrep")
+  :config
+  (add-to-list 'deadgrep-extra-arguments "--hidden"))
 
 (use-package magit
   :general
@@ -506,7 +507,7 @@
 (use-package yasnippet
   :commands yas-minor-mode
   :hook
-  (go-mode . yas-minor-mode))
+  (go-ts-mode . yas-minor-mode))
 
 (use-package saveplace
   :straight nil
