@@ -1,8 +1,11 @@
 (setq my-theme-dark 'gruvbox-dark-hard) ;;doom-one-light
 (setq my-theme-light 'gruvbox-light-hard) ;;dracula
+(setq my-default-font "Comic Code Ligatures")
 
 (defun load-my-theme (&optional dark)
   "Return right theme basing on a given argument."
+  (set-frame-font my-default-font nil t)
+  (set-face-attribute 'default nil :height 125)
   (if dark
     (progn
       (load-theme my-theme-dark)
@@ -24,6 +27,12 @@
     (substring (string-trim (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme")) 1 -1)
     "prefer-dark")))
 
+(defun load-appropriate-theme-macos ()
+  (load-my-theme
+   (string=
+    (string-trim (shell-command-to-string "dark-mode status"))
+    "on")))
+
 (unless (string= system-type "darwin")
   (require 'dbus)
   (dbus-register-signal
@@ -43,11 +52,8 @@
   (setq gruvbox-bold-constructs t))
 
 (if (string= system-type "darwin")
-    (progn
-      (load-theme 'gruvbox-dark-hard)
-      (set-frame-font "Comic Code Ligatures-13" nil t))
-    (load-appropriate-theme-linux)
-    (set-face-attribute 'default nil :height 125))
+    (load-appropriate-theme-macos)
+    (load-appropriate-theme-linux))
 
 (pixel-scroll-mode 1)
 (blink-cursor-mode -1)
@@ -56,10 +62,10 @@
   (interactive)
   (let ((current-value (frame-parameter nil 'fullscreen)))
     (if (equal 'fullboth current-value)
-        (set-face-attribute 'default nil :height 105))
+        (set-face-attribute 'default nil :height 110))
     (toggle-frame-fullscreen)
     (if (not (equal 'fullboth current-value))
-        (set-face-attribute 'default nil :height 120))))
+        (set-face-attribute 'default nil :height 125))))
 
 (global-set-key (kbd "C-x <up>") 'toggle-fullscreen)
 
