@@ -261,6 +261,17 @@
   :config
   (toggle-diredp-find-file-reuse-dir 1))
 
+(use-package dired-git-info
+  :ensure t
+  :bind
+  (:map dired-mode-map
+        (")" . dired-git-info-mode)))
+
+(use-package dired-launch
+  :ensure t
+  :hook
+  (dired-mode . dired-launch-mode))
+
 (use-package scratch)
 
 ;; install rg
@@ -540,6 +551,10 @@
 (use-package time
   :straight nil
   :custom
+  (display-time-default-load-average nil)
+  (display-timeo-24hr-format t)
+  (display-time-mode t)
+  (display-time-day-and-date)
   (world-clock-list '(("Europe/Berlin" "Berlin")
                       ("America/New_York" "New York")
                       ("America/Los_Angeles" "San Francisco"))))
@@ -671,5 +686,33 @@
           age-pinentry-mode 'ask
           age-debug t
           age-program (executable-find "rage")))
+
+(use-package expand-region
+  :ensure t
+  :bind
+  (("C-=" . er/expand-region)
+   ("C-+" . er/contract-region)
+   :map mode-specific-map
+   :prefix-map region-prefix-map
+   :prefix "r"
+   ("(" . er/mark-inside-pairs)
+   (")" . er/mark-outside-pairs)
+   ("'" . er/mark-inside-quotes)
+   ([34] . er/mark-outside-quotes) ; it's just a quotation mark
+   ("o" . er/mark-org-parent)
+   ("u" . er/mark-url)
+   ("b" . er/mark-org-code-block)
+   ("." . er/mark-method-call)
+   (">" . er/mark-next-accessor)
+   ("w" . er/mark-word)
+   ("d" . er/mark-defun)
+   ("e" . er/mark-email)
+   ("," . er/mark-symbol)
+   ("<" . er/mark-symbol-with-prefix)
+   (";" . er/mark-comment)
+   ("s" . er/mark-sentence)
+   ("S" . er/mark-text-sentence)
+   ("p" . er/mark-paragraph)
+   ("P" . er/mark-text-paragraph)))
 
 (provide 'modes)
