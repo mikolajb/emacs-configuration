@@ -5,6 +5,7 @@
   :custom
   (tramp-default-method "ssh")
   (tramp-chunksize 500)
+  (tramp-use-ssh-controlmaster-options nil)
   (tramp-backup-directory-alist backup-directory-alist))
 
 (use-package vc-hooks
@@ -165,6 +166,7 @@
   :mode "\\.go$"
   :custom
   (exec-path (append (list "/usr/local/go/bin" (concat (getenv "HOME") "/go/bin")) exec-path))
+  (go-ts-mode-indent-offset 4)
   :init
   (defun go-mode-before-save-hook ()
     (when (eq major-mode 'go-ts-mode)
@@ -280,7 +282,6 @@
 (use-package wgrep)
 
 (use-package deadgrep
-  :straight (deadgrep :type git :host github :repo "Wilfred/deadgrep")
   :config
   (add-to-list 'deadgrep-extra-arguments "--hidden"))
 
@@ -301,6 +302,8 @@
   (magit-display-buffer-function #'display-buffer)
   (magit-commit-extend-override-date nil)
   (magit-commit-reword-override-date nil)
+  (when (string= system-type "darwin")
+    (magit-git-executable "/usr/bin/git"))
   (magit-refs-margin (quote (t age magit-log-margin-width t 18)))
   (magit-repository-directories `(("~/projects" . 2)
                                   ("~/.password-store" . 1)

@@ -1,5 +1,6 @@
 (when (string= system-type "darwin")
   (setenv "PINENTRY_PROGRAM" "pinentry-mac")
+  (setenv "LC_ALL" "en_IE.UTF-8")
   (setq dired-use-ls-dired nil))
 
 ;; Set encoding to UTF-8
