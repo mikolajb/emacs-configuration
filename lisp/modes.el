@@ -718,4 +718,13 @@
    ("p" . er/mark-paragraph)
    ("P" . er/mark-text-paragraph)))
 
+(use-package ispell
+  :straight nil
+  :custom
+  (ispell-dictionary "en_US")
+  (ispell-program-name "hunspell")
+  (if (boundp 'latex-editor)
+      (setq ispell-extra-args '("--sug-mode=ultra"))
+    (setq ispell-extra-args '("--sug-mode=ultra" "--run-together" "--run-together-limit=2" "--run-together-min=2"))))
+
 (provide 'modes)
