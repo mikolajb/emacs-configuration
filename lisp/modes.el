@@ -513,10 +513,15 @@
   :defer t)
 
 (use-package markdown-mode
-  :mode "\\.md$")
+  :mode "\\.md$"
+  :hook
+  (markdown-mode . (lambda () (variable-pitch-mode t))))
 
-(when (boundp 'latex-editor)
-  (use-package writeroom-mode))
+(use-package olivetti
+  :custom
+  (olivetti-style "fancy")
+  :hook
+  (olivetti-mode . (lambda () (setq line-spacing 5))))
 
 (use-package yasnippet
   :commands yas-minor-mode

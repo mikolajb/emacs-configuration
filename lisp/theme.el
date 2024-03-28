@@ -83,15 +83,8 @@
 ;; (add-hook 'post-command-hook 'select-cursor-color-according-to-mode)
 
 (custom-set-faces
- '(variable-pitch ((t (:family "Museo")))))
-
-(defun my-latex-mode-faces ()
-  "Set a face for a buffer."
-  (face-remap-set-base
-   'default '(:height 160))
-  (face-remap-set-base
-   'default '(:family "iA Writer Duospace")))
-(when (boundp 'latex-editor)
-  (add-hook 'LaTeX-mode-hook 'my-latex-mode-faces))
+ '(fixed-pitch ((t (:family "Comic Code Ligatures"))))
+ '(fixed-pitch-serif ((t (:family "Comic Code Ligatures"))))
+ '(variable-pitch ((t (:family "Bookerly")))))
 
 (provide 'theme)
