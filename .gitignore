@@ -25,3 +25,6 @@
 /.cache
 /transient/history.el
 /straight
+/eln-cache/
+/elpa/
+/tree-sitter/

@@ -315,6 +315,11 @@
   (add-hook 'magit-log-edit-mode-hook #'flyspell-mode)
   (add-hook 'magit-log-edit-mode-hook #'auto-fill-mode))
 
+
+(use-package magit-todos
+  :after magit
+  :config (magit-todos-mode 1))
+
 (use-package forge
   :after closql)
 
@@ -694,6 +699,23 @@
           age-pinentry-mode 'ask
           age-debug t
           age-program (executable-find "rage")))
+
+(use-package indent-bars
+  :straight (indent-bars :type git :host github :repo "jdtsmith/indent-bars")
+  :config
+  (require 'indent-bars-ts)         ; not needed with straight
+  :custom
+  (indent-bars-treesit-support t)
+  (indent-bars-treesit-ignore-blank-lines-types '("module"))
+  ;; Add other languages as needed
+  (indent-bars-treesit-scope '((python function_definition class_definition for_statement
+      if_statement with_statement while_statement)))
+  ;; Note: wrap may not be needed if no-descend-list is enough
+  ;;(indent-bars-treesit-wrap '((python argument_list parameters ; for python, as an example
+  ;;                      list list_comprehension
+  ;;                      dictionary dictionary_comprehension
+  ;;                      parenthesized_expression subscript)))
+  :hook ((go-ts-mode yaml-ts-mode) . indent-bars-mode))
 
 (use-package expand-region
   :ensure t

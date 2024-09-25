@@ -85,6 +85,6 @@
 (custom-set-faces
  '(fixed-pitch ((t (:family "Comic Code Ligatures"))))
  '(fixed-pitch-serif ((t (:family "Comic Code Ligatures"))))
- '(variable-pitch ((t (:family "Bookerly")))))
+ '(variable-pitch ((t (:family "Jost*")))))
 
 (provide 'theme)
