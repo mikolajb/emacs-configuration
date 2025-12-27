@@ -73,6 +73,7 @@
   :hook ((rust-ts-mode . lsp-deferred)
          (go-ts-mode . lsp-deferred)
          (python-ts-mode . lsp-deferred)
+         (typst-ts-mode . lsp-deferred)
          (sh-mode . lsp-deferred)
          (latex-mode . lsp-deferred)
          (lsp-mode . lsp-toggle-symbol-highlight))
@@ -135,10 +136,17 @@
                      (stubmethods . t)
                      ))
   (lsp-go-build-flags ["-tags=wireinject,mage"])
+  
   :config
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t)
-     ("gopls.staticcheck" t t))))
+     ("gopls.staticcheck" t t)))
+  (add-to-list 'lsp-language-id-configuration '(typst-ts-mode . "typst"))
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection "tinymist")
+    :major-modes '(typst-ts-mode)
+    :server-id 'tinymist)))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -167,6 +175,8 @@
   :custom
   (exec-path (append (list "/usr/local/go/bin" (concat (getenv "HOME") "/go/bin")) exec-path))
   (go-ts-mode-indent-offset 4)
+  :hook (go-ts-mode-hook . (lambda ()
+                             (setq-local whitespace-style '(face trailing empty))))
   :init
   (defun go-mode-before-save-hook ()
     (when (eq major-mode 'go-ts-mode)
@@ -506,6 +516,9 @@
   (append holiday-other-holidays ustawowo-wolne-od-pracy)
   (append holiday-other-holidays swieta-katolickie))
 
+(use-package typst-ts-mode
+  :straight (:type git :host codeberg :repo "meow_king/typst-ts-mode"))
+
 (use-package persistent-scratch
   :config
   (persistent-scratch-setup-default)
@@ -753,5 +766,16 @@
   (if (boundp 'latex-editor)
       (setq ispell-extra-args '("--sug-mode=ultra"))
     (setq ispell-extra-args '("--sug-mode=ultra" "--run-together" "--run-together-limit=2" "--run-together-min=2"))))
+
+(use-package csv-mode
+  :defer t)
+
+
+(use-package ranger
+  :init
+  (setq ranger-override-dired t
+        ranger-cleanup-eagerly t
+        ranger-dont-show-binary t)
+  :ensure t)
 
 (provide 'modes)
